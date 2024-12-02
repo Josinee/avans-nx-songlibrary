@@ -2,9 +2,12 @@ import {
     IsNotEmpty,
     IsString,
     IsOptional,
-    IsNumber
+    IsNumber,
+    IsObject
 } from 'class-validator';
 import {
+    IAlbum,
+    IArtist,
     ICreateSong,
     IUpdateSong,
     IUpsertSong,
@@ -24,39 +27,14 @@ export class CreateSongDto implements ICreateSong {
     @IsNotEmpty()
     length!: number;
 
-    @IsString()
-    @IsNotEmpty()
-    songText!: string;
 
     @IsNumber()
     @IsNotEmpty()
     yearOfRelease!: number;
 
-
-
-}
-
-export class UpsertSongDto implements IUpsertSong {
-    @IsString()
-    @IsNotEmpty()
-    id!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    title!: string;
-    
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
-
-    @IsString()
-    @IsNotEmpty()
-    songText!: string;
-
-    @IsNumber()
-    @IsNotEmpty()
-    yearOfRelease!: number;
-
+    artist!: IArtist;
 
 }
 
@@ -76,4 +54,46 @@ export class UpdateSongDto implements IUpdateSong {
     @IsNumber()
     @IsOptional()
     yearOfRelease!: number
+
+    @IsOptional()
+    @IsObject()
+    artist!: IArtist
+
+    @IsOptional()
+    @IsObject()
+    album!: IAlbum
 }
+
+export class UpsertSongDto implements IUpsertSong {
+    @IsString()
+    @IsNotEmpty()
+    id!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    title!: string;
+    
+    @IsNumber()
+    @IsNotEmpty()
+    length!: number;
+
+    @IsString()
+    @IsOptional()
+    songText!: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    yearOfRelease!: number;
+
+    @IsNotEmpty()
+    @IsObject()
+    artist!: IArtist
+
+    @IsOptional()
+    @IsObject()
+    album!: IAlbum
+
+
+}
+
+

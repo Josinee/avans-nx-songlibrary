@@ -9,17 +9,17 @@ export class SongController {
     constructor(private songService: SongService) {}
 
     @Get('')
-    getAll(): ISong[] {
+    getAll(): Promise<ISong[]> {
         return this.songService.getAll();
     }
 
     @Get(':id')
-    getOne(@Param('id') id: string): ISong {
+    getOne(@Param('id') id: string): Promise<ISong> {
         return this.songService.getOne(id);
     }
 
     @Post('')
-    create(@Body() data: CreateSongDto): ISong {
+    create(@Body() data: CreateSongDto): Promise<ISong> {
         return this.songService.create(data);
     }
 }
