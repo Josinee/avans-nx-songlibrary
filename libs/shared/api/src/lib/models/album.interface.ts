@@ -4,7 +4,7 @@ import { IArtist } from './artist.interface';
 
 export interface IAlbum {
     id: Id,
-    name: string,
+    title: string,
     length: number,
     yearOfRelease: number,
     numberOfSongs: number,

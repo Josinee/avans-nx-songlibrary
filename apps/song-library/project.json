@@ -21,7 +21,8 @@
             "input": "apps/song-library/public"
           }
         ],
-        "styles": ["apps/song-library/src/styles.css"],
+        "styles": ["apps/song-library/src/styles.css",
+         "node_modules/bootstrap/dist/css/bootstrap.min.css"],
         "scripts": []
       },
       "configurations": {

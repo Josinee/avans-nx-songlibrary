@@ -28,7 +28,7 @@ export class Playlist implements IPlaylist {
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'ISong' })
     songs!: ISong[];
     
-    @Prop({ required: true })
+    @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'IUserInfo' })
     creator!: IUserInfo;
     
     @Prop({ required: true })

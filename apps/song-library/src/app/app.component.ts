@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
-import { FeaturesModule } from '@avans-nx-songlibrary/features'
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { HeaderComponent } from './components/ui/header/header.component';
+import { FooterComponent } from './components/ui/footer/footer.component';
+
+
 
 @Component({
+  imports: [RouterOutlet, RouterLink, HeaderComponent, FooterComponent],
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule, FeaturesModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'song-library';

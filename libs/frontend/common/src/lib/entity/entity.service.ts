@@ -2,9 +2,7 @@ import { IEntity } from './entity.model';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { AlertService } from '@avans-nx-workshop/share-a-meal/ui';
-import { AlertType } from '@avans-nx-workshop/share-a-meal/ui';
-import { Id } from '@avans-nx-workshop/shared/api';
+
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server

@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, ISong } from '@avans-nx-songlibrary/api';
+import { ApiResponse, IArtist } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env'
 
@@ -18,8 +18,8 @@ export const httpOptions = {
  *
  */
 @Injectable({ providedIn: 'root' })
-export class SongService {
-    endpoint = environment.dataApiUrl + '/song';
+export class ArtistService {
+    endpoint = environment.dataApiUrl + '/artist';
 
     constructor(private readonly http: HttpClient) {}
 
@@ -28,16 +28,16 @@ export class SongService {
      *
      * @options options - optional URL queryparam options
      */
-    public list(options?: any): Observable<ISong[] | null> {
+    public list(options?: any): Observable<IArtist[] | null> {
         console.log(`list ${this.endpoint}`);
 
         return this.http
-            .get<ApiResponse<ISong[]>>(this.endpoint, {
+            .get<ApiResponse<IArtist[]>>(this.endpoint, {
                 ...options,
                 ...httpOptions,
             })
             .pipe(
-                map((response: any) => response.results as ISong[]),
+                map((response: any) => response.results as IArtist[]),
                 tap(console.log),
                 catchError(this.handleError)
             );
@@ -47,16 +47,16 @@ export class SongService {
      * Get a single item from the service.
      *
      */
-    public read(id: string | null, options?: any): Observable<ISong> {
+    public read(id: string | null, options?: any): Observable<IArtist> {
         console.log(`read ${this.endpoint}`);
         return this.http
-            .get<ApiResponse<ISong>>(this.endpoint, {
+            .get<ApiResponse<IArtist>>(this.endpoint, {
                 ...options,
                 ...httpOptions,
             })
             .pipe(
                 tap(console.log),
-                map((response: any) => response.results as ISong),
+                map((response: any) => response.results as IArtist),
                 catchError(this.handleError)
             );
     }
@@ -65,7 +65,7 @@ export class SongService {
      * Handle errors.
      */
     public handleError(error: HttpErrorResponse): Observable<any> {
-        console.log('handleError in MealService', error);
+        console.log('handleError in Artistservice', error);
 
         return throwError(() => new Error(error.message));
     }

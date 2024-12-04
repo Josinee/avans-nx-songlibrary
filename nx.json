@@ -18,7 +18,6 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  
   "targetDefaults": {
     "@angular-devkit/build-angular:application": {
       "cache": true,
