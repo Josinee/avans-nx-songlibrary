@@ -27,7 +27,6 @@ export class CreateAlbumDto implements ICreateAlbum{
     @IsNotEmpty()
     length!: number;
 
-
     @IsNumber()
     @IsNotEmpty()
     yearOfRelease!: number;

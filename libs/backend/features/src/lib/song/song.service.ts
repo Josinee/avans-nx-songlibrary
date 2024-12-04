@@ -25,6 +25,10 @@ export class SongService {
         return createdSong.save();
     }
 
+    async getAllByAlbum(album: string): Promise<ISong[]> {
+        return this.songModel.find({album}).exec();
+    }
+
     async getAll(): Promise<ISong[]> {
         return this.songModel.find().populate('artist').populate('album').exec();
     }

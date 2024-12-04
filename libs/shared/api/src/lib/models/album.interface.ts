@@ -1,5 +1,6 @@
 import { Id } from './id.type';
 import { IArtist } from './artist.interface';
+import { ISong } from './song.interface';
 
 export interface IAlbum {
     id: Id,
@@ -8,8 +9,9 @@ export interface IAlbum {
     yearOfRelease: number,
     numberOfSongs: number,
     artist: IArtist
+    songs?: ISong[]
 }
 
-export type ICreateAlbum = Partial<Omit<IAlbum, 'id'>>;
-export type IUpdateAlbum = Partial<Omit<IAlbum, 'id'>>;
-export type IUpsertAlbum = IAlbum;
+export type ICreateAlbum = Partial<Omit<IAlbum, 'id' | 'songs'>>;
+export type IUpdateAlbum = Partial<Omit<IAlbum, 'id' | 'songs'>>;
+export type IUpsertAlbum = Partial<Omit<IAlbum, 'songs'>>;

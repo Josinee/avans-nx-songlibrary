@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
 import { Album } from './album.schema';
 import { CreateSongDto } from '@avans-nx-songlibrary/backend/dto';
+import { SongService } from '../song/song.service';
 
 
 const httpOptions = {
@@ -16,7 +17,7 @@ const httpOptions = {
 @Injectable()
 export class AlbumService {
     TAG = 'AlbumService';
-    constructor(@InjectModel(Album.name) private albumModel: Model<Album>) {}
+    constructor(@InjectModel(Album.name) private albumModel: Model<Album>, private readonly songService: SongService) {}
         
     
     // async create(createSongDto: CreateSongDto): Promise<Song> {
@@ -25,15 +26,17 @@ export class AlbumService {
     // }
 
     async getAll(): Promise<IAlbum[]> {
-        return this.albumModel.find().exec();
+        return this.albumModel.find().populate('artist').exec();
     }
 
     async getOne(id: string): Promise<IAlbum> {
-        const album = await this.albumModel.findById(id).exec();
+        const album = await this.albumModel.findById(id).populate('artist').exec();
         if (!album) {
             throw new NotFoundException(`Album could not be found!`);
         }
-        return album as IAlbum;
+
+        const songs = await this.songService.getAllByAlbum(album.id);
+        return { ...album, songs};
     }
 
 }
