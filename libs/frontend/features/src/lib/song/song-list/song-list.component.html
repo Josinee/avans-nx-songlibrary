@@ -1,7 +1,24 @@
 <p>song-list works!</p>
-<div *ngFor="let song of songs">
-    <h2>{{ song.title }}</h2>
-    <p>Lengthe: {{ song.length }}</p>
-    <p>SongText: {{ song.songText }}</p>
-    <p>Year of release: {{ song.yearOfRelease }}</p>
-</div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Song</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Album</th>
+      <th scope="col">Length</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let song of songs" class="song-row">
+      <td><input type="checkbox" class="song-checkbox"></td>
+      <td><a routerLink="#">{{ song.title }}</a></td>
+      <td><a routerLink="#">{{ song.artist.name }}</a></td>
+      <td><a routerLink="#">{{ song.album?.title }}</a></td>
+      <td>{{ song.length / 100 | number: '1.2-3' }}</td>
+    </tr>
+  </tbody>
+</table>

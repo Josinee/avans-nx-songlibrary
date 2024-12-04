@@ -4,12 +4,16 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { ISong } from '@avans-nx-songlibrary/api';
 import { IsMongoId } from 'class-validator';
 import { IArtist, IAlbum } from '@avans-nx-songlibrary/api';
+import * as mongoose from 'mongoose';
 
 export type SongDocument = Song & Document;
 @Schema()
 export class Song implements ISong {
     @IsMongoId()
     id!: string;
+
+    @Prop({ required: false})
+    image!: string;
 
     @Prop({ required: true })
     title!: string;
@@ -23,7 +27,7 @@ export class Song implements ISong {
     @Prop({ required: true })
     yearOfRelease!: number;
 
-    @Prop({ required: true, type: Object })
+    @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Artist' })
     artist!: IArtist;
 
     @Prop({ required: true, type: Object })//TODO mongoose object

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-song-detail',
+  selector: 'song-detail',
   template: './song-detail.component.html',
   styles: ``,
 })

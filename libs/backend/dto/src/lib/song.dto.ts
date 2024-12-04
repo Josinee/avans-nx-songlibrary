@@ -41,6 +41,10 @@ export class CreateSongDto implements ICreateSong {
 export class UpdateSongDto implements IUpdateSong {
     @IsString()
     @IsOptional()
+    image!: string;
+    
+    @IsString()
+    @IsOptional()
     title!: string;
 
     @IsNumber()
@@ -68,6 +72,10 @@ export class UpsertSongDto implements IUpsertSong {
     @IsString()
     @IsNotEmpty()
     id!: string;
+
+    @IsString()
+    @IsOptional()
+    image!: string;
 
     @IsString()
     @IsNotEmpty()
