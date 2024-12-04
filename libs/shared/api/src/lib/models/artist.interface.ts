@@ -5,7 +5,9 @@ import { IAlbum } from './album.interface';
 export interface IArtist {
     id: Id
     name: string,
-    description: string,
-    songs?: ISong[],
-    albums?: IAlbum[]
+    description: string
 }
+
+export type ICreateArtist = Pick<IArtist,'name' | 'description'>;
+export type IUpdateArtist = Partial<Omit<IArtist, 'id'>>;
+export type IUpsertArtist = IArtist;
