@@ -8,6 +8,6 @@ export interface IArtist {
     description: string
 }
 
-export type ICreateArtist = Pick<IArtist,'name' | 'description'>;
+export type ICreateArtist = Partial<Omit<IArtist, 'id'>>;;
 export type IUpdateArtist = Partial<Omit<IArtist, 'id'>>;
 export type IUpsertArtist = IArtist;

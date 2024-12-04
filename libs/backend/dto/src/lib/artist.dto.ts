@@ -1,16 +1,11 @@
 import {
     IsNotEmpty,
     IsString,
-    IsOptional,
-    IsNumber,
-    IsObject
 } from 'class-validator';
 import {
-    IAlbum,
-    IArtist,
-    ICreateSong,
-    IUpdateSong,
-    IUpsertSong,
+    ICreateArtist,
+    IUpdateArtist,
+    IUpsertArtist,
 
 } from '@avans-nx-songlibrary/api';
 
@@ -21,85 +16,38 @@ import {
 export class CreateArtistDto implements ICreateArtist {
     @IsString()
     @IsNotEmpty()
-    title!: string;
-    
-    @IsNumber()
-    @IsNotEmpty()
-    length!: number;
+    name!: string;
 
-
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    yearOfRelease!: number;
+    description!: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    artist!: IArtist;
 
 }
 
 export class UpdateArtistDto implements IUpdateArtist {
     @IsString()
-    @IsOptional()
-    image!: string;
-    
-    @IsString()
-    @IsOptional()
-    title!: string;
-
-    @IsNumber()
-    @IsOptional()
-    length!: number;
+    @IsNotEmpty()
+    name!: string;
 
     @IsString()
-    @IsOptional()
-    songText!: string;
-
-    @IsNumber()
-    @IsOptional()
-    yearOfRelease!: number
-
-    @IsOptional()
-    @IsObject()
-    artist!: IArtist
-
-    @IsOptional()
-    @IsObject()
-    album!: IAlbum
+    @IsNotEmpty()
+    description!: string;
 }
 
 export class UpsertArtistDto implements IUpsertArtist {
     @IsString()
     @IsNotEmpty()
     id!: string;
-
-    @IsString()
-    @IsOptional()
-    image!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    title!: string;
     
-    @IsNumber()
+    
+    @IsString()
     @IsNotEmpty()
-    length!: number;
+    name!: string;
 
     @IsString()
-    @IsOptional()
-    songText!: string;
-
-    @IsNumber()
     @IsNotEmpty()
-    yearOfRelease!: number;
-
-    @IsNotEmpty()
-    @IsObject()
-    artist!: IArtist
-
-    @IsOptional()
-    @IsObject()
-    album!: IAlbum
+    description!: string;
 
 
 }
