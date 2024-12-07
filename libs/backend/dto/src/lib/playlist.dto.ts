@@ -29,15 +29,15 @@ export class CreatePlaylistDto implements ICreatePlaylist {
     
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
+    duration!: number;
 
     @IsNumber()
     @IsNotEmpty()
     numberOfSongs!: number;
 
-    @IsObject()
-    @IsNotEmpty()
-    creator!: IUserInfo;
+    // @IsObject()
+    // @IsNotEmpty()
+    // creator!: IUserInfo;
 
     @IsDate()
     @IsNotEmpty()
@@ -56,7 +56,7 @@ export class UpdatePlaylistDto implements IUpdatePlaylist {
 
     @IsNumber()
     @IsOptional()
-    length!: number;
+    duration!: number;
 
     @IsNumber()
     @IsOptional()
@@ -69,9 +69,10 @@ export class UpdatePlaylistDto implements IUpdatePlaylist {
 }
 
 export class UpsertPlaylistDto implements IUpsertPlaylist {
+
     @IsString()
     @IsNotEmpty()
-    id!: Id;
+    _id!: Id;
     
     @IsString()
     @IsNotEmpty()
@@ -83,7 +84,7 @@ export class UpsertPlaylistDto implements IUpsertPlaylist {
     
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
+    duration!: number;
 
     @IsNumber()
     @IsNotEmpty()
@@ -100,6 +101,9 @@ export class UpsertPlaylistDto implements IUpsertPlaylist {
     @IsNotEmpty()
     creationDate!: Date;
 
+    @IsDate()
+    @IsNotEmpty()
+    lastUpdated!: Date;
 
 
 

@@ -34,9 +34,10 @@ export class AlbumService {
         if (!album) {
             throw new NotFoundException(`Album could not be found!`);
         }
+        const songs = await this.songService.getAllByAlbum(id)
 
-        const songs = await this.songService.getAllByAlbum(album.id);
-        return { ...album, songs};
+
+        return { ...album.toObject(), songs};
     }
 
 }

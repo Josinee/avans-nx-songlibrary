@@ -1,8 +1,10 @@
 import {
     IsNotEmpty,
     IsString,
+    IsArray,
 } from 'class-validator';
 import {
+    Genres,
     ICreateArtist,
     IUpdateArtist,
     IUpsertArtist,
@@ -36,9 +38,11 @@ export class UpdateArtistDto implements IUpdateArtist {
 }
 
 export class UpsertArtistDto implements IUpsertArtist {
+
+
     @IsString()
     @IsNotEmpty()
-    id!: string;
+    _id!: string;
     
     
     @IsString()
@@ -48,6 +52,15 @@ export class UpsertArtistDto implements IUpsertArtist {
     @IsString()
     @IsNotEmpty()
     description!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    recordLabel!: string;
+
+
+    @IsArray()
+    @IsNotEmpty()
+    genres!: Genres[];
 
 
 }

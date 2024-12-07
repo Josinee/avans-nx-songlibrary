@@ -1,26 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SongService } from '../song.service'
+import { AlbumService } from '../album.service'
+import { SongService } from '../../song/song.service'
 import { ActivatedRoute } from '@angular/router'
 import { ISong, IAlbum } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'song-detail',
-  templateUrl: './song-detail.component.html',
-
+  selector: 'album-detail',
+  templateUrl: './album-detail.component.html',
 })
 
-
-export class SongDetailComponent implements OnInit, OnDestroy {
-  song: ISong | null = null;
-
+export class AlbumDetailComponent implements OnInit, OnDestroy {
+  album: IAlbum | null = null;
+  songs: ISong[] = [];
   id: string | null = null;
   private sub: Subscription | null = null;
 
 
   constructor(
-    private songService: SongService,
+    private albumService: AlbumService,
     private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -30,13 +29,15 @@ export class SongDetailComponent implements OnInit, OnDestroy {
       if (this.id) {
         console.log("ja")
         
-        this.songService.read(this.id).subscribe((song: ISong) => {
-          console.log(song);
-          this.song = song;
-    
+        this.albumService.read(this.id).subscribe((album: IAlbum) => {
+          console.log(album);
+          this.album = album;
+          this.songs = album.songs || []
         }) 
-      }
-    });
+    }
+  
+  });
+    
   }
 
   ngOnDestroy(): void {

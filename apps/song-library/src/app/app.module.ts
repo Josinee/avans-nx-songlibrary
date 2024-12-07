@@ -8,6 +8,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/ui/header/header.component';
 import { FooterComponent } from './components/ui/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http'; 
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FeaturesModule,
     HttpClientModule,
+    RouterModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

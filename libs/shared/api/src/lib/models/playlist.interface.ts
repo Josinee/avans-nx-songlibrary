@@ -3,16 +3,17 @@ import { ISong } from './song.interface';
 import { IUserInfo } from './user.interface';
 
 export interface IPlaylist {
-    id: Id,
+    _id: Id,
     name: string,
     description: string,
-    length: number,
+    duration: number,
     numberOfSongs: number,
     songs: ISong[],
-    creator: IUserInfo,
-    creationDate: Date
+    // creator: IUserInfo,
+    creationDate: Date,
+    lastUpdated: Date,
 }
 
-export type ICreatePlaylist = Pick<IPlaylist,'name' | 'creator' | 'numberOfSongs' | 'length' | 'creationDate'>;
-export type IUpdatePlaylist = Partial<Omit<IPlaylist, 'id' | 'creator' | 'creationDate'>>;
+export type ICreatePlaylist = Pick<IPlaylist,'name' | 'numberOfSongs' | 'duration' | 'creationDate'>;
+export type IUpdatePlaylist = Partial<Omit<IPlaylist, '_id' | 'creationDate'>>;
 export type IUpsertPlaylist = IPlaylist;

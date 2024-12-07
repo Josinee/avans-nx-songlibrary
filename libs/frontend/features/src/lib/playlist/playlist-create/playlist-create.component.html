@@ -1,0 +1,17 @@
+<form #playlistCreate="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+          <label for="name" class="form-label">name</label>
+          <input type="text" class="form-control" [(ngModel)]="playlist.name" name="playlistName" #playlistName="ngModel" id="name">
+        </div>
+        
+        <div class="mb-3">
+          <label for="description" class="form-label">description</label>
+          <!-- <input type="text" class="form-control" [(ngModel)]="" name="playlistDescription" #playlistDescription="ngModel" id="description"> -->
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>

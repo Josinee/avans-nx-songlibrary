@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 
 })
 export class ArtistDetailComponent implements OnInit, OnDestroy {
-    artists: IArtist[] | null = null;
+    artist: IArtist[] | null = null;
     subscription: Subscription | undefined = undefined;
 
 
@@ -20,7 +20,7 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscription = this.artistService.list().subscribe((results) => {
             console.log(`results: ${results}`);
-            this.artists = results;
+            this.artist = results;
         });
     }
 

@@ -19,18 +19,20 @@ import {
  * new to-do items
  */
 export class CreateSongDto implements ICreateSong {
+
+    
     @IsString()
     @IsNotEmpty()
     title!: string;
     
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
+    duration!: number;
 
 
     @IsNumber()
     @IsNotEmpty()
-    yearOfRelease!: number;
+    dateOfRelease!: Date;
 
     @IsNumber()
     @IsNotEmpty()
@@ -49,7 +51,7 @@ export class UpdateSongDto implements IUpdateSong {
 
     @IsNumber()
     @IsOptional()
-    length!: number;
+    duration!: number;
 
     @IsString()
     @IsOptional()
@@ -57,7 +59,7 @@ export class UpdateSongDto implements IUpdateSong {
 
     @IsNumber()
     @IsOptional()
-    yearOfRelease!: number
+    dateOfRelease!: Date
 
     @IsOptional()
     @IsObject()
@@ -69,9 +71,10 @@ export class UpdateSongDto implements IUpdateSong {
 }
 
 export class UpsertSongDto implements IUpsertSong {
+
     @IsString()
     @IsNotEmpty()
-    id!: string;
+    _id!: string;
 
     @IsString()
     @IsOptional()
@@ -83,7 +86,7 @@ export class UpsertSongDto implements IUpsertSong {
     
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
+    duration!: number;
 
     @IsString()
     @IsOptional()
@@ -91,7 +94,7 @@ export class UpsertSongDto implements IUpsertSong {
 
     @IsNumber()
     @IsNotEmpty()
-    yearOfRelease!: number;
+    dateOfRelease!: Date;
 
     @IsNotEmpty()
     @IsObject()

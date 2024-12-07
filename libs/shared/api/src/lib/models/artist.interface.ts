@@ -1,13 +1,15 @@
 import { Id } from './id.type';
 import { ISong } from './song.interface';
-import { IAlbum } from './album.interface';
+import { Genres, IAlbum } from './album.interface';
 
 export interface IArtist {
-    id: Id
+    _id: Id
     name: string,
-    description: string
+    description: string,
+    recordLabel: string,
+    genres: Genres[]
 }
 
-export type ICreateArtist = Partial<Omit<IArtist, 'id'>>;;
-export type IUpdateArtist = Partial<Omit<IArtist, 'id'>>;
+export type ICreateArtist = Partial<Omit<IArtist, '_id'>>;;
+export type IUpdateArtist = Partial<Omit<IArtist, '_id'>>;
 export type IUpsertArtist = IArtist;

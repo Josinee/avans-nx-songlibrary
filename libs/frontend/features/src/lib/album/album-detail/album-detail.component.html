@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH4PnzC50nS6p-Amu_gSiNpAoulvk0YM0Zug&s">
+        <!-- TODO dit is ugly -->
+        </div>
+        <div class="col-8">
+            <p>{{album?.title}}</p>
+            <p>{{album?.artist?.name}}</p>
+            <p>{{album?.dateOfRelease}} - {{album?.numberOfSongs}} songs</p>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr *ngFor="let song of album?.songs; let i = index" [routerLink]="['/song', song._id]">
+                <td>{{song._id}}</td>
+                <td>{{i + 1}}</td>
+                <td>{{song.title}}</td>
+                <td>{{ song.duration / 100 | number: '1.2-3' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+  <pre>{{ album | json }}</pre>
+
+  
+
+</div>

@@ -9,8 +9,9 @@ import * as mongoose from 'mongoose';
 export type SongDocument = Song & Document;
 @Schema()
 export class Song implements ISong {
+    
     @IsMongoId()
-    id!: string;
+    _id!: string;
 
     @Prop({ required: false})
     image!: string;
@@ -19,13 +20,13 @@ export class Song implements ISong {
     title!: string;
 
     @Prop({ required: true })
-    length!: number;
+    duration!: number;
 
     @Prop({ required: true })
     songText!: string;
 
     @Prop({ required: true })
-    yearOfRelease!: number;
+    dateOfRelease!: Date;
 
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Artist' })
     artist!: IArtist;

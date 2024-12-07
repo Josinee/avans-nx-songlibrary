@@ -19,8 +19,8 @@ export const httpOptions = {
  *
  */
 @Injectable({ providedIn: 'root' })
-export class SongService {
-    endpoint = environment.dataApiUrl + '/song';
+export class AlbumService {
+    endpoint = environment.dataApiUrl + '/album';
 
     constructor(private readonly http: HttpClient) {}
 
@@ -29,62 +29,49 @@ export class SongService {
      *
      * @options options - optional URL queryparam options
      */
-    public list(options?: any): Observable<ISong[] | null> {
+    public list(options?: any): Observable<IAlbum[] | null> {
         console.log(`list ${this.endpoint}`);
 
         return this.http
-            .get<ApiResponse<ISong[]>>(this.endpoint, {
+            .get<ApiResponse<IAlbum[]>>(this.endpoint, {
                 ...options,
                 ...httpOptions,
             })
             .pipe(
-                map((response: any) => response.results as ISong[]),
+                map((response: any) => response.results as IAlbum[]),
                 tap(console.log),
                 catchError(this.handleError)
             );
     }
+
+
 
     /**
      * Get a single item from the service.
      *
      */
-    public read(id: string | null, options?: any): Observable<ISong> {
-        console.log(`read ${this.endpoint}/${id}`);
+    public read(id: string | null, options?: any): Observable<IAlbum> {
+        console.log(`read ${this.endpoint + `/${id}`}`);
         return this.http
-            .get<ApiResponse<ISong>>(this.endpoint + `/${id}`, {
+            .get<ApiResponse<IAlbum>>(this.endpoint + `/${id}`, {
                 ...options,
                 ...httpOptions,
             })
             .pipe(
                 tap(console.log),
-                map((response: any) => response.results as ISong),
-                catchError(this.handleError)
+                map((response: any) => response.results as IAlbum),
+                catchError(this.handleError),
+                
             );
-    }
-
-
-    public getByAlbum(albumId: string | null, options?: any): Observable<ISong[]> {
-        console.log(albumId + 'get by album in song service');
-        if(albumId){
             
-        }
-        return this.http.get<ApiResponse<ISong>>(`${environment.dataApiUrl}/album/${albumId}`, {
-            ...options,
-            ...httpOptions,
-        })
-        .pipe(
-            tap(console.log),
-            map((response: any) => response.results as ISong[]),
-            catchError(this.handleError)
-        )
-        
     }
+
 
     /**
      * Handle errors.
      */
     public handleError(error: HttpErrorResponse): Observable<any> {
-        console.log('handleError in MealService', error);
+        console.log('handleError in AlbumService', error);
 
         return throwError(() => new Error(error.message));
     }

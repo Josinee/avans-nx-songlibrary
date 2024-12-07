@@ -25,11 +25,11 @@ export class CreateAlbumDto implements ICreateAlbum{
     
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
+    duration!: number;
 
     @IsNumber()
     @IsNotEmpty()
-    yearOfRelease!: number;
+    dateOfRelease!: Date;
 
     @IsNumber()
     @IsNotEmpty()
@@ -48,11 +48,11 @@ export class UpdateAlbumDto implements IUpdateAlbum {
     
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
+    duration!: number;
 
     @IsNumber()
     @IsNotEmpty()
-    yearOfRelease!: number;
+    dateOfRelease!: Date;
 
     @IsNumber()
     @IsNotEmpty()
@@ -66,7 +66,7 @@ export class UpdateAlbumDto implements IUpdateAlbum {
 export class UpsertAlbumDto implements IUpsertAlbum {
     @IsString()
     @IsNotEmpty()
-    id!: string;
+    _id!: string;
 
     @IsString()
     @IsNotEmpty()
@@ -74,11 +74,11 @@ export class UpsertAlbumDto implements IUpsertAlbum {
     
     @IsNumber()
     @IsNotEmpty()
-    length!: number;
+    duration!: number;
 
     @IsNumber()
     @IsNotEmpty()
-    yearOfRelease!: number;
+    dateOfRelease!: Date;
 
     @IsNumber()
     @IsNotEmpty()

@@ -4,6 +4,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IPlaylist } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env'
+import { FormsModule } from '@angular/forms'  
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -17,7 +18,7 @@ export const httpOptions = {
  *
  *
  */ 
-@Injectable()
+@Injectable({ providedIn: 'root', })
 export class PlaylistService {
     endpoint = environment.dataApiUrl + '/playlist';
 
@@ -61,11 +62,21 @@ export class PlaylistService {
             );
     }
 
+    public create(playlist: IPlaylist, options?: any): Observable<IPlaylist> {
+        console.log(`create ${this.endpoint}`);
+        return this.http
+            .post<IPlaylist>(this.endpoint, playlist, { ...options, ...httpOptions })
+            .pipe(
+                map((response: any) => response.results),
+                catchError(this.handleError)
+            );
+    }
+
     /**
      * Handle errors.
      */
     public handleError(error: HttpErrorResponse): Observable<any> {
-        console.log('handleError in MealService', error);
+        console.log('handleError in PlaylistService', error);
 
         return throwError(() => new Error(error.message));
     }

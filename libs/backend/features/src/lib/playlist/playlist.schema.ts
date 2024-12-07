@@ -8,31 +8,34 @@ import * as mongoose from 'mongoose';
 export type PlaylistDocumentent = Playlist & Document;
 @Schema()
 export class Playlist implements IPlaylist {
+    
 
     @IsMongoId()
-    id!: string;
-    
+    _id!: string;
     
     @Prop({ required: true })
     name!: string;
     
-    @Prop({ required: true })
+    @Prop({ required: false })
     description!: string;
     
     @Prop({ required: true })
-    length!: number;
+    duration!: number;
 
     @Prop({ required: true })
     numberOfSongs!: number;
     
-    @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'ISong' })
+    @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'ISong' })
     songs!: ISong[];
     
-    @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'IUserInfo' })
-    creator!: IUserInfo;
+    // @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'IUserInfo' })
+    // creator!: IUserInfo;
     
     @Prop({ required: true })
     creationDate!: Date;
+
+    @Prop({ required: true })
+    lastUpdated!: Date;
 
 }
 

@@ -3,18 +3,18 @@ import { IArtist } from './artist.interface';
 import { IAlbum } from './album.interface';
 
 export interface ISong {
-    id: Id,
+    _id: Id,
     image: string,
     title: string,
-    length: number,
+    duration: number,
     songText: string,
-    yearOfRelease: number
+    dateOfRelease: Date
     artist: IArtist,
     album?: IAlbum,
 
 }
 
 
-export type ICreateSong = Pick<ISong,'title' | 'length' | 'yearOfRelease' | 'artist'>;
-export type IUpdateSong = Partial<Omit<ISong, 'id'>>;
+export type ICreateSong = Pick<ISong,'title' | 'duration' | 'dateOfRelease' | 'artist'>;
+export type IUpdateSong = Partial<Omit<ISong, '_id'>>;
 export type IUpsertSong = ISong;
