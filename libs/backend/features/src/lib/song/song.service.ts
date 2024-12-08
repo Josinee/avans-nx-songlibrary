@@ -22,7 +22,7 @@ export class SongService {
     
     async create(createSongDto: CreateSongDto): Promise<Song> {
         const createdSong = new this.songModel(createSongDto);
-        return createdSong.save();
+        return createdSong.save(); 
     }
 
     async getAllByAlbum(album: string): Promise<ISong[]> {
@@ -30,7 +30,7 @@ export class SongService {
     }
 
     async getAll(): Promise<ISong[]> {
-        return this.songModel.find().populate('artist').populate('album').exec();
+        return this.songModel.find().select('title artist album duration').populate({path: 'artist', select: '_id name'}).populate({path: 'album', select: '_id title'}).exec();
     }
 
     async getOne(id: string): Promise<ISong> {

@@ -14,6 +14,6 @@ export interface IPlaylist {
     lastUpdated: Date,
 }
 
-export type ICreatePlaylist = Pick<IPlaylist,'name' | 'numberOfSongs' | 'duration' | 'creationDate'>;
+export type ICreatePlaylist = Pick<IPlaylist,'name' | 'numberOfSongs' | 'duration' | 'creationDate' | 'lastUpdated' > & { description?: IPlaylist['description']};
 export type IUpdatePlaylist = Partial<Omit<IPlaylist, '_id' | 'creationDate'>>;
 export type IUpsertPlaylist = IPlaylist;

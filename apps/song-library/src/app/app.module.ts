@@ -10,11 +10,12 @@ import { FooterComponent } from './components/ui/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http'; 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from './components/ui/sidebar/sidebar.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, RouterModule, HeaderComponent, FooterComponent, DashboardComponent
+    AppComponent, RouterModule, HeaderComponent, FooterComponent, DashboardComponent, SidebarComponent
   ],
   imports: [
     BrowserModule,

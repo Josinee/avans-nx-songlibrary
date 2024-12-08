@@ -1,3 +1,11 @@
-.song-row:hover{
-    background-color: pink;
+
+tbody tr:hover {
+
+        background-color: coral;
+
+    
+}
+
+.table {
+    --bs-table-hover-bg: pink;
 }

@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IPlaylist } from '@avans-nx-songlibrary/api';
+import { ApiResponse, ICreatePlaylist, IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env'
 import { FormsModule } from '@angular/forms'  
@@ -44,14 +44,29 @@ export class PlaylistService {
             );
     }
 
+    public getSongsByPlaylist(id: string, options?: any): Observable<ISong[]> {
+        console.log(`list ${this.endpoint}`+ `/${id}`);
+        return this.http
+            .get<ApiResponse<ISong[]>>(this.endpoint + `/${id}`, {
+                ...options,
+                ...httpOptions,
+            })
+            .pipe(
+                map((response: any) => response.results.songs as ISong[]),
+                tap(console.log),
+                catchError(this.handleError)
+            );
+            
+    }
+
     /**
      * Get a single item from the service.
      *
      */
     public read(id: string | null, options?: any): Observable<IPlaylist> {
-        console.log(`read ${this.endpoint}`);
+        console.log(`read ${this.endpoint}`+ `/${id}`);
         return this.http
-            .get<ApiResponse<IPlaylist>>(this.endpoint, {
+            .get<ApiResponse<IPlaylist>>(this.endpoint + `/${id}`, {
                 ...options,
                 ...httpOptions,
             })
@@ -62,7 +77,7 @@ export class PlaylistService {
             );
     }
 
-    public create(playlist: IPlaylist, options?: any): Observable<IPlaylist> {
+    public create(playlist: ICreatePlaylist, options?: any): Observable<IPlaylist> {
         console.log(`create ${this.endpoint}`);
         return this.http
             .post<IPlaylist>(this.endpoint, playlist, { ...options, ...httpOptions })

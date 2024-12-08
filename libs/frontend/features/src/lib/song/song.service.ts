@@ -77,7 +77,6 @@ export class SongService {
             map((response: any) => response.results as ISong[]),
             catchError(this.handleError)
         )
-        
     }
 
     /**

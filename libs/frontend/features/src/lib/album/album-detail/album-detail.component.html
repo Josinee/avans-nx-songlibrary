@@ -1,29 +1,38 @@
 <div class="container">
-    <div class="row">
-        <div class="col-4">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH4PnzC50nS6p-Amu_gSiNpAoulvk0YM0Zug&s">
-        <!-- TODO dit is ugly -->
-        </div>
-        <div class="col-8">
-            <p>{{album?.title}}</p>
-            <p>{{album?.artist?.name}}</p>
-            <p>{{album?.dateOfRelease}} - {{album?.numberOfSongs}} songs</p>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-4">
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH4PnzC50nS6p-Amu_gSiNpAoulvk0YM0Zug&s" />
+			<!-- TODO dit is ugly -->
+		</div>
+		<div class="col-8">
+			<p>{{ album?.title }}</p>
+			<p>{{ album?.artist?.name }}</p>
+			<p>{{ album?.dateOfRelease }} - {{ album?.numberOfSongs }} songs</p>
+		</div>
+	</div>
 
-    <table class="table table-striped">
-        <tbody>
-            <tr *ngFor="let song of album?.songs; let i = index" [routerLink]="['/song', song._id]">
-                <td>{{song._id}}</td>
-                <td>{{i + 1}}</td>
-                <td>{{song.title}}</td>
-                <td>{{ song.duration / 100 | number: '1.2-3' }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table table-hover">
+		<tbody>
+			<tr *ngFor="let song of album?.songs; let i = index" width="100%">
+				<td width="5%">{{ i + 1 }}</td>
+				<td width="80%">{{ song.title }}</td>
+				<td>{{ song.duration / 100 | number : '1.2-3' }}</td>
+				<td>
+					<div class="dropstart">
+						<button type="button" class="btn btn-link text-body" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-three-dots"></i>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a [routerLink]="['/song', song._id]" class="dropdown-item">Show details</a></li>
+							<li><a class="dropdown-item">Add to playlist</a></li>
+							<!-- TODO toevoegen? -->
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
-  <pre>{{ album | json }}</pre>
-
-  
-
+	<!-- <pre>{{ album | json }}</pre> -->
 </div>
+<!-- [routerLink]="['/song', song._id]" -->

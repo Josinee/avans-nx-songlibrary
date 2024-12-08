@@ -24,11 +24,6 @@ export class AlbumService {
 
     constructor(private readonly http: HttpClient) {}
 
-    /**
-     * Get all items.
-     *
-     * @options options - optional URL queryparam options
-     */
     public list(options?: any): Observable<IAlbum[] | null> {
         console.log(`list ${this.endpoint}`);
 
@@ -45,11 +40,6 @@ export class AlbumService {
     }
 
 
-
-    /**
-     * Get a single item from the service.
-     *
-     */
     public read(id: string | null, options?: any): Observable<IAlbum> {
         console.log(`read ${this.endpoint + `/${id}`}`);
         return this.http
@@ -67,9 +57,6 @@ export class AlbumService {
     }
 
 
-    /**
-     * Handle errors.
-     */
     public handleError(error: HttpErrorResponse): Observable<any> {
         console.log('handleError in AlbumService', error);
 
