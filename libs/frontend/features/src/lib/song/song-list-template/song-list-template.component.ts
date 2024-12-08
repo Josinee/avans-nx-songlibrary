@@ -1,36 +1,68 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SongService } from '../song.service'
-import { ISong } from '@avans-nx-songlibrary/api';
+import { IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
+import { PlaylistService } from '../../playlist/playlist.service';
 
 @Component({
     selector: 'song-list-template',
-    template: `
-    <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Song</th>
-                <th scope="col">Artist</th>
-                <th scope="col">Album</th>
-                <th scope="col">Duration</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr *ngFor="let song of songs" class="song-row">
-                <td><input type="checkbox" class="song-checkbox"></td>
-                <td><a [routerLink]="['/song', song._id]">{{ song.title }}</a></td>
-                <td><a [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</a></td>
-                <td><a [routerLink]="['/album', song.album?._id]">{{ song.album?.title }}, {{song.album?._id}}</a></td>
-                <td>{{ song.duration / 100 | number: '1.2-3' }}</td>
-                </tr>
-            </tbody>
-            </table>
-`,
+    templateUrl:  'song-list-template.component.html',
+    styleUrl: 'song-list-template.component.css'
 
 })
 export class SongListTemplateComponent {
+    subscription: Subscription | undefined = undefined;
     @Input() songs: ISong[] = []
+    @Input() context: string | undefined
+    @Input() playlist?: IPlaylist;
+
+    playlists: IPlaylist[]= []
+
+    constructor(private playlistService: PlaylistService) {}
+
+    addToPlaylist(playlist : IPlaylist, song: ISong ): void{
+        if(!playlist) {
+            console.error("Playlist not found");
+            return;
+        }
+        console.log("Adding song", song, " to playlist with  playlistId:", playlist);
+        this.playlistService.addToPlaylist(playlist, song).subscribe(
+            (response) => {
+                console.log("Song added successfully:", response);
+            },
+            (error) => {
+                console.error("Error adding song to playlist:", error);
+            }
+        );
+    }
+
+    removeFromPlaylist(playlist : IPlaylist, song: ISong): void {
+        if(!playlist) {
+            console.error("Playlist not found");
+            return;
+        }
+        console.log("deleting song ", song._id);
+        this.playlistService.removeFromPlaylist(playlist, song).subscribe((results)=>{
+            console.log(results)
+        })
+    }
+
+    ngOnInit(): void {
+        this.subscription = this.playlistService.list().subscribe((results) => {
+            if(results) {
+                console.log(`results: ${results}`);
+                this.playlists = results
+            } else {
+                console.error('Playlists not found')
+            }
+            
+        });
+    }
+
+
+
+    ngOnDestroy(): void {
+        if (this.subscription) this.subscription.unsubscribe();
+    }
     
 }

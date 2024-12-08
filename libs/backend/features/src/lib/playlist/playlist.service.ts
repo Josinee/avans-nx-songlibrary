@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
 import { Playlist } from './playlist.schema'
 import { Song } from '../song/song.schema'; 
-import { CreatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
+import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
 //import { CreateCatDto } from './dto/create-cat.dto';
 
 
@@ -36,6 +36,27 @@ export class PlaylistService {
             throw new NotFoundException(`Playlist could not be found!`);
         }
         return playlist as IPlaylist;
+    }
+
+    async update(id: string, updatePlaylistDto: UpdatePlaylistDto): Promise<Playlist> {
+        console.log('Received update for playlist:', id, 'with data:', updatePlaylistDto);
+        const updateData: any={};
+
+        updatePlaylistDto.name && (updateData.name = updatePlaylistDto.name);
+        updatePlaylistDto.description && (updateData.description = updatePlaylistDto.description);
+        updatePlaylistDto.duration && (updateData.duration = updatePlaylistDto.duration);
+        updatePlaylistDto.lastUpdated && (updateData.lastUpdated = updatePlaylistDto.lastUpdated);
+        updatePlaylistDto.numberOfSongs && (updateData.numberOfSongs = updatePlaylistDto.numberOfSongs);
+        updatePlaylistDto.lastUpdated && (updateData.lastUpdated = updatePlaylistDto.lastUpdated);
+        updatePlaylistDto.songs && (updateData.songs = updatePlaylistDto.songs);
+
+        const playlist = await this.playlistModel.findByIdAndUpdate(id, updateData, {new: true}).exec();
+        if (!playlist) {
+            throw new NotFoundException(`Playlist ${id} not found`);
+        }
+
+        console.log('endboss')
+        return playlist;
     }
 
 }

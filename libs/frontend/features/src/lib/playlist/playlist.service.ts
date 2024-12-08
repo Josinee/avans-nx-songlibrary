@@ -87,6 +87,53 @@ export class PlaylistService {
             );
     }
 
+    public addToPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
+        console.log("add song to playlist");
+        playlist.songs.push(song);
+        playlist.numberOfSongs++;
+        playlist.duration += song.duration;
+        playlist.lastUpdated = new Date();
+        return this.http
+        .put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions })
+        .pipe(
+            tap(response => console.log(response)),
+            map((response: any) => response.results),
+            catchError(this.handleError)
+        );
+    }
+
+    public removeFromPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
+        console.log("delete song from playlist");
+        const songdelete = playlist.songs.indexOf(song)
+        console.log(songdelete);
+        playlist.songs.splice(songdelete, 1);
+        playlist.numberOfSongs--;
+        playlist.duration -= song.duration;
+        playlist.lastUpdated = new Date();
+        
+        return this.http
+        .put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions })
+        .pipe(
+            tap(response => console.log(response)),
+            map((response: any) => response.results),
+            catchError(this.handleError)
+        );
+    }
+
+    // public deleteFromPlaylist(playlist: IPlaylist, song: ISong, options?:any): Observable<IPlaylist> {
+    //     console.log("delete song from playlist");
+    //     const songdelete = playlist.songs.indexOf(song)
+    //     console.log(songdelete);
+    //     playlist.songs.splice(songdelete, 1);
+
+    //     return this.http
+    //     .delete<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions })
+    //     .pipe(
+    //         tap(console.log),
+    //         map((response: any) => response.results as IPlaylist),
+    //         catchError(this.handleError)
+    //     )
+    // }
     /**
      * Handle errors.
      */

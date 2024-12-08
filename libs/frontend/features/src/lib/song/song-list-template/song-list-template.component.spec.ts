@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SongListTemplateComponent } from './song-list-template.component';
 
-describe('SongListComponent', () => {
+describe('SongListTemplateComponent', () => {
   let component: SongListTemplateComponent;
   let fixture: ComponentFixture<SongListTemplateComponent>;
 

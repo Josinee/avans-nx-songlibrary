@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./song-list.component.css'],
 })
 export class SongListComponent implements OnInit, OnDestroy {
-    songs: ISong[] | null = null;
+    songs: ISong[] = []
     subscription: Subscription | undefined = undefined;
 
     constructor(private songService: SongService) {}
@@ -17,7 +17,7 @@ export class SongListComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscription = this.songService.list().subscribe((results) => {
             console.log(`results: ${results}`);
-            this.songs = results;
+            this.songs = results || [];
         });
     }
 

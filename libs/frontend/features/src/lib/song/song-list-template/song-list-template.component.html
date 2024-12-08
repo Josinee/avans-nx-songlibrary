@@ -1,0 +1,116 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Song</th>
+            <th *ngIf="context === 'song' || context === 'playlist'" scope="col">Artist</th>
+            <th *ngIf="context === 'song' || context === 'playlist'" scope="col">Album</th>
+            <th scope="col">Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let song of songs; let i = index" width="100%">
+            <td>{{ i + 1 }}</td>
+            <td [routerLink]="['/song', song._id]">{{ song.title }}</td>
+            <td *ngIf="context === 'song' || context === 'playlist'" [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</td>
+            <td *ngIf="context === 'song' || context === 'playlist'" [routerLink]="['/album', song.album._id]">{{ song.album.title || 'no album' }}</td>
+            <td>{{ song.duration / 100 | number : '1.2-3' }}</td>
+            <td>
+                <div class="dropstart">
+                    <button type="button" class="btn btn-link text-body" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- Show song details -->
+                        <li class="dropdown-item"><button [routerLink]="['/song', song._id]"  class="btn">Show details</button></li>
+
+                        <!-- Nested dropdown -->
+                        <li class="dropdown-item">
+                            <i class="bi bi-caret-left-fill"></i>Toevoegen aan ... 
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <div *ngFor="let playlist of playlists">
+                                    <li class="dropdown-item"><button class="btn" (click)="addToPlaylist(playlist, song)">{{playlist.name}}</button></li>
+                                </div>
+
+                            </ul>
+                        </li>
+                        <div *ngIf="context === 'playlist' && playlist">
+                            <li class="dropdown-item"><button class="btn" (click)="removeFromPlaylist(playlist, song)">Verwijder uit playlist</button>
+                        </div>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="dropdown">
+    <button
+        
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+    >
+        Dropdown button
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li>
+            <a class="dropdown-item" href="#">Another action</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#"> Submenu &raquo; </a>
+            <ul class="dropdown-menu dropdown-submenu">
+                <li>
+                    <a class="dropdown-item" href="#">Submenu item 1</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">Submenu item 2</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">Submenu item 3 &raquo; </a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                        <li>
+                            <a class="dropdown-item" href="#">Multi level 1</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Multi level 2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">Submenu item 4</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">Submenu item 5</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Song</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Album</th>
+        <th scope="col">Duration</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <tr *ngFor="let song of songs" class="song-row">
+        <td><input type="checkbox" class="song-checkbox"></td>
+        <td><a [routerLink]="['/song', song._id]">{{ song.title }}</a></td>
+        <td><a [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</a></td>
+        <td><a [routerLink]="['/album', song.album?._id]">{{ song.album?.title }}, {{song.album?._id}}</a></td>
+        <td>{{ song.duration / 100 | number: '1.2-3' }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+
+<p>song list TEMPLATE</p>
+<pre>{{ songs | json }}</pre>

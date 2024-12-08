@@ -10,7 +10,7 @@ export interface ISong {
     songText: string,
     dateOfRelease: Date
     artist: IArtist,
-    album?: IAlbum,
+    album: IAlbum,
 
 }
 

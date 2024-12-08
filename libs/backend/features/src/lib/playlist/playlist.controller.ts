@@ -1,8 +1,7 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Put, Get, Param, Post, Body } from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
-import { Get, Param, Post, Body } from '@nestjs/common';
 import { IPlaylist } from '@avans-nx-songlibrary/api';
-import { CreatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
+import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
 
 @Controller('playlist')
 export class PlaylistController {
@@ -21,5 +20,11 @@ export class PlaylistController {
     @Post('')
     create(@Body() data: CreatePlaylistDto): Promise<IPlaylist> {
         return this.playlistService.create(data);
+    }
+
+    @Put(':id')
+    update(@Param('id') id: string, @Body() updatePlaylistDto: UpdatePlaylistDto): Promise<IPlaylist>{
+        console.log('update')
+        return this.playlistService.update(id, updatePlaylistDto)
     }
 }

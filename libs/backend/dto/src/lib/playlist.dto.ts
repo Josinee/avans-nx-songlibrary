@@ -43,9 +43,14 @@ export class CreatePlaylistDto implements ICreatePlaylist {
     @IsNotEmpty()
     creationDate!: Date;
 
+    @IsDate()
+    @IsNotEmpty()
+    lastUpdated!: Date;
+
 }
 
 export class UpdatePlaylistDto implements IUpdatePlaylist {
+    
     @IsString()
     @IsOptional()
     name!: string;
@@ -65,6 +70,10 @@ export class UpdatePlaylistDto implements IUpdatePlaylist {
     @IsOptional()
     @IsArray()
     songs?: ISong[]
+
+    @IsDate()
+    @IsNotEmpty()
+    lastUpdated!: Date;
 
 }
 

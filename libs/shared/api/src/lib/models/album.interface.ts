@@ -36,7 +36,7 @@ export interface IAlbum {
     numberOfSongs: number,
     genre: Genres
     artist: IArtist
-    songs?: ISong[]
+    songs: ISong[]
 }
 
 export type ICreateAlbum = Partial<Omit<IAlbum, 'id' | 'songs'>>;

@@ -23,12 +23,6 @@ export class PlaylistCreateComponent {
 
     constructor(private playlistService: PlaylistService, private route: ActivatedRoute, private router: Router) {}
 
-    // createPlaylist(): void {
-    //   this.playlistService.create(this.playlist).subscribe({
-    //     next: ()
-    //   })
-    // }
-
     
     onSubmit(): void {
         console.log('onSubmit', this.playlist);
@@ -36,7 +30,7 @@ export class PlaylistCreateComponent {
             this.playlistService.create(this.playlist).subscribe({
                 next: (data) => {
                     console.log('Playlist created:', data);
-                    this.router.navigate(['..'], {relativeTo: this.route});
+                    this.router.navigate(['/playlist', data._id]);
                 }, error: (err)=> {
                     console.error('Error creating playlist:', err)
                 }
