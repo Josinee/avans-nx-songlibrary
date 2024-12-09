@@ -22,3 +22,12 @@
     </tr>
   </tbody>
 </table> -->
+
+<div class="row" width="100%">
+  <div *ngFor="let album of albums" class="col-4 p-5" >
+    <img class="img-fluid" src="{{album.image}}">
+    <p class="text-center">{{album.title}}</p>
+    <p class="text-center">{{album.dateOfRelease}}</p>
+    <p class="text-center">{{album.type}}</p>
+  </div>
+</div>

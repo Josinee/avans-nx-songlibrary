@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Query } from '@nestjs/common';
 import { SongService } from './song.service';
 import { Get, Param, Post, Body } from '@nestjs/common';
 import { ISong } from '@avans-nx-songlibrary/api';
@@ -9,8 +9,8 @@ export class SongController {
     constructor(private songService: SongService) {}
 
     @Get('')
-    getAll(): Promise<ISong[]> {
-        return this.songService.getAll();
+    getAll(@Query('artist') artistParam? : string): Promise<ISong[]> {
+        return this.songService.getAll(artistParam);
     }
 
     @Get(':id')

@@ -59,4 +59,11 @@ export class PlaylistService {
         return playlist;
     }
 
+    async delete(id: string): Promise<void> {
+        console.log("delte playlist ", id);
+        const filter  = { _id: id };
+        const deleted = await this.playlistModel.deleteOne(filter);
+        console.log('endboss deleted');
+    }
+
 }

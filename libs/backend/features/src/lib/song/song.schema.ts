@@ -25,9 +25,6 @@ export class Song implements ISong {
     @Prop({ required: true })
     songText!: string;
 
-    @Prop({ required: true })
-    dateOfRelease!: Date;
-
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Artist' })
     artist!: IArtist;
 

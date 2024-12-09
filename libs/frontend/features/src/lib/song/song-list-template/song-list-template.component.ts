@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SongService } from '../song.service'
-import { IPlaylist, ISong } from '@avans-nx-songlibrary/api';
+import { IAlbum, IArtist, IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
 import { PlaylistService } from '../../playlist/playlist.service';
 
@@ -12,9 +12,11 @@ import { PlaylistService } from '../../playlist/playlist.service';
 })
 export class SongListTemplateComponent {
     subscription: Subscription | undefined = undefined;
-    @Input() songs: ISong[] = []
+    @Input() songs: ISong[] | null = null;
     @Input() context: string | undefined
     @Input() playlist?: IPlaylist;
+    @Input() artist?: IArtist;
+    @Input() album?: IAlbum;
 
     playlists: IPlaylist[]= []
 

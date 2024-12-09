@@ -43,6 +43,10 @@ export class UpsertArtistDto implements IUpsertArtist {
     @IsString()
     @IsNotEmpty()
     _id!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    image!: string;
     
     
     @IsString()

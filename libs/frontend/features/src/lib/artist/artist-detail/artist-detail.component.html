@@ -1,1 +1,17 @@
-<pre>{{artist | json}}</pre>
+<div class="tab">
+    <button class="tablinks" (click)="setTab('artist')">Artist</button>
+    <button class="tablinks" (click)="setTab('album')">Albums</button>
+    <button class="tablinks" (click)="setTab('song')">Songs</button>
+  </div>
+  <div *ngIf="activeTab === 'artist'">
+    {{artist | json}}
+  </div>
+  <!-- Render the content based on activeTab -->
+  <album-list *ngIf="activeTab === 'album'" [albums]="albums"></album-list>
+  <song-list-template *ngIf="activeTab === 'song'" [songs]="songs" [context]="'artist'"></song-list-template>
+  
+  <router-outlet></router-outlet>
+<!-- <pre>{{artist | json}}</pre>
+<pre>{{songs | json}}</pre>
+<pre>{{albums | json}}</pre> -->
+

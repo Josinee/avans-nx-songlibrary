@@ -1,3 +1,30 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Dit is een tandwiel
+  </button>
+  
+<div class="modal" tabindex="-1" id="exampleModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{playlist.name}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #updatePlaylist="ngForm">
+            <label>Naam</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)]="playlist.name" name="name" value="{{playlist.name}}">
+            <label>description</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)]="playlist.name" name="name">
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save Changes</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deletePlaylist(playlist)">Delete Playlist</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 <p>{{playlist.name}}</p>
 <p>{{playlist.description}}</p>
 <p>{{playlist.duration}}</p>
@@ -5,3 +32,4 @@
 <p>{{playlist.lastUpdated}}</p>
 <!-- TODO utc timezones enzo -->
 <song-list-template [songs]="songs" [context]="'playlist'" [playlist]="playlist"></song-list-template>
+<pre>{{ playlist | json }}</pre>

@@ -29,7 +29,10 @@ export class SongService {
         return this.songModel.find({album}).exec();
     }
 
-    async getAll(): Promise<ISong[]> {
+    async getAll(artist? : string): Promise<ISong[]> {
+        if(artist) {
+            return this.songModel.find({artist}).select('title artist album duration').exec();
+        }
         return this.songModel.find().select('title artist album duration').populate({path: 'artist', select: '_id name'}).populate({path: 'album', select: '_id title'}).exec();
     }
 

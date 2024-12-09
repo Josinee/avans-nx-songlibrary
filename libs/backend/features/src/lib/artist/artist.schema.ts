@@ -9,6 +9,9 @@ export class Artist implements IArtist {
     @IsMongoId()
     _id!: string;
 
+    @Prop({ required: false })
+    image!: string;
+
     @Prop({ required: true })
     name!: string;
 

@@ -48,9 +48,9 @@ export class ArtistService {
      *
      */
     public read(id: string | null, options?: any): Observable<IArtist> {
-        console.log(`read ${this.endpoint}`);
+        console.log(`read ${this.endpoint}/${id}`);
         return this.http
-            .get<ApiResponse<IArtist>>(this.endpoint, {
+            .get<ApiResponse<IArtist>>(this.endpoint+ `/${id}`, {
                 ...options,
                 ...httpOptions,
             })

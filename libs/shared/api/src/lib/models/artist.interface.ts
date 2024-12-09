@@ -3,7 +3,8 @@ import { ISong } from './song.interface';
 import { Genres, IAlbum } from './album.interface';
 
 export interface IArtist {
-    _id: Id
+    _id: Id,
+    image: string,
     name: string,
     description: string,
     recordLabel: string,

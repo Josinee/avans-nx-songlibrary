@@ -120,6 +120,27 @@ export class PlaylistService {
         );
     }
 
+    public update(playlist: IPlaylist, options?: any) : Observable<IPlaylist>{
+        return this.http
+        .put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions })
+        .pipe(
+            tap(response => console.log(response)),
+            map((response: any) => response.results),
+            catchError(this.handleError)
+        );
+    }
+
+    public delete(playlist: IPlaylist): Observable<void> {
+        console.log("Deleting playlist with ID:", playlist._id);
+    
+        return this.http
+          .delete<void>(`${this.endpoint}/${playlist._id}`)
+          .pipe(
+            tap(() => console.log(`Playlist ${playlist._id} deleted successfully`)),
+            catchError(this.handleError)
+          );
+    }
+
     // public deleteFromPlaylist(playlist: IPlaylist, song: ISong, options?:any): Observable<IPlaylist> {
     //     console.log("delete song from playlist");
     //     const songdelete = playlist.songs.indexOf(song)

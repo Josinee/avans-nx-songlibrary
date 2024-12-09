@@ -8,13 +8,12 @@ export interface ISong {
     title: string,
     duration: number,
     songText: string,
-    dateOfRelease: Date
     artist: IArtist,
     album: IAlbum,
 
 }
 
 
-export type ICreateSong = Pick<ISong,'title' | 'duration' | 'dateOfRelease' | 'artist'>;
+export type ICreateSong = Pick<ISong,'title' | 'duration' | 'artist'>;
 export type IUpdateSong = Partial<Omit<ISong, '_id'>>;
 export type IUpsertSong = ISong;

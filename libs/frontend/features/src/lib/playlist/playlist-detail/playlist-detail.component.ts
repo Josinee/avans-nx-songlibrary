@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
 import { SongService } from '../../song/song.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlaylistService } from '../playlist.service';
+import { Form, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'playlist-detail',
@@ -16,8 +17,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
 
     id: string | null = null;
     private sub: Subscription | null = null;
-
-    constructor(private playlistService: PlaylistService, private route: ActivatedRoute) {}
+    constructor(private playlistService: PlaylistService, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
@@ -39,5 +39,17 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
         if (this.sub) {
             this.sub.unsubscribe();
         }
+    }
+
+    deletePlaylist(playlist: IPlaylist): void {
+        console.log("eersts", playlist);
+        this.playlistService.delete(playlist).subscribe({    
+            next: () => {
+                console.log('navigate');
+                this.router.navigate(['playlist-list']);
+                console.log(this.route)
+            },
+            error: (err) => console.error('Failed to delete playlist', err)
+        });
     }
 }
