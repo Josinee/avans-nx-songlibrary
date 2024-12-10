@@ -1,21 +1,23 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { PlaylistCreateComponent, SongDetailComponent, SongListComponent, PlaylistListComponent, PlaylistDetailComponent, AlbumListComponent } from "@avans-nx-songlibrary/features"
+import { PlaylistCreateComponent, SongDetailComponent, SongListComponent, PlaylistListComponent, PlaylistDetailComponent, AlbumListComponent, LoginComponent } from "@avans-nx-songlibrary/features"
 import { ArtistDetailComponent } from "@avans-nx-songlibrary/features"
 import { AlbumDetailComponent } from "@avans-nx-songlibrary/features"
 
 export const routes: Routes = [
+    { path: "login", pathMatch: "full", component: LoginComponent},
     { path: "", pathMatch: "full", redirectTo: "dashboardcomponent" },
-    { path: "dashboard", component: DashboardComponent },
-    { path: "song-list", component: SongListComponent },
+    { path: "dashboard", pathMatch: "full",component: DashboardComponent },
+    { path: "song-list", pathMatch: "full",component: SongListComponent },
     { path: "album/:id", pathMatch: "full", component: AlbumDetailComponent},
-    { path: "album-list", component: AlbumListComponent },
+    { path: "album-list", pathMatch: "full",component: AlbumListComponent },
     { path: "song/:id", pathMatch: "full", component: SongDetailComponent},
     { path: "artist/:id", pathMatch: "full", component: ArtistDetailComponent},
-    { path: "playlist-list", component: PlaylistListComponent},
-    { path: "playlist-create", component: PlaylistCreateComponent},
-    { path: "playlist/:id", component: PlaylistDetailComponent},
+    { path: "playlist-list", pathMatch: "full",component: PlaylistListComponent},
+    { path: "playlist-create", pathMatch: "full",component: PlaylistCreateComponent},
+    { path: "playlist/:id", pathMatch: "full",component: PlaylistDetailComponent},
+
     //{ path: "users", pathMatch: "full", component: ListComponent },
     // users/new moet voor users/:id, omdat new anders als de id wordt gezien.
     // Volgorde is belangrijk in routing.

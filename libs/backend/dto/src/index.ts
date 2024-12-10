@@ -4,3 +4,4 @@ export * from './lib/playlist.dto';
 export * from './lib/api-response.interceptor';
 export * from './lib/artist.dto';
 export * from './lib/album.dto';
+export * from './lib/user.dto';

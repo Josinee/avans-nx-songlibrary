@@ -37,8 +37,8 @@
                         <div *ngIf="context === 'playlist' && playlist">
                             <li class="dropdown-item"><button class="btn" (click)="removeFromPlaylist(playlist, song)">Verwijder uit playlist</button>
                         </div>
-                        <li class="dropdown-item"><button [routerLink]="['/artist', artist?._id || song.artist?._id]" class="btn">Show artist {{artist?.name || song.artist?.name}}</button></li>
-                        <li class="dropdown-item"><button [routerLink]="['/album', album?._id || song.artist?._id]" class="btn">Show album {{album?.title || song.album?.title}}</button></li>
+                        <li class="dropdown-item"><button [routerLink]="['/artist', artist?._id || song.artist._id]" class="btn">Show artist {{artist?.name || song.artist.name}}</button></li>
+                        <li class="dropdown-item"><button [routerLink]="['/album', album?._id || song.artist._id]" class="btn">Show album {{album?.title || song.album.title}}</button></li>
                     </ul>
                 </div>
             </td>

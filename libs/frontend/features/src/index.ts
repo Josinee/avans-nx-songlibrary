@@ -1,4 +1,4 @@
-export * from './lib/features/features.component';
+export * from './lib/login/login.component';
 export * from './lib/features.module'
 export * from './lib/song/song-detail/song-detail.component'
 export * from './lib/song/song-list/song-list.component'

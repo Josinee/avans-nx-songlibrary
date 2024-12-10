@@ -17,6 +17,8 @@ import { ArtistDetailComponent } from './artist/artist-detail/artist-detail.comp
 import { AlbumListComponent } from './album/album-list/album-list.component';
 import { AlbumDetailComponent } from './album/album-detail/album-detail.component';
 import { AlbumService } from './album/album.service';
+import { LoginService } from './login/login.service';
+import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -24,10 +26,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,],
-    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent],
-    providers: [SongService, ArtistService, AlbumService, PlaylistService],
-    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent]
+    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ],
+    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent],
+    providers: [SongService, ArtistService, AlbumService, PlaylistService, LoginService],
+    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent]
 
 })
 export class FeaturesModule {}

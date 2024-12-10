@@ -1,8 +1,7 @@
 // import { IEntity } from 'libs/share-a-meal/common/src/lib/entity/entity.model';
-//import { IMeal } from './meal.interface';
+import { IPlaylist } from './playlist.interface';
 import { IToken, IUserRegistration } from './auth.interface';
 import { Id } from './id.type';
-import { IPlaylist } from './playlist.interface'
 
 export enum UserRole {
     Guest = 'Guest',

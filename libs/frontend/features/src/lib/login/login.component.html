@@ -1,0 +1,19 @@
+
+  <form #loginFrom="ngForm">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <div class="form-floating">
+      <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required [(ngModel)]="loginUser.emailAddress" name="emailAddress" #emailAddress="ngModel">
+      <div [hidden]="emailAddress.valid || emailAddress.pristine" class="alert alert-danger">Email is required</div>
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required [(ngModel)]="loginUser.password" name="password" #password="ngModel">
+      <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+  </form>
+<pre>{{ loginUser | json}}</pre>
+<p>{{loginUser}}</p>
+<p>hois</p>
