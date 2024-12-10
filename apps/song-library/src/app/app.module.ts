@@ -15,7 +15,7 @@ import { SidebarComponent } from './components/ui/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    AppComponent, RouterModule, HeaderComponent, FooterComponent, DashboardComponent, SidebarComponent
+    AppComponent, RouterModule, HeaderComponent, FooterComponent, DashboardComponent, SidebarComponent,
   ],
   imports: [
     BrowserModule,
