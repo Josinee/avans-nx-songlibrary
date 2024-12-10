@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConflictException, UnauthorizedException} from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
-import { User as UserModel, UserDocument} from '@avans-nx-songlibrary/backend/features';
+import { User, UserDocument} from '@avans-nx-songlibrary/backend/features';
 import { JwtService } from '@nestjs/jwt';
 import { IUserCredentials, IUserIdentity } from '@avans-nx-songlibrary/api';
 import { CreateUserDto } from '@avans-nx-songlibrary/backend/dto';
@@ -12,8 +12,12 @@ import { Model } from 'mongoose';
 export class AuthService {
     private readonly logger = new Logger(AuthService.name);
 
+
+       
+
     constructor(
-        @InjectModel(UserModel.name) private userModel: Model<UserDocument>,
+        @InjectModel('User') private readonly userModel: Model<User>,
+        //@InjectModel(User.name) private userModel: Model<User>,
         private jwtService: JwtService
     ) {}
 
@@ -55,6 +59,7 @@ export class AuthService {
                 }
             })
             .catch((error) => {
+                
                 return error;
             });
     }

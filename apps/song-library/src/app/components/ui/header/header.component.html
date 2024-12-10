@@ -10,8 +10,8 @@
       </form>
 
       <div class="flex-shrink-0 dropdown">
-        <ul *ngIF="!(loggedInUser$ | async)" class="navbar-nav">niet ingelogd</ul>
-        <ul *ngIF="loggedInUser$ | async as user" class="navbar-nav">niet ingelogd</ul>
+        <ul *ngIf="!(loggedInUser | async)" class="navbar-nav">niet ingelogd</ul>
+        <ul *ngIf="loggedInUser | async as user" class="navbar-nav">ingelogd</ul>
         <ul class="dropdown-menu text-small shadow">
           <li><a class="dropdown-item" href="#">New project...</a></li>
           <li><a class="dropdown-item" href="#">Settings</a></li>
