@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConflictException, UnauthorizedException} from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
-import { User as UserModel, UserDocument} from '@avans-nx-songlibrary/backend/user';
+import { User as UserModel, UserDocument} from '@avans-nx-songlibrary/backend/features';
 import { JwtService } from '@nestjs/jwt';
 import { IUserCredentials, IUserIdentity } from '@avans-nx-songlibrary/api';
 import { CreateUserDto } from '@avans-nx-songlibrary/backend/dto';

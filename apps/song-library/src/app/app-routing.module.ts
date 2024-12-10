@@ -1,18 +1,21 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { PlaylistCreateComponent, SongDetailComponent, SongListComponent, PlaylistListComponent, PlaylistDetailComponent, AlbumListComponent, LoginComponent } from "@avans-nx-songlibrary/features"
+import { HomepageComponent } from "./components/homepage/homepage.component";
+import { PlaylistCreateComponent, SongDetailComponent, SongListComponent, PlaylistListComponent, PlaylistDetailComponent, AlbumListComponent, LoginComponent, RegisterComponent } from "@avans-nx-songlibrary/features"
 import { ArtistDetailComponent } from "@avans-nx-songlibrary/features"
 import { AlbumDetailComponent } from "@avans-nx-songlibrary/features"
-import { FooterLayoutComponent } from "./components/layout/footer-layout-component"
+import { PublicLayoutComponent } from "./components/layout/public-layout-component"
 
 import  { MainLayoutComponent } from './components/layout/main-layout-component'
 
 export const routes: Routes = [
-    { path: 'login', pathMatch: 'full', component: FooterLayoutComponent, children: [{ path: '', component: LoginComponent }]},
-    { path: '', pathMatch: 'full', redirectTo: 'login' },
+    { path: '', pathMatch: 'full', redirectTo: '/login' },
+    { path: '', component: PublicLayoutComponent, children: [
+        { path: 'login', component: LoginComponent },
+        { path: 'register', component: RegisterComponent}]},
+
     { path: '', component: MainLayoutComponent, children: [
-          { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
+          { path: 'homepage', pathMatch: 'full', component: HomepageComponent },
           { path: 'song-list', pathMatch: 'full', component: SongListComponent },
           { path: 'album/:id', pathMatch: 'full', component: AlbumDetailComponent },
           { path: 'album-list', pathMatch: 'full', component: AlbumListComponent },

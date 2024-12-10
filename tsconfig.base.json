@@ -19,10 +19,12 @@
             "@avans-nx-songlibrary/backend/dto": ["libs/backend/dto/src/index.ts"],
             "@avans-nx-songlibrary/backend/features": ["libs/backend/features/src/index.ts"],
             "@avans-nx-songlibrary/backend/user": ["libs/backend/user/src/index.ts"],
+            "@avans-nx-songlibrary/backend/auth": ["libs/backend/auth/src/index.ts"],
             "@avans-nx-songlibrary/common": ["libs/frontend/common/src/index.ts"],
             "@avans-nx-songlibrary/features": ["libs/frontend/features/src/index.ts"],
             "@avans-nx-songlibrary/shared/util-env": ["libs/shared/util-env/src/index.ts"],
             "@avans-nx-songlibrary/ui": ["libs/frontend/ui/src/index.ts"]
+
         }
     },
     "exclude": ["node_modules", "tmp"]
