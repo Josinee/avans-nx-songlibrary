@@ -30,8 +30,8 @@ jobs:
             - name: Zip artifacts for deployment
               run: |
                   echo ${GITHUB_WORKSPACE}
-                  cd ${GITHUB_WORKSPACE}/dist/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
-                  cd ${GITHUB_WORKSPACE}/dist/song-library/ && zip ${GITHUB_WORKSPACE}/song-library-release.zip ./* -r
+                  cd ${GITHUB_WORKSPACE}/dist/data-api && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
+                  cd ${GITHUB_WORKSPACE}/dist/song-library && zip ${GITHUB_WORKSPACE}/song-library-release.zip ./* -r
 
             - name: Upload song-library artifact for deployment job
               uses: actions/upload-artifact@v4
