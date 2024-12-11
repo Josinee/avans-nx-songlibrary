@@ -1,19 +1,17 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './user.schema';
+import { User as UserModel, UserDocument } from './user.schema';
 import { IUser, IUserInfo } from '@avans-nx-songlibrary/api';
 // import { Meal, MealDocument } from '@avans-nx-workshop/backend/features';
 import { CreateUserDto, UpdateUserDto } from '@avans-nx-songlibrary/backend/dto';
-import { Playlist, PlaylistDocument } from '../playlist/playlist.schema';
 
 @Injectable()
 export class UserService {
     private readonly logger: Logger = new Logger(UserService.name);
 
     constructor(
-        @InjectModel(User.name) private userModel: Model<User>,
-        @InjectModel(Playlist.name) private playlistModel: Model<Playlist>
+        @InjectModel(UserModel.name) private userModel: Model<UserDocument> // @InjectModel(Meal.name) private meetupModel: Model<MealDocument>
     ) {}
 
     async findAll(): Promise<IUserInfo[]> {
@@ -33,7 +31,10 @@ export class UserService {
 
     async findOneByEmail(email: string): Promise<IUserInfo | null> {
         this.logger.log(`Finding user by email ${email}`);
-        const item = this.userModel.findOne({ emailAddress: email }).select('-password').exec();
+        const item = this.userModel
+            .findOne({ emailAddress: email })
+            .select('-password')
+            .exec();
         return item;
     }
 

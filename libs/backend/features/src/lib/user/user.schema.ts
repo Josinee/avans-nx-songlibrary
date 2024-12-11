@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 // import { v4 as uuid } from 'uuid';
-//import isEmail from 'validator/lib/isEmail';
+import isEmail from 'validator/lib/isEmail';
 import { IPlaylist, IUser, UserGender, UserRole } from '@avans-nx-songlibrary/api';
 import { IsMongoId } from 'class-validator';
-import * as mongoose from 'mongoose';
 
 export type UserDocument = User & Document;
+
 @Schema()
 export class User implements IUser {
     @IsMongoId()
@@ -14,7 +14,7 @@ export class User implements IUser {
 
     @Prop({ required: true, type: String })
     name!: string;
- 
+
     @Prop({ required: true, select: false, // do not return password in select statements
         type: String
     })
@@ -40,7 +40,7 @@ export class User implements IUser {
     @Prop({ required: false, type: Boolean, default: true })
     isActive = true;
 
-    @Prop({ default: [],  type: mongoose.Schema.Types.ObjectId, ref: 'Playlist' })
+    @Prop({ default: [], type: [MongooseSchema.Types.ObjectId], ref: 'Playlist' })
     playlists: IPlaylist[] = [];
 }
 

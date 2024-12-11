@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit(): void {
     this.loggedInUser = this.loginService.currentUser;
-    console.log(this.loggedInUser);
   }
 
   logout(): void {

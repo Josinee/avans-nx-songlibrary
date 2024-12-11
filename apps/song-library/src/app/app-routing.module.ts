@@ -5,7 +5,7 @@ import { PlaylistCreateComponent, SongDetailComponent, SongListComponent, Playli
 import { ArtistDetailComponent } from "@avans-nx-songlibrary/features"
 import { AlbumDetailComponent } from "@avans-nx-songlibrary/features"
 import { PublicLayoutComponent } from "./components/layout/public-layout-component"
-import { AuthGuard } from '@avans-nx-songlibrary/backend/auth'
+
 import  { MainLayoutComponent } from './components/layout/main-layout-component'
 
 export const routes: Routes = [
@@ -14,7 +14,7 @@ export const routes: Routes = [
         { path: 'login', component: LoginComponent },
         { path: 'register', component: RegisterComponent}]},
 
-    { path: '', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
+    { path: '', component: MainLayoutComponent, children: [
           { path: 'homepage', pathMatch: 'full', component: HomepageComponent },
           { path: 'song-list', pathMatch: 'full', component: SongListComponent },
           { path: 'album/:id', pathMatch: 'full', component: AlbumDetailComponent },

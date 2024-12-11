@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
+import { IUserRegistration } from '@avans-nx-songlibrary/api';
 import { NgForm } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -17,23 +17,10 @@ export class RegisterComponent {
         password: '',
         name: ''
     }
-    registerForm!: NgForm;
+    loginForm!: NgForm;
 
-    constructor(private registerService: RegisterService, private router: Router) {};
-
-    onSubmit(): void {
-        const name = this.registerUser.name;
-        const emailAddress = this.registerUser.emailAddress;
-        const password = this.registerUser.password;
-        this.registerService.register(name, emailAddress, password).subscribe((user: IUserInfo) =>{
-            if(user) {
-                console.log('aangemaakt ',user);
-                this.router.navigate(['login']);
-            }else {
-                console.error('Something went wrong');
-            }
-        })
-    }
+    constructor(
+        private registerService: RegisterService, private router: Router) {}
 
     // onSubmit(): void {
     //     if (this.loginForm.valid) {

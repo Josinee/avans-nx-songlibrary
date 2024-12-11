@@ -1,18 +1,13 @@
-import { Controller, Put, Get, Param, Post, Delete, Body, UseGuards } from '@nestjs/common';
+import { Controller, Put, Get, Param, Post, Delete, Body } from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
 import { IPlaylist } from '@avans-nx-songlibrary/api';
 import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
-import { AuthGuard } from '@avans-nx-songlibrary/backend/auth'
-//import { UserExistGuard } from '../user/user-exists.guard';
-
 
 @Controller('playlist')
-@UseGuards(AuthGuard)
 export class PlaylistController {
     constructor(private playlistService: PlaylistService) {}
 
     @Get('')
-    //@UseGuards(UserExistGuard)
     getAll(): Promise<IPlaylist[]> {
         return this.playlistService.getAll();
     }
@@ -22,7 +17,6 @@ export class PlaylistController {
         return this.playlistService.getOne(id);
     }
 
-    @UseGuards(AuthGuard)
     @Post('')
     create(@Body() data: CreatePlaylistDto): Promise<IPlaylist> {
         return this.playlistService.create(data);

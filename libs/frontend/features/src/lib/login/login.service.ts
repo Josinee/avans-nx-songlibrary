@@ -1,4 +1,4 @@
-import { IUser, IUserCredentials, IUserIdentity } from '@avans-nx-songlibrary/api';
+import { IUser, IUserCredentials } from '@avans-nx-songlibrary/api';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -18,35 +18,28 @@ export class LoginService {
     public currentUser = new BehaviorSubject<IUser| null>(null);
     private readonly CURRENT_USER = 'currentuser';
 
-    endpoint = environment.dataApiUrl + '/auth/login';
+    endpoint = environment.dataApiUrl + '/login';
 
     constructor(private readonly http: HttpClient) {}
-    login(emailAddress: string, password: string, options?: any): Observable<IUserIdentity> {
+    login(email: string, password: string, options?: any): Observable<IUser> {
         console.log(`login at ${environment.dataApiUrl}login`);
 
         return this.http
-        .post(this.endpoint, {emailAddress, password}, { 
+        .post(this.endpoint, {email, password}, { 
             ...options,
             ...httpOptions,
         })
         .pipe(
             tap(console.log),
-            
-            map((response: any) => { 
-                console.log(response.results.token)
-                if(!response.results.token) {
-                    this.handleError(response.results);
-                    throw new Error(response.results.message);
-                }
-                const user = response.results as IUser
+            map((response: any) => {
+                const user = { ...response} as IUser;
                 this.saveUserToLocalStorage(user);
                 this.currentUser.next(user);
-                console.log('niet hier')
                 //this.alertService.succes('You have been logged in');
                 return user;
-            }),
+            },
             catchError(this.handleError)
-        );
+        ));
     
     }
 
@@ -62,8 +55,6 @@ export class LoginService {
     private saveUserToLocalStorage(user: IUser): void {
         localStorage.setItem(this.CURRENT_USER, JSON.stringify(user));
     }
-
-    
     public handleError(error: HttpErrorResponse): Observable<any> {
         console.log('handleError in MealService', error);
 

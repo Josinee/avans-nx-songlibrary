@@ -1,4 +1,4 @@
-import { IUser, IUserCredentials, IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
+import { IUser, IUserCredentials } from '@avans-nx-songlibrary/api';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -14,27 +14,6 @@ export const httpOptions = {
 
 @Injectable({providedIn: 'root'})
 export class RegisterService {
-
-    endpoint = environment.dataApiUrl + '/auth/register';
-
-    constructor(private readonly http: HttpClient) {}
-
-
-    public register(name: string, emailAddress: string, password: string, options?: any): Observable<IUserInfo> {
-        console.log(`create ${this.endpoint}`);
-        return this.http
-            .post<IUserRegistration>(this.endpoint, {name, emailAddress, password}, { ...options, ...httpOptions })
-            .pipe(
-                map((response: any) => response.results),
-                catchError(this.handleError)
-            );
-    }
-
-    public handleError(error: HttpErrorResponse): Observable<any> {
-        console.log('handleError in RegisterService', error);
-
-        return throwError(() => new Error(error.message));
-    }
 
     // public currentUser = new BehaviorSubject<IUser| null>(null);
     // private readonly CURRENT_USER = 'currentuser';
