@@ -9,11 +9,11 @@ export interface IPlaylist {
     duration: number,
     numberOfSongs: number,
     songs: ISong[],
-    creator: IUserInfo,
+    // creator: IUserInfo,
     creationDate: Date,
     lastUpdated: Date,
 }
 
-export type ICreatePlaylist = Pick<IPlaylist,'name' | 'numberOfSongs' | 'duration' | 'creationDate' | 'lastUpdated' | 'creator'> & { description?: IPlaylist['description']};
+export type ICreatePlaylist = Pick<IPlaylist,'name' | 'numberOfSongs' | 'duration' | 'creationDate' | 'lastUpdated' > & { description?: IPlaylist['description']};
 export type IUpdatePlaylist = Partial<Omit<IPlaylist, '_id' | 'creationDate'>>;
 export type IUpsertPlaylist = IPlaylist;

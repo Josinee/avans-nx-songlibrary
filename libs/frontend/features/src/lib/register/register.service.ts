@@ -1,4 +1,4 @@
-import { IUser, IUserCredentials, IUserIdentity, IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
+import { IUser, IUserCredentials, IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class RegisterService {
     constructor(private readonly http: HttpClient) {}
 
 
-    public register(name: string, emailAddress: string, password: string, options?: any): Observable<IUserIdentity> {
+    public register(name: string, emailAddress: string, password: string, options?: any): Observable<IUserInfo> {
         console.log(`create ${this.endpoint}`);
         return this.http
             .post<IUserRegistration>(this.endpoint, {name, emailAddress, password}, { ...options, ...httpOptions })

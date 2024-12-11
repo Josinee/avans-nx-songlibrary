@@ -15,18 +15,13 @@ export const httpOptions = {
 @Injectable({providedIn: 'root'})
 export class LoginService {
 
-    public currentUser = new BehaviorSubject<IUser | undefined>(undefined);
+    public currentUser = new BehaviorSubject<IUser| null>(null);
     private readonly CURRENT_USER = 'currentuser';
 
     endpoint = environment.dataApiUrl + '/auth/login';
 
-    constructor(private readonly http: HttpClient) {
-        console.log("constructor login service")
-        this.getUserFromLocalStorage();
-        
-    }
-
-    login(emailAddress: string, password: string, options?: any): Observable<IUser> {
+    constructor(private readonly http: HttpClient) {}
+    login(emailAddress: string, password: string, options?: any): Observable<IUserIdentity> {
         console.log(`login at ${environment.dataApiUrl}login`);
 
         return this.http
@@ -46,7 +41,7 @@ export class LoginService {
                 const user = response.results as IUser
                 this.saveUserToLocalStorage(user);
                 this.currentUser.next(user);
-                console.log(this.currentUser);
+                console.log('niet hier')
                 //this.alertService.succes('You have been logged in');
                 return user;
             }),
@@ -55,21 +50,17 @@ export class LoginService {
     
     }
 
-    getUserFromLocalStorage(): void {
+    getUserFromLocalStorage(): Observable<IUser> {
         const localUser = localStorage.getItem(this.CURRENT_USER);
         if(localUser) {
-            const user = JSON.parse(localUser);
-            console.log(user)
-            this.currentUser.next(user);
-            return user;
+            return of(JSON.parse(localUser));
         }
-        //throw new Error('User not found in local storage');
+        throw new Error('User not found in local storage');
         
     }
 
     private saveUserToLocalStorage(user: IUser): void {
         localStorage.setItem(this.CURRENT_USER, JSON.stringify(user));
-        
     }
 
     
@@ -77,13 +68,6 @@ export class LoginService {
         console.log('handleError in MealService', error);
 
         return throwError(() => new Error(error.message));
-    }
-
-    public logout(): void {
-        console.log('logout in service')
-        localStorage.removeItem(this.CURRENT_USER);
-        this.currentUser.next(undefined);
-        
     }
     
 
