@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
+import { IUserIdentity, IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
 import { NgForm } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -25,7 +25,7 @@ export class RegisterComponent {
         const name = this.registerUser.name;
         const emailAddress = this.registerUser.emailAddress;
         const password = this.registerUser.password;
-        this.registerService.register(name, emailAddress, password).subscribe((user: IUserInfo) =>{
+        this.registerService.register(name, emailAddress, password).subscribe((user: IUserIdentity) =>{
             if(user) {
                 console.log('aangemaakt ',user);
                 this.router.navigate(['login']);

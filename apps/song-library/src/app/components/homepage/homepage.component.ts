@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../ui/header/header.component';
+import { AppComponent } from '../../app.component';
 
 @Component({
   standalone: true,
@@ -7,4 +8,7 @@ import { HeaderComponent } from '../ui/header/header.component';
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
 })
-export class HomepageComponent {}
+export class HomepageComponent {
+    user = AppComponent.user;
+  
+}

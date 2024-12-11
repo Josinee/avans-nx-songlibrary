@@ -4,7 +4,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, ICreatePlaylist, IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env'
-import { FormsModule } from '@angular/forms'  
+
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -21,6 +21,7 @@ export const httpOptions = {
 @Injectable({ providedIn: 'root', })
 export class PlaylistService {
     endpoint = environment.dataApiUrl + '/playlist';
+    
 
     constructor(private readonly http: HttpClient) {}
 

@@ -7,12 +7,12 @@ import { Logger } from '@nestjs/common';
 import { Playlist } from './playlist.schema'
 import { Song } from '../song/song.schema'; 
 import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
-//import { CreateCatDto } from './dto/create-cat.dto';
+//import { HttpHeaders } from '@angular/common/http'
 
 
 const httpOptions = {
     observe: 'body',
-    responseType: 'json' as const
+    responseType: 'json' as const,
 };
 
 @Injectable()

@@ -14,6 +14,7 @@ import { SidebarComponent } from './components/ui/sidebar/sidebar.component';
 import { LoginService } from 'libs/frontend/features/src/lib/login/login.service';
 import { PublicLayoutComponent } from './components/layout/public-layout-component';
 import { MainLayoutComponent } from './components/layout/main-layout-component';
+//import { ApiRequestInterceptor } from '@avans-nx-songlibrary/common';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MainLayoutComponent } from './components/layout/main-layout-component';
     FeaturesModule,
     HttpClientModule,
     RouterModule,
+    LoginService,
 
   ],
   providers: [],

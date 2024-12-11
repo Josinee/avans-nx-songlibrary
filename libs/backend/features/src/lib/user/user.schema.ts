@@ -40,8 +40,8 @@ export class User implements IUser {
     @Prop({ required: false, type: Boolean, default: true })
     isActive = true;
 
-    @Prop({ default: [],  type: mongoose.Schema.Types.ObjectId, ref: 'Playlist' })
-    playlists: IPlaylist[] = [];
+    @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'Playlist' })
+    playlists!: IPlaylist[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

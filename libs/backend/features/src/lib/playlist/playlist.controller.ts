@@ -22,7 +22,6 @@ export class PlaylistController {
         return this.playlistService.getOne(id);
     }
 
-    @UseGuards(AuthGuard)
     @Post('')
     create(@Body() data: CreatePlaylistDto): Promise<IPlaylist> {
         return this.playlistService.create(data);
