@@ -5,7 +5,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './user/user.schema';
 import { Playlist, PlaylistSchema } from './playlist/playlist.schema';
 import { PlaylistService } from './playlist/playlist.service';
-import { UserExistGuard } from './user/user-exists.guard';
 // import { Meal, MealSchema } from '@avans-nx-workshop/backend/features';
 
 @Module({

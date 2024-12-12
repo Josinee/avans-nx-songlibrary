@@ -1,4 +1,4 @@
-import { IUser, IUserCredentials, IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
+import { IUser, IUserCredentials, IUserIdentity, IUserInfo, IUserRegistration } from '@avans-nx-songlibrary/api';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';

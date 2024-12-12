@@ -31,9 +31,6 @@ export class Playlist implements IPlaylist {
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User' })
     creator!: IUserInfo;
     
-    @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-    creator!: IUserInfo;
-    
     @Prop({ required: true })
     creationDate!: Date;
 
