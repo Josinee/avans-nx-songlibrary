@@ -2,7 +2,15 @@
   "name": "@avans-nx-songlibrary/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx run-many -t build",
+    "build:song-library": "nx run song-library:build:production",
+    "test": "nx run-many -t test"
+},
+  "engines": {
+    "node": "^20.0.0",
+    "npm": "^10.0.0"
+},
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.2.0",
