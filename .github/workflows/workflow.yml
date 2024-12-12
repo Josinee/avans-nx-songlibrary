@@ -24,8 +24,11 @@ jobs:
             - name: npm install, build, and test
               run: |
                   npm install
-                  npm run build --if-present
+                  nx run-many --target=build -p data-api song-library
                   # npm run test --if-present
+
+            - name: List build output
+               run: ls -R ${GITHUB_WORKSPACE}/dist
 
             - name: Zip artifacts for deployment
               run: |
