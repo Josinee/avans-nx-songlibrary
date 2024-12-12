@@ -11,7 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 
 @Module({
-  imports: [SongModule, PlaylistModule, ArtistModule, AlbumModule, UserModule, MongooseModule.forRoot('mongodb://localhost:27017/songlibrary')],
+  imports: [SongModule, PlaylistModule, ArtistModule, AlbumModule, UserModule, MongooseModule.forRoot(process.env.MONGO_DB_CONNECTION_STRING)],
   controllers: [AppController],
   providers: [AppService],
 })
