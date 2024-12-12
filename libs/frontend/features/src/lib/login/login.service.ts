@@ -15,7 +15,7 @@ export const httpOptions = {
 @Injectable({providedIn: 'root'})
 export class LoginService {
 
-    public currentUser = new BehaviorSubject<IUser| null>(null);
+    public currentUser = new BehaviorSubject<IUser| undefined>(undefined);
     private readonly CURRENT_USER = 'currentuser';
 
     endpoint = environment.dataApiUrl + '/login';
@@ -67,7 +67,12 @@ export class LoginService {
         return throwError(() => new Error(error.message));
     }
     
-
+    public logout(): void {
+        console.log('logout in service')
+        localStorage.removeItem(this.CURRENT_USER);
+        this.currentUser.next(undefined);
+        
+    }
 
     // onSubmit(): void{
     //     if(this.loginForm.valid)

@@ -4,6 +4,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import isEmail from 'validator/lib/isEmail';
 import { IPlaylist, IUser, UserGender, UserRole } from '@avans-nx-songlibrary/api';
 import { IsMongoId } from 'class-validator';
+import * as mongoose from 'mongoose';
 
 export type UserDocument = User & Document;
 
