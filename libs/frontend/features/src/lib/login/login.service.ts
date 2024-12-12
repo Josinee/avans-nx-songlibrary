@@ -35,6 +35,8 @@ export class LoginService {
                 const user = { ...response} as IUser;
                 this.saveUserToLocalStorage(user);
                 this.currentUser.next(user);
+                console.log(this.currentUser);
+
                 //this.alertService.succes('You have been logged in');
                 return user;
             },
@@ -43,12 +45,16 @@ export class LoginService {
     
     }
 
-    getUserFromLocalStorage(): Observable<IUser> {
+    getUserFromLocalStorage(): void {
         const localUser = localStorage.getItem(this.CURRENT_USER);
         if(localUser) {
-            return of(JSON.parse(localUser));
+            const user = JSON.parse(localUser);
+            console.log(user)
+            this.currentUser.next(user);
+            return user;
         }
-        throw new Error('User not found in local storage');
+        //throw new Error('User not found in local storage');
+
         
     }
 

@@ -11,13 +11,16 @@ import { Observable } from 'rxjs';
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
-  loggedInUser: Observable<IUser | null> | undefined;
-  
-  constructor(private loginService: LoginService) {}
-  
+export class HeaderComponent {
+  public user: IUser | undefined;
+   
+  constructor(private loginService: LoginService, private router: Router) {}
   ngOnInit(): void {
     this.loggedInUser = this.loginService.currentUser;
+        this.loginService.currentUser.subscribe((user) => {
+          this.user = user;
+    
+        });
   }
 
   logout(): void {

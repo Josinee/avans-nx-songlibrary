@@ -17,20 +17,24 @@ export class LoginComponent {
         password: ''
     }
     loginForm!: NgForm;
+    error: string = '';
 
     constructor(
         private loginService: LoginService, private router: Router) {}
 
     onSubmit(): void {
-        if (this.loginForm.valid) {
-            const email = this.loginForm.value.emailAddress;
-            const password = this.loginForm.value.password;
-            this.loginService.login(email, password).subscribe((user) => {
-                if(user) {
-                    console.log("user = ", user);
-                    this.router.navigate(['/']);
-                }
-            })
-        }
+        const emailAddress = this.loginUser.emailAddress;
+        const password = this.loginUser.password;
+        this.loginService.login(emailAddress, password).subscribe({
+            next: user => {
+                console.log("user = ", user);
+                this.router.navigate(['homepage']);
+            },
+            error: (error: string) => {
+                console.error('Error in component:', error);
+                this.error = error;
+            }
+
+        })
     }
 }

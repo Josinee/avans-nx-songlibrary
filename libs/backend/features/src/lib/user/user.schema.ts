@@ -40,7 +40,7 @@ export class User implements IUser {
     @Prop({ required: false, type: Boolean, default: true })
     isActive = true;
 
-    @Prop({ default: [], type: [MongooseSchema.Types.ObjectId], ref: 'Playlist' })
+    @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'Playlist' })
     playlists: IPlaylist[] = [];
 }
 

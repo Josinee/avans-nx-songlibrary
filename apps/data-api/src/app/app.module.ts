@@ -9,6 +9,7 @@ import { UserModule } from '@avans-nx-songlibrary/backend/features'
 import { MongooseModule } from '@nestjs/mongoose';
 
 
+
 @Module({
   imports: [SongModule, PlaylistModule, ArtistModule, AlbumModule, UserModule, MongooseModule.forRoot('mongodb://localhost:27017/songlibrary')],
   controllers: [AppController],
