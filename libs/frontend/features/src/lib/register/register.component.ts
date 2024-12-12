@@ -18,8 +18,10 @@ export class RegisterComponent {
         name: ''
     }
     registerForm!: NgForm;
+    
 
     constructor(private registerService: RegisterService, private router: Router) {};
+
 
     onSubmit(): void {
         const name = this.registerUser.name;

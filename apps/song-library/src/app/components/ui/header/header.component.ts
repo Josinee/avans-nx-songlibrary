@@ -16,13 +16,11 @@ export class HeaderComponent {
   public user: IUser | undefined;
    
   constructor(private loginService: LoginService, private router: Router) {}
-
   ngOnInit(): void {
-    // Subscribe to the currentUser$ observable
-    this.loginService.currentUser.subscribe((user) => {
-      this.user = user;
-
-    });
+        this.loginService.currentUser.subscribe((user) => {
+          this.user = user;
+    
+        });
   }
 
   logout(): void {

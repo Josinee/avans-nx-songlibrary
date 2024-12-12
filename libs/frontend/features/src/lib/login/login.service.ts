@@ -16,6 +16,7 @@ export const httpOptions = {
 export class LoginService {
 
     public currentUser = new BehaviorSubject<IUser | undefined>(undefined);
+    public currentUser = new BehaviorSubject<IUser | undefined>(undefined);
     private readonly CURRENT_USER = 'currentuser';
 
     endpoint = environment.dataApiUrl + '/auth/login';
@@ -30,6 +31,7 @@ export class LoginService {
         console.log(`login at ${environment.dataApiUrl}login`);
 
         return this.http
+        .post(this.endpoint, {emailAddress, password}, { 
         .post(this.endpoint, {emailAddress, password}, { 
             ...options,
             ...httpOptions,
@@ -47,8 +49,10 @@ export class LoginService {
                 this.saveUserToLocalStorage(user);
                 this.currentUser.next(user);
                 console.log(this.currentUser);
+                console.log(this.currentUser);
                 //this.alertService.succes('You have been logged in');
                 return user;
+            }),
             }),
             catchError(this.handleError)
         );
@@ -56,13 +60,19 @@ export class LoginService {
     }
 
     getUserFromLocalStorage(): void {
+    getUserFromLocalStorage(): void {
         const localUser = localStorage.getItem(this.CURRENT_USER);
         if(localUser) {
             const user = JSON.parse(localUser);
             console.log(user)
             this.currentUser.next(user);
             return user;
+            const user = JSON.parse(localUser);
+            console.log(user)
+            this.currentUser.next(user);
+            return user;
         }
+        //throw new Error('User not found in local storage');
         //throw new Error('User not found in local storage');
         
     }

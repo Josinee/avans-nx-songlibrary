@@ -17,7 +17,6 @@ export class LoginComponent {
         password: ''
     }
     loginForm!: NgForm;
-
     error: string = '';
 
     constructor(
@@ -37,6 +36,5 @@ export class LoginComponent {
             }
 
         })
-
     }
 }

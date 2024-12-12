@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthController } from './auth/auth.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { User, UserSchema, UserModule, } from '@avans-nx-songlibrary/backend/features';
+import { User, UserSchema, UserModule } from '@avans-nx-songlibrary/backend/features';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guards';
 

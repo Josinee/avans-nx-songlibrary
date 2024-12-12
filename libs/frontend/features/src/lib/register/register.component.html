@@ -22,7 +22,6 @@
                   <label class="form-label" for="form3Example3cg">Your Email</label>
                   <div [hidden]="emailAddress.valid || emailAddress.pristine" class="alert alert-danger">email i</div>
                 </div>
-
                 <div data-mdb-input-init class="form-outline mb-4">
                   <input type="password" id="form3Example4cg" class="form-control form-control-lg" [(ngModel)]="registerUser.password" name="password" #password="ngModel"/>
                   <label class="form-label" for="form3Example4cg">Password</label>
@@ -47,5 +46,4 @@
     </div>
   </div>
 </section>
-
 <pre>{{registerUser | json }}</pre>

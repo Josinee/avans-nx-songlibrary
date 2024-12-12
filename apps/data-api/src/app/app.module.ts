@@ -8,6 +8,7 @@ import { AlbumModule } from '@avans-nx-songlibrary/backend/features'
 import { UserModule } from '@avans-nx-songlibrary/backend/features'
 import { AuthModule} from '@avans-nx-songlibrary/backend/auth';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule} from '@avans-nx-songlibrary/backend/auth';
 
 
 @Module({
