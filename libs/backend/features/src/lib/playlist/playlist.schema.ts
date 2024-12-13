@@ -20,10 +20,10 @@ export class Playlist implements IPlaylist {
     description!: string;
     
     @Prop({ required: true })
-    duration!: number;
+    duration: number = 0;
 
     @Prop({ required: true })
-    numberOfSongs!: number;
+    numberOfSongs: number = 0;
     
     @Prop({ required: false, type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Song'}] })
     songs!: ISong[];
@@ -36,6 +36,9 @@ export class Playlist implements IPlaylist {
 
     @Prop({ required: true })
     lastUpdated!: Date;
+
+    @Prop({ required: true})
+    public: boolean = false;
 
 }
 

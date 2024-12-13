@@ -1,4 +1,4 @@
-import { Controller, Put, Get, Param, Post, Delete, Body } from '@nestjs/common';
+import { Controller, Put, Get, Param, Post, Delete, Body, Query } from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
 import { IPlaylist } from '@avans-nx-songlibrary/api';
 import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
@@ -7,20 +7,28 @@ import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/back
 export class PlaylistController {
     constructor(private playlistService: PlaylistService) {}
 
+    
     @Get('')
-    getAll(): Promise<IPlaylist[]> {
-        return this.playlistService.getAll();
+    getFromCreator(@Query('creator') creator?: string): Promise<IPlaylist[] | []> {
+      if (creator) {
+        return this.playlistService.getFromCreator(creator);
+      }
+      return this.playlistService.getAll();
+      
     }
 
     @Get(':id')
     getOne(@Param('id') id: string): Promise<IPlaylist> {
+        console.log('getone')
         return this.playlistService.getOne(id);
     }
+
 
     @Post('')
     create(@Body() data: CreatePlaylistDto): Promise<IPlaylist> {
         return this.playlistService.create(data);
     }
+
 
     @Put(':id')
     update(@Param('id') id: string, @Body() updatePlaylistDto: UpdatePlaylistDto): Promise<IPlaylist>{
@@ -33,3 +41,5 @@ export class PlaylistController {
       return this.playlistService.delete(id);
     }
 }
+
+

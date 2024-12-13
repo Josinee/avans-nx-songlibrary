@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { IPlaylist } from '@avans-nx-songlibrary/api';
+import { IPlaylist, IUser } from '@avans-nx-songlibrary/api';
 import { BehaviorSubject } from 'rxjs';
 import { Logger } from '@nestjs/common';
 import { Playlist } from './playlist.schema'
@@ -27,7 +27,8 @@ export class PlaylistService {
     }
 
     async getAll(): Promise<IPlaylist[]> {
-        return this.playlistModel.find().exec();
+        console.log('getall in service')
+        return this.playlistModel.find({public: true}).exec();
     }
 
     async getOne(id: string): Promise<IPlaylist> {
@@ -37,6 +38,15 @@ export class PlaylistService {
         }
         return playlist as IPlaylist;
     }
+
+    async getFromCreator(creator: string): Promise<IPlaylist[]> {
+        //const creatorObjectId = new Types.ObjectId(creator);
+      
+        const playlists = await this.playlistModel.find({ creator: creator }).exec();
+      
+        //console.log('Query result:', playlists); // Debug log
+        return playlists || [];
+      }
 
     async update(id: string, updatePlaylistDto: UpdatePlaylistDto): Promise<Playlist> {
         console.log('Received update for playlist:', id, 'with data:', updatePlaylistDto);

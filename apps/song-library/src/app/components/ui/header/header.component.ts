@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styles: ['header { background-color: whitesmoke}']
 })
 export class HeaderComponent {
   public user: IUser | undefined;

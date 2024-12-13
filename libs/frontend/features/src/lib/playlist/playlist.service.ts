@@ -1,5 +1,5 @@
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, ICreatePlaylist, IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
@@ -20,6 +20,8 @@ export const httpOptions = {
  */ 
 @Injectable({ providedIn: 'root', })
 export class PlaylistService {
+    private playlistsSubject: BehaviorSubject<IPlaylist[]> = new BehaviorSubject<IPlaylist[]>([]);
+    public playlists$: Observable<IPlaylist[]> = this.playlistsSubject.asObservable();
     endpoint = environment.dataApiUrl + '/playlist';
 
     constructor(private readonly http: HttpClient) {}
@@ -59,6 +61,23 @@ export class PlaylistService {
             
     }
 
+public getPlaylistFromCreator(creator: string, options?: any): Observable<IPlaylist[]> {
+    return this.http
+      .get<ApiResponse<IPlaylist[]>>(this.endpoint, {
+        params: { creator },
+        ...options,
+        ...httpOptions,
+      })
+      .pipe(
+        map((response: any) => response.results),  // Extract the results array directly
+        tap((playlists: IPlaylist[]) => {
+          // Update the BehaviorSubject with the new playlist data
+          this.playlistsSubject.next(playlists);
+        }),
+        catchError(this.handleError) // Handle any errors that occur
+      );
+}
+
     /**
      * Get a single item from the service.
      *
@@ -83,8 +102,13 @@ export class PlaylistService {
             .post<IPlaylist>(this.endpoint, playlist, { ...options, ...httpOptions })
             .pipe(
                 map((response: any) => response.results),
+                map((newPlaylist: IPlaylist) => {
+                    const currentPlaylists = this.playlistsSubject.value;
+                    this.playlistsSubject.next([...currentPlaylists, newPlaylist]);
+                    return newPlaylist;
+                }),
                 catchError(this.handleError)
-            );
+            )
     }
 
     public addToPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
@@ -120,15 +144,21 @@ export class PlaylistService {
         );
     }
 
-    public update(playlist: IPlaylist, options?: any) : Observable<IPlaylist>{
+    public update(playlist: IPlaylist): Observable<IPlaylist> {
         return this.http
-        .put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions })
+        .put<ApiResponse<IPlaylist>>(`${this.endpoint}/${playlist._id}`, playlist)
         .pipe(
-            tap(response => console.log(response)),
-            map((response: any) => response.results),
-            catchError(this.handleError)
-        );
-    }
+            map((response: ApiResponse<IPlaylist>) => {
+                const updatedPlaylist = response.results as IPlaylist;
+                const currentPlaylists = this.playlistsSubject.value;
+                const updatedPlaylists = currentPlaylists.map(p =>
+                    p._id === updatedPlaylist._id ? updatedPlaylist : p
+                );
+                this.playlistsSubject.next(updatedPlaylists);
+                return updatedPlaylist;
+            }),
+          );
+      }
 
     public delete(playlist: IPlaylist): Observable<void> {
         console.log("Deleting playlist with ID:", playlist._id);
@@ -136,9 +166,16 @@ export class PlaylistService {
         return this.http
           .delete<void>(`${this.endpoint}/${playlist._id}`)
           .pipe(
-            tap(() => console.log(`Playlist ${playlist._id} deleted successfully`)),
+            tap(() => {
+              console.log(`Playlist ${playlist._id} deleted successfully`);
+      
+              // After deletion, filter out the playlist from the list in the BehaviorSubject
+              const updatedPlaylists = this.playlistsSubject.value.filter(p => p._id !== playlist._id);
+              this.playlistsSubject.next(updatedPlaylists);  // Emit the updated list
+            }),
             catchError(this.handleError)
           );
+      
     }
 
     // public deleteFromPlaylist(playlist: IPlaylist, song: ISong, options?:any): Observable<IPlaylist> {

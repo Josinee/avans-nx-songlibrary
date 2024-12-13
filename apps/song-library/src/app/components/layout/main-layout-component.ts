@@ -16,11 +16,13 @@ import { SidebarComponent } from '../ui/sidebar/sidebar.component';
     </div>
     <div class="col">
         <router-outlet></router-outlet>
+        
     </div>
+    
     
 </div>
 
-<app-footer></app-footer>   
+
  `,
 })
 export class MainLayoutComponent {

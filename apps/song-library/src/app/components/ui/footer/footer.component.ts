@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   standalone: true,
   selector: 'app-footer',
   templateUrl: './footer.component.html',
+  styles: ['footer { background-color: whitesmoke}']
 })
 export class FooterComponent{}
 

@@ -42,14 +42,32 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     }
 
     deletePlaylist(playlist: IPlaylist): void {
-        console.log("eersts", playlist);
-        this.playlistService.delete(playlist).subscribe({    
+        console.log('eersts', playlist);
+        this.playlistService.delete(playlist).subscribe({
             next: () => {
                 console.log('navigate');
                 this.router.navigate(['playlist-list']);
-                console.log(this.route)
+                console.log(this.route);
             },
             error: (err) => console.error('Failed to delete playlist', err)
         });
+    }
+    updatePlaylist(): void {
+        console.log('submit');
+        console.log("this playlist ", this.playlist);
+        
+        if (this.playlist) {
+            console.log('Form is valid, updating playlist:', this.playlist);
+            
+            this.playlistService.update(this.playlist).subscribe((updatedPlaylist) => {
+                console.log("Updated Playlist from API:", updatedPlaylist);
+    
+                // Update the local playlist object with the updated one from the response
+                this.playlist = updatedPlaylist;  // Update the playlist with the new values
+                
+                // Optional: You can also update the list of playlists in the sidebar
+                // if the component is using a playlist list
+            });
+        }
     }
 }

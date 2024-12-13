@@ -1,5 +1,5 @@
 <div class="container w-50 h-50 my-5">
-  <form #loginFrom="ngForm">
+  <form #loginFrom="ngForm" (ngSubmit)="onSubmit()">
     <h1>Please sign in</h1>
     <div class="form-floating m-2">
       <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required [(ngModel)]="loginUser.emailAddress" name="emailAddress" #emailAddress="ngModel">
@@ -11,7 +11,7 @@
       <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
       <label for="floatingPassword">Password</label>
     </div>
-
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     <button class="btn btn-primary w-100 py-2 m-2" type="submit">Sign in</button>
   </form>
   <button [routerLink]="['/register']">Register</button>

@@ -15,33 +15,44 @@ export const httpOptions = {
 @Injectable({providedIn: 'root'})
 export class LoginService {
 
-    public currentUser = new BehaviorSubject<IUser| undefined>(undefined);
+    public currentUser = new BehaviorSubject<IUser | undefined>(undefined);
     private readonly CURRENT_USER = 'currentuser';
 
-    endpoint = environment.dataApiUrl + '/login';
+    endpoint = environment.dataApiUrl + '/auth/login';
 
-    constructor(private readonly http: HttpClient) {}
-    login(email: string, password: string, options?: any): Observable<IUser> {
+    constructor(private readonly http: HttpClient) {
+        console.log("constructor login service")
+        this.getUserFromLocalStorage();
+
+    }
+
+    login(emailAddress: string, password: string, options?: any): Observable<IUser> {
         console.log(`login at ${environment.dataApiUrl}login`);
 
         return this.http
-        .post(this.endpoint, {email, password}, { 
+        .post(this.endpoint, {emailAddress, password}, { 
             ...options,
             ...httpOptions,
         })
         .pipe(
             tap(console.log),
+
             map((response: any) => {
-                const user = { ...response} as IUser;
+                console.log(response.results.token)
+                if(!response.results.token) {
+                    this.handleError(response.results);
+                    throw new Error(response.results.message);
+                }
+                const user = response.results as IUser
                 this.saveUserToLocalStorage(user);
                 this.currentUser.next(user);
                 console.log(this.currentUser);
 
                 //this.alertService.succes('You have been logged in');
                 return user;
-            },
+            }),
             catchError(this.handleError)
-        ));
+        );
     
     }
 
