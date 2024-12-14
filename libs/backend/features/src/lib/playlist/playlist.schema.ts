@@ -41,7 +41,7 @@ export class Playlist implements IPlaylist {
     @Prop({ required: true})
     public: boolean = false;
 
-    @Prop({ required: true})
+    @Prop({ required: false})
     image!: string;
 
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { SongService } from '../song.service'
-import { IAlbum, IArtist, IPlaylist, ISong } from '@avans-nx-songlibrary/api';
+import { IAlbum, IArtist, IPlaylist, ISong, IUser } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
 import { PlaylistService } from '../../playlist/playlist.service';
+import { LoginService } from '../../login/login.service';
 
 @Component({
     selector: 'song-list-template',
@@ -19,8 +20,9 @@ export class SongListTemplateComponent {
     @Input() album?: IAlbum;
 
     playlists: IPlaylist[]= []
+    user!: IUser;
 
-    constructor(private playlistService: PlaylistService) {}
+    constructor(private playlistService: PlaylistService, private loginService: LoginService) {}
 
     addToPlaylist(playlist : IPlaylist, song: ISong ): void{
         if(!playlist) {
@@ -50,7 +52,13 @@ export class SongListTemplateComponent {
     }
 
     ngOnInit(): void {
-        this.subscription = this.playlistService.list().subscribe((results) => {
+        this.loginService.currentUser.subscribe(user => {
+            if(user){
+                this.user = user;
+                console.log("init", this.user)
+            }
+        });
+        this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
             if(results) {
                 console.log(`results: ${results}`);
                 this.playlists = results

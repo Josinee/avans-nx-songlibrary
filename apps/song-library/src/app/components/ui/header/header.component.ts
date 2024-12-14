@@ -4,13 +4,13 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { IUser } from '@avans-nx-songlibrary/api';
 import { LoginService } from 'libs/frontend/features/src/lib/login/login.service';
 import { Observable } from 'rxjs';
-import { AppComponent } from '../../../app.component';
 
 @Component({
   imports: [CommonModule, RouterLink, RouterOutlet],
   standalone: true,
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styles: ['header { background-color: whitesmoke}']
 })
 export class HeaderComponent {
   public user: IUser | undefined;
@@ -26,6 +26,6 @@ export class HeaderComponent {
   logout(): void {
     console.log('logout in headercomp');
     this.loginService.logout();
-    //this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 }

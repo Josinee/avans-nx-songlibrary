@@ -60,7 +60,7 @@
         <div class="col-8 ms-1 mt-3">
             <h1 class="">{{ playlist.name }}</h1>
             <p class="mb-5">{{ playlist.description}}</p>
-            <p class="d-inline">{{ playlist.duration }} minutes - </p>
+            <p>{{ convertToMinutesAndSeconds(playlist.duration) }}</p>
             <p class="d-inline"> {{ playlist.numberOfSongs }} songs - </p>
             <p class="d-inline"> {{ playlist.public ? 'Public' : 'Private' }}</p>
             <div class="mt-3">

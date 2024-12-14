@@ -111,11 +111,18 @@ public getPlaylistFromCreator(creator: string, options?: any): Observable<IPlayl
             )
     }
 
+    public parseDuration(duration: number) : number {
+        const minutes = Math.floor(duration / 100);
+        const seconds = duration % 100;
+        return minutes * 60 + seconds;
+    }
+
     public addToPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
         console.log("add song to playlist");
         playlist.songs.push(song);
         playlist.numberOfSongs++;
-        playlist.duration += song.duration;
+        const durationSeconds = this.parseDuration(song.duration);
+        playlist.duration += durationSeconds;
         playlist.lastUpdated = new Date();
         return this.http
         .put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions })
