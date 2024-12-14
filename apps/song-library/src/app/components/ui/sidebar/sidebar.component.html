@@ -1,38 +1,39 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
-    <h4 class="ms-3">BROWSE MUSIC</h4>
-  <hr>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
-      <a [routerLink]="['homepage']" class="nav-link active" aria-current="page">
-        <i class="bi bi-house-fill"></i>
-        Homepage
-      </a>
-    </li>
-    <li>
-      <a [routerLink]="['song-list']" class="nav-link link-body-emphasis">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-        songlist
-      </a>
-    </li>
-    <li>
-      <a [routerLink]="['playlist-list']" class="nav-link link-body-emphasis">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-        Playlists
-      </a>
-    </li>
-    <!-- <li>
-      <a href="#" class="nav-link link-body-emphasis">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-        Products
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link link-body-emphasis">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-        Customers
-      </a>
-    </li> -->
-  </ul>
-  <hr>
-  
+<div class="d-flex flex-column flex-shrink-0 p-3 sidebar" style="width: 260px; min-height: 500px">
+    <h5 class="ms-3">BROWSE MUSIC</h5>
+    <hr />
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a [routerLink]="['homepage']" routerlink="/homepage" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+                <i class="bi bi-house-fill"></i>
+                Home
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['new']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+                <i class="bi bi-vinyl"></i>
+                New
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['playlist-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+                <i class="bi bi-collection-play"></i>
+                Playlists
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['discover']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+                <i class="bi bi-music-note-beamed"></i>
+                Discover
+            </a>
+        </li>
+    </ul>
+    <hr />
+    <button class="btn btn-danger" [routerLink]="['/playlist-create']">Create Playlist</button>
+    <p>Your playlists:</p>
+
+    <div *ngFor="let playlist of personalPlaylists" class="ms-3 playlists">
+        <a [routerLink]="['/playlist', playlist._id]" class=""
+            ><p>{{ playlist.name }}</p></a
+        >
+    </div>
 </div>

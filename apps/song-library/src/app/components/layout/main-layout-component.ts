@@ -9,18 +9,19 @@ import { SidebarComponent } from '../ui/sidebar/sidebar.component';
   standalone: true,
   imports: [RouterOutlet, RouterLink, FooterComponent, SidebarComponent, HeaderComponent],
   selector: 'app-root',
-  template: `<app-header></app-header>
-<div class="row">
-    <div class="col-auto">
-        <app-sidebar></app-sidebar>
+  template: `<div class="d-flex flex-column min-vh-100">
+  <app-header></app-header>
+  <div class="d-flex flex-grow-1">
+    <div class="bg-light col-auto">
+      <app-sidebar></app-sidebar>
     </div>
     <div class="col">
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </div>
-    
+  </div>
+
 </div>
 
-<app-footer></app-footer>   
  `,
 })
 export class MainLayoutComponent {

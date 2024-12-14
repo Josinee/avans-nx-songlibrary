@@ -23,7 +23,8 @@
             "@avans-nx-songlibrary/common": ["libs/frontend/common/src/index.ts"],
             "@avans-nx-songlibrary/features": ["libs/frontend/features/src/index.ts"],
             "@avans-nx-songlibrary/shared/util-env": ["libs/shared/util-env/src/index.ts"],
-            "@avans-nx-songlibrary/ui": ["libs/frontend/ui/src/index.ts"]
+            "@avans-nx-songlibrary/ui": ["libs/frontend/ui/src/index.ts"],
+            "@avans-nx-songlibrary/assets": ["apps/song-library/src/assets"]
 
         }
     },
