@@ -1,50 +1,65 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Song</th>
-            <th *ngIf="context !== 'artist'" scope="col">Artist</th>
-            <th *ngIf="context !== 'album'" scope="col">Album</th>
-            <th scope="col">Duration</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let song of songs; let i = index" width="100%">
-            <td>{{ i + 1 }}</td>
-            <td [routerLink]="['/song', song._id]">{{ song.title }}</td>
-            <td *ngIf="context !== 'artist'" [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</td>
-            <td *ngIf="context !== 'album'" [routerLink]="['/album', song.album._id]">{{ song.album.title || 'no album' }}</td>
-            <td>{{ song.duration / 100 | number : '1.2-3' }}</td>
-            <td>
-                <div class="dropstart">
-                    <button type="button" class="btn btn-link text-body" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-three-dots"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <!-- Show song details -->
-                        <li class="dropdown-item"><button [routerLink]="['/song', song._id]"  class="btn">Show details</button></li>
+<div class="table-container mx-5">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Song</th>
+                    <th *ngIf="context == 'playlist'" scope="col">Artist</th>
+                    <th *ngIf="context !== 'album'" scope="col">Album</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let song of songs; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td [routerLink]="['/song', song._id]">{{ song.title }}</td>
+                    <td *ngIf="context == 'playlist'" [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</td>
+                    <td *ngIf="context !== 'album'" [routerLink]="['/album', song.album._id]">{{ song.album.title || 'no album' }}</td>
+                    <td>{{ song.duration / 100 | number : '1.2-3' }}</td>
+                    <td>
+                        <div class="dropstart">
+                            <button type="button" class="btn btn-link text-body" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <!-- Show song details -->
+                                <li class="dropdown-item">
+                                    <button [routerLink]="['/song', song._id]" class="btn">Show details</button>
+                                </li>
 
-                        <!-- Nested dropdown -->
-                        <li class="dropdown-item btn">
-                            <i class="bi bi-caret-left-fill"></i>Toevoegen aan ... 
-                            <ul class="dropdown-menu dropdown-submenu">
-                                <div *ngFor="let playlist of playlists">
-                                    <li class="dropdown-item"><button class="btn" (click)="addToPlaylist(playlist, song)">{{playlist.name}}</button></li>
+                                <!-- Nested dropdown -->
+                                <li class="dropdown-item btn">
+                                    <i class="bi bi-caret-left-fill"></i>Add to ...
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <div *ngFor="let playlist of playlists">
+                                            <li class="dropdown-item">
+                                                <button class="btn" (click)="addToPlaylist(playlist, song)">
+                                                    {{ playlist.name }}
+                                                </button>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <div *ngIf="context === 'playlist' && playlist">
+                                    <li class="dropdown-item">
+                                        <button class="btn" (click)="removeFromPlaylist(playlist, song)">Remove from playlist</button>
+                                    </li>
                                 </div>
-
+                                <li class="dropdown-item">
+                                    <button [routerLink]="['/artist', artist?._id || song.artist._id]" class="btn">Show artist</button>
+                                </li>
+                                <div *ngIf="context !== 'album'">
+                                    <li class="dropdown-item">
+                                        <button [routerLink]="['/album', album?._id || song.artist._id]" class="btn">Show album</button>
+                                    </li>
+                                </div>
                             </ul>
-                        </li>
-                        <div *ngIf="context === 'playlist' && playlist">
-                            <li class="dropdown-item"><button class="btn" (click)="removeFromPlaylist(playlist, song)">Verwijder uit playlist</button>
                         </div>
-                        <li class="dropdown-item"><button [routerLink]="['/artist', artist?._id || song.artist._id]" class="btn">Show artist {{artist?.name || song.artist.name}}</button></li>
-                        <li class="dropdown-item"><button [routerLink]="['/album', album?._id || song.artist._id]" class="btn">Show album {{album?.title || song.album.title}}</button></li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<p>song list TEMPLATE</p>
-
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

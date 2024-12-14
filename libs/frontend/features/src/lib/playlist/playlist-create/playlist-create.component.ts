@@ -13,7 +13,6 @@ import { LoginService } from '../../login/login.service';
 })
 export class PlaylistCreateComponent {
     user!: IUser;
-    private sub: Subscription | null = null;
     playlist: ICreatePlaylist = {
         name: '',
         numberOfSongs: 0,
@@ -21,7 +20,9 @@ export class PlaylistCreateComponent {
         creationDate: new Date(),
         creator: this.user,
         description: ' ',
-        lastUpdated: new Date()
+        lastUpdated: new Date(),
+        public: false,
+        image: '',
       };
 
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private route: ActivatedRoute, private router: Router) {}
@@ -30,7 +31,6 @@ export class PlaylistCreateComponent {
         // Subscribe to the currentUser$ observable to get the logged-in user
         this.loginService.currentUser.subscribe(user => {
             if(user){
-
                 this.user = user;
                 console.log("init", this.user)
             }

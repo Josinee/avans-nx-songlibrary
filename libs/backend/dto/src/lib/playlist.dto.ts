@@ -5,7 +5,8 @@ import {
     IsNumber,
     IsObject,
     IsArray,
-    IsDate
+    IsDate,
+    IsBoolean
 } from 'class-validator';
 import {
     ICreatePlaylist,
@@ -47,6 +48,13 @@ export class CreatePlaylistDto implements ICreatePlaylist {
     @IsNotEmpty()
     lastUpdated!: Date;
 
+    @IsBoolean()
+    public!: boolean
+
+    @IsString()
+    @IsNotEmpty()
+    image!: string;
+
 }
 
 export class UpdatePlaylistDto implements IUpdatePlaylist {
@@ -75,9 +83,17 @@ export class UpdatePlaylistDto implements IUpdatePlaylist {
     @IsNotEmpty()
     lastUpdated!: Date;
 
+    @IsBoolean()
+    public!: boolean
+    
+    @IsString()
+    @IsOptional()
+    image!: string;
+
 }
 
 export class UpsertPlaylistDto implements IUpsertPlaylist {
+
 
     @IsString()
     @IsNotEmpty()
@@ -114,6 +130,12 @@ export class UpsertPlaylistDto implements IUpsertPlaylist {
     @IsNotEmpty()
     lastUpdated!: Date;
 
+    @IsBoolean()
+    public!: boolean
+
+    @IsString()
+    @IsNotEmpty()
+    image!: string;
 
 
 }

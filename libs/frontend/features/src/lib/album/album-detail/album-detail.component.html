@@ -1,18 +1,24 @@
-<div class="container">
+<button class="btn " (click)="goBack()"><i class="bi bi-arrow-up-left-square"></i></button>
+
+<div class="container my-3">
     <div class="row">
-        <div class="col-4">
-            <img src="{{album!.image}}">
-            <!-- TODO dit is ugly -->
-        </div>
-        <div class="col-8">
-            <p>{{ album?.title }}</p>
-            <p>{{ album?.artist?.name }}</p>
-            <p>{{ album?.dateOfRelease }} - {{ album?.numberOfSongs }} songs</p>
-        </div>
+      <!-- Album Image -->
+      <div class="col-md-4 d-flex justify-content-center">
+        <img src="{{album?.image || '/assets/album-placeholder.png'}}" class="img-fluid rounded shadow" style="object-fit: cover; width: 100%; max-width: 250px; height: 250px;">
+      </div>
+      
+      <!-- Album Details -->
+      <div class="col-md-8">
+        <h2 class="display-6">{{ album?.title }}</h2>
+        <a [routerLink]="['/artist', album!.artist._id]" class="h5 text-muted ">{{ album?.artist?.name }}</a>
+        <p class="text-muted mt-2">
+          {{ album?.dateOfRelease | date}} - {{ album?.numberOfSongs }} song{{ album?.numberOfSongs! > 1 ? 's' : '' }}
+        </p>
+      </div>
     </div>
-
-    <song-list-template [songs]="songs" [context]="'album'" [artist]="album?.artist"></song-list-template>
-
-
-</div>
-<!-- [routerLink]="['/song', song._id]" -->
+    
+    <!-- Song List Component -->
+    <div class="mt-4">
+      <song-list-template [songs]="songs" [context]="'album'" [artist]="album?.artist"></song-list-template>
+    </div>
+  </div>

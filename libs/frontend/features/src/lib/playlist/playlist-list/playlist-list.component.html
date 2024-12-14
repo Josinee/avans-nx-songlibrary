@@ -1,7 +1,9 @@
-<p>playlistlist-list works!</p>
-<button class="btn btn-danger" [routerLink]="['/playlist-create']">Create Playlist</button>
-  
-<div *ngFor="let playlist of playlists">
-    <a [routerLink]="['/playlist', playlist._id]"><h2>{{ playlist.name }}</h2></a>
-    
+<button class="btn " (click)="goBack()"><i class="bi bi-arrow-up-left-square"></i></button>
+<div class="row container m-3">
+    <div *ngFor="let playlist of playlists" class="col-3">
+        <a [routerLink]="['/playlist', playlist._id]" class="playlist-card">
+            <img src="{{ playlist.image || '/assets/playlist-placeholder.png' }}" class="rounded img-fluid" style="object-fit: cover; height: 150px; width: 150px" alt="Playlist Image" />
+            <p class="playlist-name">{{ playlist.name }}</p>
+        </a>
+    </div>
 </div>

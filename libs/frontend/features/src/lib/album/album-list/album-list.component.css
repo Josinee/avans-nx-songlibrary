@@ -1,0 +1,22 @@
+.album-cover {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.album-cover img {
+    transition: transform 0.3s ease;
+}
+
+.album-cover:hover img {
+    transform: scale(1.05);
+}
+
+.card-body {
+    transition: background-color 0.3s ease;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.card:hover .card-body {
+    background-color: rgba(0, 0, 0, 0.1);
+}

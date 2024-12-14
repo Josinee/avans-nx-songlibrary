@@ -1,33 +1,27 @@
-<!-- <p>song-list works!</p>
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Song</th>
-      <th scope="col">Artist</th>
-      <th scope="col">Album</th>
-      <th scope="col">Length</th>
-    </tr>
-  </thead>
+<div class="container m-3">
+  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4">
+    <!-- Loop through albums -->
+    <div *ngFor="let album of albums" class="col">
+      <!-- Album Card -->
+      <a [routerLink]="['/album', album._id]" class="text-decoration-none">
+      <div class="card h-100 border-0">
+        <div class="album-cover position-relative">
+          <img 
+          src="{{album?.image || '/assets/album-placeholder.png'}}"
+            class="card-img-top rounded-3" 
+            alt="{{ album.title }}" 
+            style="object-fit: cover; height: 200px; width: 100%; border-radius: 8px;">
+        </div>
+        <div class="card-body text-center pt-3 pb-2">
+          <h6 class="card-title text-truncate">{{ album.title }}</h6>
+          <p class="card-text text-muted">{{ album.artist?.name }}</p>
+          <p class="card-text text-muted text-sm">{{ album.dateOfRelease | date :"yyyy" }}</p>
+        </div>
+      </div>
+    </a>
+    </div>
 
-  <tbody>
-    <tr *ngFor="let song of songs" class="song-row">
-      <td><input type="checkbox" class="song-checkbox"></td>
-      <td><a routerLink="#">{{ song.title }}</a></td>
-      <td><a routerLink="#">{{ song.artist.name }}</a></td>
-      <td><a [routerLink="['/album', {{song.album.id}}]">{{ song.album?.title }}</a></td>
-      <td>{{ song.duration / 100 | number: '1.2-3' }}</td>
-    </tr>
-  </tbody>
-</table> -->
-
-<div class="row" width="100%">
-  <div *ngFor="let album of albums" class="col-4 p-5" >
-    <img class="img-fluid" src="{{album.image}}">
-    <p class="text-center">{{album.title}}</p>
-    <p class="text-center">{{album.dateOfRelease}}</p>
-    <p class="text-center">{{album.type}}</p>
   </div>
 </div>

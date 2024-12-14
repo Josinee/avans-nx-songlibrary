@@ -6,10 +6,12 @@ import { SongService } from '../../song/song.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlbumDetailComponent } from '../../album/album-detail/album-detail.component';
 import { AlbumService } from '../../album/album.service';
+import { Location } from '@angular/common'
 
 @Component({
     selector: 'app-artist-detail',
     templateUrl: './artist-detail.component.html',
+    styleUrl: './artist-detail.component.css',
 
 })
 export class ArtistDetailComponent implements OnInit, OnDestroy {
@@ -21,7 +23,7 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     subscription: Subscription | undefined = undefined;
 
 
-    constructor(private artistService: ArtistService, private songService: SongService, private albumService: AlbumService, private route: ActivatedRoute, private router: Router) {
+    constructor(private artistService: ArtistService, private songService: SongService, private albumService: AlbumService, private route: ActivatedRoute, private router: Router, private location: Location) {
         console.log("ja artist detail");
     }
 
@@ -58,6 +60,10 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     setTab(tabName: string): void {
         this.activeTab = tabName;  // Update the active tab
     }
+
+    goBack(): void {
+        this.location.back(); // Navigate to the previous page
+      }
 
 }
 

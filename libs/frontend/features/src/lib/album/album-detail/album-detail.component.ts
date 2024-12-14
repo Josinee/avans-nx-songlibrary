@@ -4,7 +4,7 @@ import { SongService } from '../../song/song.service'
 import { ActivatedRoute } from '@angular/router'
 import { ISong, IAlbum } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
-import * as bootstrap from 'bootstrap'
+import { Location } from '@angular/common'
 
 
 
@@ -24,7 +24,7 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private albumService: AlbumService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute, private location: Location) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -49,5 +49,10 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
     }
   }
+
+  goBack(): void {
+    this.location.back(); // Navigate to the previous page
+  }
+
 }
  

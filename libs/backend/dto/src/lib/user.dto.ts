@@ -1,5 +1,6 @@
-import { IsNotEmpty, IsString, IsBoolean, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString, IsBoolean, IsOptional, IsArray } from 'class-validator';
 import {
+    IPlaylist,
     // ICreateUser,
     IUpdateUser,
     IUpsertUser,
@@ -49,9 +50,9 @@ export class UpsertUserDto implements IUpsertUser {
     @IsNotEmpty()
     profileImgUrl = '';
 
-    @IsString()
+    @IsArray()
     @IsNotEmpty()
-    playlists: Playlist[] = [];
+    playlists: IPlaylist[] = [];
 
     @IsString()
     @IsNotEmpty()
