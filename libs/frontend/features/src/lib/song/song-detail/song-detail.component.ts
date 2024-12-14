@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'song-detail',
   templateUrl: './song-detail.component.html',
+  styleUrl: './song-detail.component.css'
 
 })
 
@@ -45,4 +46,3 @@ export class SongDetailComponent implements OnInit, OnDestroy {
     }
   }
 }
- 

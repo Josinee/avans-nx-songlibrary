@@ -4,7 +4,6 @@ import { IAlbum } from './album.interface';
 
 export interface ISong {
     _id: Id,
-    image: string,
     title: string,
     duration: number,
     songText: string,

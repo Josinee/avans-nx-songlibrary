@@ -3,7 +3,7 @@
         <div class="header">
             <div class="artist-header text-white">
                 <button class="btn" (click)="goBack()"><i class="bi bi-arrow-up-left-square text-white"></i></button>
-                <h6 class="display-4 text-center mb-0">{{ artist!.name }}</h6>
+                <h6 class="display-4 text-center mb-0">About {{ artist!.name }}</h6>
             </div>
             <!-- Nav Tabs Navigation -->
             <ul class="nav nav-tabs mb-1 ps-2 pt-2" role="tablist">
@@ -24,9 +24,9 @@
             <div *ngIf="activeTab === 'artist'" class="tab-pane fade show active m-4" id="artist" role="tabpanel" aria-labelledby="artist-tab">
                 <div class="container mt-4">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12">
-                            <!-- Artist Image -->
-                            <img src="{{ artist!.image || '/assets/person-placeholder.png' }}" class="img-fluid rounded" style="object-fit: cover; height: 250px; width: 100%; border-radius: 8px" />
+                        <div class="col-md-4 text-center mb-4">
+                            <img src="{{ artist!.image || '/assets/person-placeholder.png' }}" 
+                                 class="img-fluid rounded-circle shadow" style="object-fit: cover; height: 250px; width: 250px; border-radius: 8px" >
                         </div>
 
                         <div class="col-md-8 col-sm-12">
@@ -46,6 +46,8 @@
                         </div>
                     </div>
                 </div>
+
+            
             </div>
             <div *ngIf="activeTab === 'album'" class="tab-pane fade show active m-4" id="album" role="tabpanel" aria-labelledby="album-tab">
                 <album-list [albums]="albums"></album-list>
@@ -53,6 +55,8 @@
             <div *ngIf="activeTab === 'song'" class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
                 <song-list-template [songs]="songs" [context]="'artist'"></song-list-template>
             </div>
+
+
         </div>
     </div>
 </div>

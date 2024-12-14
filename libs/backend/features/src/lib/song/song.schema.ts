@@ -13,9 +13,6 @@ export class Song implements ISong {
     @IsMongoId()
     _id!: string;
 
-    @Prop({ required: false})
-    image!: string;
-
     @Prop({ required: true })
     title!: string;
 
