@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { IPlaylist, IUser } from '@avans-nx-songlibrary/api';

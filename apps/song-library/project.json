@@ -15,12 +15,7 @@
         "browser": "apps/song-library/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/song-library/tsconfig.app.json",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/song-library/public"
-          }
-        ],
+        "assets": ["apps/song-library/src/assets"],
         "styles": ["apps/song-library/src/styles.css",
          "node_modules/bootstrap/dist/css/bootstrap.min.css"],
         "scripts": [

@@ -5,7 +5,7 @@ import { User, UserDocument } from './user.schema';
 import { IUser, IUserInfo } from '@avans-nx-songlibrary/api';
 // import { Meal, MealDocument } from '@avans-nx-workshop/backend/features';
 import { CreateUserDto, UpdateUserDto } from '@avans-nx-songlibrary/backend/dto';
-import { Playlist, PlaylistDocument } from '../playlist/playlist.schema';
+import { Playlist } from '../playlist/playlist.schema';
 
 @Injectable()
 export class UserService {

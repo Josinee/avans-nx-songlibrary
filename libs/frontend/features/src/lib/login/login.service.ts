@@ -1,4 +1,4 @@
-import { IUser, IUserCredentials, IUserIdentity } from '@avans-nx-songlibrary/api';
+import { IUser, IUserCredentials } from '@avans-nx-songlibrary/api';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class LoginService {
     constructor(private readonly http: HttpClient) {
         console.log("constructor login service")
         this.getUserFromLocalStorage();
-        
+
     }
 
     login(emailAddress: string, password: string, options?: any): Observable<IUser> {
@@ -36,8 +36,8 @@ export class LoginService {
         })
         .pipe(
             tap(console.log),
-            
-            map((response: any) => { 
+
+            map((response: any) => {
                 console.log(response.results.token)
                 if(!response.results.token) {
                     this.handleError(response.results);
@@ -71,24 +71,19 @@ export class LoginService {
 
     private saveUserToLocalStorage(user: IUser): void {
         localStorage.setItem(this.CURRENT_USER, JSON.stringify(user));
-        
     }
-
-    
     public handleError(error: HttpErrorResponse): Observable<any> {
         console.log('handleError in MealService', error);
 
         return throwError(() => new Error(error.message));
     }
-
+    
     public logout(): void {
         console.log('logout in service')
         localStorage.removeItem(this.CURRENT_USER);
         this.currentUser.next(undefined);
         
     }
-    
-
 
     // onSubmit(): void{
     //     if(this.loginForm.valid)

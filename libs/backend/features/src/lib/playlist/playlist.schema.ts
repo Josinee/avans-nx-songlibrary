@@ -5,7 +5,7 @@ import { IPlaylist, ISong, IUserInfo } from '@avans-nx-songlibrary/api';
 import { IsMongoId } from 'class-validator';
 import * as mongoose from 'mongoose';
 
-export type PlaylistDocumentent = Playlist & Document;
+export type PlaylistDocument = Playlist & Document;
 @Schema()
 export class Playlist implements IPlaylist {
 

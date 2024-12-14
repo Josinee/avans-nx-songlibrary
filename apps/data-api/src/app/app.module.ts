@@ -11,7 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
 @Module({
-    imports: [UserModule, SongModule, PlaylistModule, ArtistModule, AlbumModule, MongooseModule.forRoot(environment.MONGO_DB_CONNECTION_STRING)],
+    imports: [UserModule, SongModule, PlaylistModule, ArtistModule, AlbumModule, AuthModule, MongooseModule.forRoot(environment.MONGO_DB_CONNECTION_STRING)],
     controllers: [AppController],
     providers: [AppService]
 })
