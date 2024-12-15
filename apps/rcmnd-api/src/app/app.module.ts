@@ -7,7 +7,7 @@ import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
 @Module({
   imports: [Neo4jModule.forRoot({
-    scheme: 'neo4j',
+    scheme: 'neo4j+s',
     database: environment.NEO4J_DB_DATABASE_NAME,
     host: environment.NEO4J_DB_CONNECTION_STRING,
     port: 7687,
