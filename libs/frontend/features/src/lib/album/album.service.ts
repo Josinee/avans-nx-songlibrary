@@ -1,5 +1,5 @@
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse, IAlbum, ISong } from '@avans-nx-songlibrary/api';
 
@@ -26,16 +26,30 @@ export class AlbumService {
 
     public list(options?: any): Observable<IAlbum[] | null> {
         console.log(`list ${this.endpoint}`);
-
+    
+        let params = new HttpParams();
+    
+        // If options contain 'startDate', append it to params
+        if (options?.dateOfRelease?.startDate) {
+            console.log('ja gaad goed')
+            // Convert startDate to ISO string format for the backend
+            const startDate = options.dateOfRelease.startDate.toISOString();
+            console.log(startDate)
+            params = params.append('startDate', startDate);
+            console.log(params)
+        }
+    
+        // Send the HTTP GET request with the params
         return this.http
             .get<ApiResponse<IAlbum[]>>(this.endpoint, {
-                ...options,
-                ...httpOptions,
+                params: params,  // Pass the HttpParams with the query parameters
+                observe: 'body',  // Expect response body
+                responseType: 'json',  // Response type as JSON
             })
             .pipe(
-                map((response: any) => response.results as IAlbum[]),
-                tap(console.log),
-                catchError(this.handleError)
+                map((response: ApiResponse<IAlbum[]>) => response.results as IAlbum[]),  // Map the response
+                tap(console.log),  // Log the response
+                catchError(this.handleError)  // Handle any errors
             );
     }
 

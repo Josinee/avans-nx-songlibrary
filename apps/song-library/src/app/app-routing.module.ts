@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { HomepageComponent } from "./components/homepage/homepage.component";
-import { PlaylistCreateComponent, SongDetailComponent, SongListComponent, PlaylistListComponent, PlaylistDetailComponent, AlbumListComponent, LoginComponent, RegisterComponent } from "@avans-nx-songlibrary/features"
+import { PlaylistCreateComponent, SongDetailComponent, SongListComponent, PlaylistListComponent, PlaylistDetailComponent, AlbumListComponent, LoginComponent, RegisterComponent, NewComponent } from "@avans-nx-songlibrary/features"
 import { ArtistDetailComponent } from "@avans-nx-songlibrary/features"
 import { AlbumDetailComponent } from "@avans-nx-songlibrary/features"
 import { PublicLayoutComponent } from "./components/layout/public-layout-component"
@@ -25,7 +25,8 @@ export const routes: Routes = [
           { path: 'playlist-list', pathMatch: 'full', component: PlaylistListComponent },
           { path: 'playlist-create', pathMatch: 'full', component: PlaylistCreateComponent },
           { path: 'playlist/:id', pathMatch: 'full', component: PlaylistDetailComponent },
-          { path: 'user-detail/:id', pathMatch: 'full', component: UserDetailComponent}
+          { path: 'user-detail/:id', pathMatch: 'full', component: UserDetailComponent},
+          { path: 'new', pathMatch: 'full', component: NewComponent}
         ]
     }
     ];

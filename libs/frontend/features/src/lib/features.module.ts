@@ -24,15 +24,15 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './users/user.service';
-
+import { NewComponent } from './new/new/new.component'
 
 
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ],
-    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent],
+    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent, NewComponent],
     providers: [SongService, ArtistService, AlbumService, PlaylistService, LoginService, RegisterService, UserService],
-    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent]
+    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent, NewComponent]
 
 })
 export class FeaturesModule {}

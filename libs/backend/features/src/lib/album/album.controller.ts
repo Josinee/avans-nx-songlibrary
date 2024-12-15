@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Query } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { Get, Param, Post, Body } from '@nestjs/common';
 import { IAlbum } from '@avans-nx-songlibrary/api';
@@ -9,9 +9,14 @@ export class AlbumController {
     constructor(private albumService: AlbumService) {}
 
     @Get('')
-    getAll(): Promise<IAlbum[]> {
-        console.log("getALl in album controller")
-        return this.albumService.getAll();
+    async getAll(@Query('startDate') dateOfRelease?: string): Promise<IAlbum[]> {
+        console.log('Fetching albums with dateOfRelease filter', dateOfRelease);
+
+        if (dateOfRelease) {
+            return this.albumService.getAll(dateOfRelease);
+        }
+
+        return this.albumService.getAll(); // return all albums if no filter
     }
 
     @Get(':id')

@@ -19,7 +19,7 @@ export class AlbumListComponent {
 
     ngOnInit(): void {
         console.log('Albums received in AlbumListComponent:', this.albums);
-      }
+    }
 
     // ngOnInit(): void {
     //     this.subscription = this.albumService.list().subscribe((results: IAlbum[] | null) => {
