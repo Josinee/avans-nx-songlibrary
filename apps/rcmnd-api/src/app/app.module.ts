@@ -8,12 +8,12 @@ import { env } from 'process';
 
 @Module({
   imports: [Neo4jModule.forRoot({
-    scheme: 'neo4j+s',
+    scheme: 'neo4j',
     database: 'neo4j',
-    host: '1b1e492e.databases.neo4j.io',
+    host: '1b1e492e.databases.neo4j.io:7687',
     port: 7687,
-    username: environment.NEO4J_DB_USERNAME,
-    password: environment.NEO4J_DB_PASSWORD,
+    username: 'neo4j',
+    password: 'bH7kKQvOOmsFoXlUzl1Z8HfUT1i-uM3wRww9zOVYEpM',
   }), Neo4jBackendModule ],
   controllers: [AppController,],
   providers: [AppService],
