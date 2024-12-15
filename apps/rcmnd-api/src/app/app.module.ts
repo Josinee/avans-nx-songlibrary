@@ -10,7 +10,7 @@ import { env } from 'process';
   imports: [Neo4jModule.forRoot({
     scheme: 'neo4j',
     database: 'neo4j',
-    host: '1b1e492e.databases.neo4j.io:7687',
+    host: '1b1e492e.databases.neo4j.io',
     port: 7687,
     username: 'neo4j',
     password: 'bH7kKQvOOmsFoXlUzl1Z8HfUT1i-uM3wRww9zOVYEpM',
