@@ -67,6 +67,9 @@ export class NewComponent implements OnInit, OnDestroy {
             case 'lastYear':
                 startDate.setFullYear(now.getFullYear() - 1);
                 break;
+                case 'allTime':
+                    startDate.setFullYear(now.getFullYear() - 100);
+                    break;
         }
 
         return { startDate };
