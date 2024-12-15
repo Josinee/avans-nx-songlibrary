@@ -34,13 +34,13 @@ export class AlbumService {
         return this.albumModel.find().populate('artist').exec();
     }
 
-    async getOne(id: string): Promise<IAlbum> {
+    async getOne(id: string): Promise<any> {
         const album = await this.albumModel.findById(id).populate('artist').exec();
         if (!album) {
             throw new NotFoundException(`Album could not be found!`);
         }
+        const songs = await this.songService.getAllByAlbum(id);
 
-        return album;
-        
+        return { ...album.toObject(), songs };
     }
 }

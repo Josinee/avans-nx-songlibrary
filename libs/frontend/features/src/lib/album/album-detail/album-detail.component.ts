@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlbumService } from '../album.service';
 import { ActivatedRoute } from '@angular/router';
 import { ISong, IAlbum } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
-import { Location, PathLocationStrategy } from '@angular/common';
-import { SongService } from '../../song/song.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'album-detail',
@@ -16,28 +15,17 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
     id: string | null = null;
     private sub: Subscription | null = null;
 
-    constructor(private albumService: AlbumService, private route: ActivatedRoute, private location: Location, private songService: SongService) {}
+    constructor(private albumService: AlbumService, private route: ActivatedRoute, private location: Location) {}
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
             this.id = params.get('id');
             console.log(this.id);
             if (this.id) {
-                // Fetch the album first
                 this.albumService.read(this.id).subscribe((album: IAlbum) => {
                     console.log(album);
                     this.album = album;
-    
-                    // Fetch the songs after the album is loaded
-                    this.songService.getByAlbum(this.id).subscribe((songs: ISong[]) => {
-                        console.log(songs);
-                        this.songs = songs;
-                    }, (error) => {
-                        console.error('Failed to fetch songs:', error);
-                        this.songs = []; // Handle errors if fetching songs fails
-                    });
-                }, (error) => {
-                    console.error('Failed to fetch album:', error);
+                    this.songs = album.songs || [];
                 });
             }
         });
