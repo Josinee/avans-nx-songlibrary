@@ -9,8 +9,8 @@ export const environment: IEnvironment = {
 
 
     MONGO_DB_CONNECTION_STRING: 'dummy',
-    NEO4J_DB_CONNECTION_STRING: '',
-    NEO4J_DB_DATABASE_NAME: '',
-    NEO4J_DB_USERNAME: '',
-    NEO4J_DB_PASSWORD: ''
+    NEO4J_DB_CONNECTION_STRING: 'dummy',
+    NEO4J_DB_DATABASE_NAME: 'dummy',
+    NEO4J_DB_USERNAME: 'dummy',
+    NEO4J_DB_PASSWORD: 'dummy'
 };

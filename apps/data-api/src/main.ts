@@ -4,6 +4,8 @@ import { AppModule } from './app/app.module';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { ApiResponseInterceptor } from '@avans-nx-songlibrary/backend/dto'
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
