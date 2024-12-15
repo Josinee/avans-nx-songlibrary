@@ -5,6 +5,7 @@ export const environment: IEnvironment = {
 
     ROOT_DOMAIN_URL: 'dummy',
     dataApiUrl: 'dummy',
+    rcmndApiUrl: 'dummy',
     
 
     MONGO_DB_CONNECTION_STRING: 'dummy'

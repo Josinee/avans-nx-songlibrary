@@ -20,16 +20,7 @@ export class NewComponent implements OnInit, OnDestroy {
     albums: IAlbum[] | null = null;
     subscription: Subscription | undefined = undefined;
 
-    constructor(
-
-        private songService: SongService,
-        private albumService: AlbumService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private location: Location
-    ) {
-        console.log('ja artist detail');
-    }
+    constructor(private albumService: AlbumService, private location: Location) {}
 
     ngOnInit(): void {
         const dateRange = this.getDateRange('lastMonth');
@@ -38,7 +29,7 @@ export class NewComponent implements OnInit, OnDestroy {
                 startDate: dateRange.startDate
             }
         };
-    
+
         this.albumService.list(options).subscribe((albums) => {
             this.albums = albums;
             console.log('Albums updated');
@@ -52,13 +43,13 @@ export class NewComponent implements OnInit, OnDestroy {
     onDateFilterChange(event: any) {
         const selectedFilter = event.target.value;
         const dateRange = this.getDateRange(selectedFilter);
-    
+
         const options = {
             dateOfRelease: {
                 startDate: dateRange.startDate
             }
         };
-    
+
         // Pass only the startDate to the API
         this.albumService.list(options).subscribe((albums) => {
             this.albums = albums;
@@ -69,7 +60,7 @@ export class NewComponent implements OnInit, OnDestroy {
     getDateRange(filter: string): { startDate: Date } {
         const now = new Date();
         const startDate = new Date(now);
-    
+
         switch (filter) {
             case 'lastWeek':
                 startDate.setDate(now.getDate() - 7); // 7 days ago
@@ -81,7 +72,7 @@ export class NewComponent implements OnInit, OnDestroy {
                 startDate.setFullYear(now.getFullYear() - 1); // 1 year ago
                 break;
         }
-    
+
         return { startDate };
     }
 

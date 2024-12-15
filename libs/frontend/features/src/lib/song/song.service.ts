@@ -1,17 +1,17 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IAlbum, ISong } from '@avans-nx-songlibrary/api';
+import { ApiResponse, IAlbum, ISong, IUser } from '@avans-nx-songlibrary/api';
 
 import { Injectable } from '@angular/core';
-import { environment } from '@avans-nx-songlibrary/shared/util-env'
+import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
  */
 export const httpOptions = {
     observe: 'body',
-    responseType: 'json',
+    responseType: 'json'
 };
 
 /**
@@ -35,7 +35,7 @@ export class SongService {
         return this.http
             .get<ApiResponse<ISong[]>>(this.endpoint, {
                 ...options,
-                ...httpOptions,
+                ...httpOptions
             })
             .pipe(
                 map((response: any) => response.results as ISong[]),
@@ -53,7 +53,7 @@ export class SongService {
         return this.http
             .get<ApiResponse<ISong>>(this.endpoint + `/${id}`, {
                 ...options,
-                ...httpOptions,
+                ...httpOptions
             })
             .pipe(
                 tap(console.log),
@@ -62,22 +62,34 @@ export class SongService {
             );
     }
 
-
     public getByAlbum(albumId: string | null, options?: any): Observable<ISong[]> {
         console.log(albumId + 'get by album in song service');
-        if(albumId){
-            
+        if (albumId) {
         }
-        return this.http.get<ApiResponse<ISong>>(`${environment.dataApiUrl}/album/${albumId}`, {
-            ...options,
-            ...httpOptions,
-        })
-        .pipe(
-            tap(console.log),
-            map((response: any) => response.results as ISong[]),
-            catchError(this.handleError)
-        )
+        return this.http
+            .get<ApiResponse<ISong>>(`${environment.dataApiUrl}/album/${albumId}`, {
+                ...options,
+                ...httpOptions
+            })
+            .pipe(
+                tap(console.log),
+                map((response: any) => response.results as ISong[]),
+                catchError(this.handleError)
+            );
     }
+
+    public putLikedSong(user: IUser, song: ISong, options?: any) {
+
+        return this.http.
+        put<void>(`${environment.rcmndApiUrl}/songs/${user._id}/${song._id}`, null)
+            .pipe(
+            tap(response => console.log('Response: ', response)),
+            map((response: any) => response.results),
+            catchError(this.handleError)
+        );
+
+    }
+
 
     /**
      * Handle errors.

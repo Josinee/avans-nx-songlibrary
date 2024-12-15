@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { PlaylistService } from '../playlist.service';
 import { ICreatePlaylist, IPlaylist, IUser } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';

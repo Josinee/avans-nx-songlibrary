@@ -4,6 +4,7 @@ import { IAlbum, IArtist, IPlaylist, ISong, IUser } from '@avans-nx-songlibrary/
 import { Subscription } from 'rxjs';
 import { PlaylistService } from '../../playlist/playlist.service';
 import { LoginService } from '../../login/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'song-list-template',
@@ -22,9 +23,17 @@ export class SongListTemplateComponent {
     playlists: IPlaylist[]= []
     user!: IUser;
 
-    constructor(private playlistService: PlaylistService, private loginService: LoginService) {}
+    constructor(private playlistService: PlaylistService, private loginService: LoginService, private songService : SongService, private toastr: ToastrService) {}
 
     addToPlaylist(playlist : IPlaylist, song: ISong ): void{
+        this.songService.putLikedSong(this.user, song).subscribe(
+            (response) => {
+                console.log("Song liked successfully:", response);
+            },
+            (error) => {
+                console.error("Error liking song", error);
+            }
+        );
         if(!playlist) {
             console.error("Playlist not found");
             return;
@@ -38,9 +47,12 @@ export class SongListTemplateComponent {
                 console.error("Error adding song to playlist:", error);
             }
         );
+        this.toastr.success('Song created successfully!', 'Success');
+        
     }
 
     removeFromPlaylist(playlist : IPlaylist, song: ISong): void {
+
         if(!playlist) {
             console.error("Playlist not found");
             return;

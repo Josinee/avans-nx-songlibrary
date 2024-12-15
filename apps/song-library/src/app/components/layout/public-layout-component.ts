@@ -8,8 +8,7 @@ import { HeaderComponent } from '../ui/header/header.component';
   imports: [RouterOutlet, RouterLink, FooterComponent, HeaderComponent],
   selector: 'app-root',
   template: `<app-header></app-header>
-             <router-outlet></router-outlet>
-             <app-footer></app-footer>`,
+             <router-outlet></router-outlet>`,
 })
 export class PublicLayoutComponent {
 }

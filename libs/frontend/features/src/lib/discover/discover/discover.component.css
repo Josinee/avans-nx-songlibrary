@@ -1,0 +1,27 @@
+.filter-container {
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-right: 50px;
+}
+
+.filter-container select {
+  width: auto;
+}
+
+
+select.form-select {
+  padding: 10px;
+  padding-right: 30px;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s;
+}
+
+select.form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25);
+}

@@ -12,3 +12,5 @@ export * from './lib/playlist/playlist-detail/playlist-detail.component';
 export * from './lib/register/register.component';
 export * from './lib/users/user-detail/user-detail.component'
 export * from './lib/new/new/new.component'
+export * from './lib/discover/discover/discover.component'
+export * from './lib/homepage/homepage.component'

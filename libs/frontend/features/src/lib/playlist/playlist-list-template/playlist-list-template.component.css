@@ -1,0 +1,28 @@
+/* Style the playlist card */
+.playlist-card {
+    display: block;
+    text-decoration: none; /* Remove link styling */
+    text-align: center; /* Center the text */
+    color: inherit; /* Ensure the text uses the parent color */
+    padding: 10px;
+    border-radius: 8px; /* Optional: Add rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition for hover effects */
+  }
+  
+  /* Style for the playlist name */
+  .playlist-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  /* Hover effect for the whole card */
+  .playlist-card:hover {
+    transform: translateY(-5px); /* Slightly raise the card */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Add a shadow */
+  }
+  
+  /* Optional: Make sure the text is not underlined by default */
+  .playlist-card p {
+    text-decoration: none;
+  }

@@ -3,9 +3,11 @@ import {
     IsString,
     IsOptional,
     IsNumber,
-    IsObject
+    IsObject,
+    IsEnum
 } from 'class-validator';
 import {
+    Genres,
     IAlbum,
     IArtist,
     ICreateSong,
@@ -37,6 +39,10 @@ export class CreateSongDto implements ICreateSong {
     @IsNumber()
     @IsNotEmpty()
     artist!: IArtist;
+
+    @IsNotEmpty()
+    @IsEnum(Genres)
+    genre!: Genres;
 
 }
 
@@ -72,6 +78,7 @@ export class UpdateSongDto implements IUpdateSong {
 
 export class UpsertSongDto implements IUpsertSong {
 
+
     @IsString()
     @IsNotEmpty()
     _id!: string;
@@ -103,6 +110,10 @@ export class UpsertSongDto implements IUpsertSong {
     @IsOptional()
     @IsObject()
     album!: IAlbum
+
+    @IsOptional()
+    @IsEnum(Genres)
+    genre!: Genres;
 
 
 }

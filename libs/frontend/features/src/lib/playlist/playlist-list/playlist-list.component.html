@@ -1,19 +1,8 @@
-<button class="btn " (click)="goBack()"><i class="bi bi-arrow-up-left-square"></i></button>
-<h4 class="display-4 ms-4">Public Playlists</h4>
-<div class="row container m-4">
-    <div *ngFor="let playlist of playlists" class="col-3">
-        <a [routerLink]="['/playlist', playlist._id]" class="playlist-card">
-            <img src="{{ playlist.image || '/assets/playlist-placeholder.png' }}" class="rounded img-fluid" style="object-fit: cover; height: 150px; width: 150px" alt="Playlist Image" />
-            <p class="playlist-name">{{ playlist.name }}</p>
-        </a>
-    </div>
-</div>
-<h4 class="display-4 ms-4">My Playlists</h4>
-<div class="row container m-4">
-    <div *ngFor="let playlist of privatePlaylists" class="col-3">
-        <a [routerLink]="['/playlist', playlist._id]" class="playlist-card">
-            <img src="{{ playlist.image || '/assets/playlist-placeholder.png' }}" class="rounded img-fluid" style="object-fit: cover; height: 150px; width: 150px" alt="Playlist Image" />
-            <p class="playlist-name">{{ playlist.name }}</p>
-        </a>
-    </div>
+<div class="container p-4">
+    <h4 class="display-4">Public Playlists</h4>
+    <playlist-list-template [playlists]="playlists!"></playlist-list-template>
+
+    <h4 class="display-4">Your Playlists</h4>
+
+    <playlist-list-template [playlists]="privatePlaylists!"></playlist-list-template>
 </div>
