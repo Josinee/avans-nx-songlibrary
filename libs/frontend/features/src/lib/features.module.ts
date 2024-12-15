@@ -26,13 +26,14 @@ import { UserService } from './users/user.service';
 import { NewComponent } from './new/new/new.component';
 import { DiscoverComponent } from './discover/discover/discover.component'
 import { HomepageComponent } from './homepage/homepage.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent, NewComponent, DiscoverComponent, HomepageComponent, PlaylistListTemplateComponent],
+    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent, NewComponent, DiscoverComponent, HomepageComponent, PlaylistListTemplateComponent, AboutComponent],
     providers: [SongService, ArtistService, AlbumService, PlaylistService, LoginService, RegisterService, UserService],
-    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent, NewComponent, DiscoverComponent, HomepageComponent, PlaylistListTemplateComponent ]
+    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent, NewComponent, DiscoverComponent, HomepageComponent, PlaylistListTemplateComponent, AboutComponent ]
 
 })
 export class FeaturesModule {}

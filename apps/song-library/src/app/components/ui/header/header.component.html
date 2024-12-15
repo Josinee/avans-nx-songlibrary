@@ -11,6 +11,7 @@
                 </button>
                 <ul class="dropdown-menu text-small shadow">
                     <li><a class="dropdown-item" [routerLink]="['user-detail', user._id]">Profile</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['/about']">About</a></li>
                     <li><hr class="dropdown-divider" /></li>
                     <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
                 </ul>
