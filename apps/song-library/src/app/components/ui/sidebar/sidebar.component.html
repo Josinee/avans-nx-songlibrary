@@ -28,8 +28,11 @@
         </li>
     </ul>
     <hr />
-    <button class="btn btn-danger" [routerLink]="['/playlist-create']">Create Playlist</button>
-    <p>Your playlists:</p>
+    <div class="d-flex align-items-center justify-content-between ">
+        <p class="mb-0">Your playlists:</p>
+        <button class="btn me-2" [routerLink]="['/playlist-create']"><i class="bi bi-plus-circle"></i></button>
+
+      </div>
 
     <div *ngFor="let playlist of personalPlaylists" class="ms-3 playlists">
         <a [routerLink]="['/playlist', playlist._id]" class=""
