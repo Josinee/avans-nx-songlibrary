@@ -1,5 +1,5 @@
-import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
-import { IArtist, ICreateAlbum, IUpdateAlbum, IUpsertAlbum } from '@avans-nx-songlibrary/api';
+import { IsNotEmpty, IsString, IsNumber, IsEnum } from 'class-validator';
+import { AlbumType, Genres, IArtist, ICreateAlbum, IUpdateAlbum, IUpsertAlbum } from '@avans-nx-songlibrary/api';
 
 export class CreateAlbumDto implements ICreateAlbum {
     @IsString()
@@ -46,6 +46,7 @@ export class UpdateAlbumDto implements IUpdateAlbum {
 }
 
 export class UpsertAlbumDto implements IUpsertAlbum {
+
     @IsString()
     @IsNotEmpty()
     _id!: string;
@@ -69,4 +70,16 @@ export class UpsertAlbumDto implements IUpsertAlbum {
     @IsNumber()
     @IsNotEmpty()
     artist!: IArtist;
+
+    @IsString()
+    @IsNotEmpty()
+    image!: string;
+
+    @IsEnum(Genres)
+    @IsNotEmpty()
+    genre!: Genres;
+
+    @IsEnum(AlbumType)
+    @IsNotEmpty()
+    type!: AlbumType;
 }

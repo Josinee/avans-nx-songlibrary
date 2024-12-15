@@ -23,10 +23,10 @@ async function bootstrap() {
   Logger.log(
     `🚀 rcmnd-api is running on: http://localhost:${port}/${globalPrefix}`
   );
-  console.log('Environment variables:');
-console.log('Connection String:', environment.NEO4J_DB_CONNECTION_STRING);
-console.log('Database Name:', environment.NEO4J_DB_DATABASE_NAME);
-console.log('Password:', environment.NEO4J_DB_PASSWORD);
+//   console.log('Environment variables:');
+// console.log('Connection String:', environment.NEO4J_DB_CONNECTION_STRING);
+// console.log('Database Name:', environment.NEO4J_DB_DATABASE_NAME);
+// console.log('Password:', environment.NEO4J_DB_PASSWORD);
 }
 
 bootstrap();
