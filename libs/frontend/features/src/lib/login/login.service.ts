@@ -16,7 +16,7 @@ export class LoginService {
     public currentUser = new BehaviorSubject<IUser | undefined>(undefined);
     private readonly CURRENT_USER = 'currentuser';
 
-    endpoint = environment.dataApiUrl + '/login';
+    endpoint = environment.dataApiUrl + '/auth/login';
 
     constructor(private readonly http: HttpClient, private userService: UserService) {
         console.log('constructor login service');
