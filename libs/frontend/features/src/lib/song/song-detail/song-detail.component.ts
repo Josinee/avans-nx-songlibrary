@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SongService } from '../song.service';
 import { ActivatedRoute } from '@angular/router';
-import { ISong, IAlbum } from '@avans-nx-songlibrary/api';
+import { ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 
@@ -40,7 +40,7 @@ export class SongDetailComponent implements OnInit, OnDestroy {
     }
 
     goBack(): void {
-        this.location.back(); // Navigate to the previous page
+        this.location.back();
     }
 
     convertToMinutesAndSeconds(seconds: number): string {

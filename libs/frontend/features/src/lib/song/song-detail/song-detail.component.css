@@ -2,32 +2,36 @@
     text-decoration: none;
     color: inherit;
     transition: color 0.3s;
-  }
-  
-  .hover-effect:hover img {
-    transform: scale(1.1); /* Zoom effect on image hover */
-  }
-  
-  .hover-effect:hover {
-    color: #ee9fbf; /* Add a hover color effect */
-  }
-  
-  .artist-info h4, .album-info h4 {
-    color: #343a40; /* Darker section titles */
-  }
-  
-  .artist-info p, .album-info p {
+}
+
+.hover-effect:hover img {
+    transform: scale(1.1);
+}
+
+.hover-effect:hover {
+    color: #ee9fbf;
+}
+
+.artist-info h4,
+.album-info h4 {
+    color: #343a40;
+}
+
+.artist-info p,
+.album-info p {
     margin-bottom: 0.5rem;
-  }
-  
-  .artist-info, .album-info {
-    background-color: #f8f9fa; /* Subtle background color */
+}
+
+.artist-info,
+.album-info {
+    background-color: #f8f9fa;
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s;
-  }
-  
-  .artist-info:hover, .album-info:hover {
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
-  }
+}
+
+.artist-info:hover,
+.album-info:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}

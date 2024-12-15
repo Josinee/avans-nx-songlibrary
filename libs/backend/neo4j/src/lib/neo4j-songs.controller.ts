@@ -12,10 +12,10 @@ export class Neo4JController {
     }
 
     @Get(':song')
-    async getSimilar(@Param('song') song : string): Promise<any> {
+    async getSimilar(@Param('song') song: string): Promise<any> {
         const results = await this.neo4jService.findSimilar(song);
-        console.log("hoi ", song);
-        return results
+        console.log('hoi ', song);
+        return results;
     }
 
     @Get('recommendations/:user')
@@ -26,13 +26,13 @@ export class Neo4JController {
 
     @Put(':song/:user')
     async putLikedSong(@Param('user') song: string, @Param('song') user: string): Promise<any> {
-        console.log("put liked song in controller");
+        console.log('put liked song in controller');
         await this.neo4jService.putLikedSong(user, song);
     }
 
     @Delete(':song/:user')
     async deleteLikedSong(@Param('user') song: string, @Param('song') user: string): Promise<any> {
-        console.log("delete deleted song in controller");
+        console.log('delete deleted song in controller');
         await this.neo4jService.deleteLikedSong(user, song);
     }
 }

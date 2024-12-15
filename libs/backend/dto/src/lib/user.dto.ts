@@ -1,15 +1,5 @@
 import { IsNotEmpty, IsString, IsBoolean, IsOptional, IsArray } from 'class-validator';
-import {
-    IPlaylist,
-    // ICreateUser,
-    IUpdateUser,
-    IUpsertUser,
-    IUserRegistration,
-    Id,
-    UserGender,
-    UserRole
-} from '@avans-nx-songlibrary/api';
-import { Playlist } from '@avans-nx-songlibrary/backend/features';
+import { IPlaylist, IUpdateUser, IUpsertUser, IUserRegistration, Id, UserGender, UserRole } from '@avans-nx-songlibrary/api';
 
 export class CreateUserDto implements IUserRegistration {
     @IsString()
@@ -70,7 +60,6 @@ export class UpdateUserDto implements IUpdateUser {
     @IsOptional()
     name!: string;
 
-    
     @IsString()
     @IsNotEmpty()
     emailAddress!: string;

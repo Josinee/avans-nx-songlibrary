@@ -7,34 +7,27 @@
                         <h2 class="text-center mb-5">Register</h2>
 
                         <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
-                            <!-- Name Field -->
                             <div class="form-outline mb-4">
                                 <input type="text" id="formName" class="form-control form-control-lg" [(ngModel)]="registerUser.name" name="name" #name="ngModel" required />
                                 <label class="form-label" for="formName">Your Name</label>
                                 <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>
                             </div>
 
-                            <!-- Email Field -->
                             <div class="form-outline mb-4">
                                 <input type="email" id="formEmail" class="form-control form-control-lg" [(ngModel)]="registerUser.emailAddress" name="emailAddress" #emailAddress="ngModel" required />
                                 <label class="form-label" for="formEmail">Your Email</label>
                                 <div [hidden]="emailAddress.valid || emailAddress.pristine" class="alert alert-danger">Email is required</div>
                             </div>
 
-                            <!-- Password Field -->
                             <div class="form-outline mb-4">
                                 <input type="password" id="formPassword" class="form-control form-control-lg" [(ngModel)]="registerUser.password" name="password" #password="ngModel" required />
                                 <label class="form-label" for="formPassword">Password</label>
                                 <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
                             </div>
-
-                            <!-- Submit Button -->
                             <div class="d-flex justify-content-center">
                                 <button type="submit" [disabled]="!registerForm.form.valid" class="btn btn-primary w-100 py-2">Register</button>
                             </div>
                         </form>
-
-                        <!-- Redirect to Login -->
                         <div class="text-center mt-3">
                             <p><a [routerLink]="['/login']" class="btn btn-link">Sign In</a></p>
                         </div>

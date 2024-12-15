@@ -36,11 +36,10 @@ export class HomepageComponent {
             this.albums = albums!.slice(0, 4);
         });
 
-        
         this.playlistService.list().subscribe((results) => {
-          console.log(`results: ${results}`);
-          this.playlists = results!.slice(0, 4);
-      });
+            console.log(`results: ${results}`);
+            this.playlists = results!.slice(0, 4);
+        });
 
         this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
             console.log(`results: ${results}`);

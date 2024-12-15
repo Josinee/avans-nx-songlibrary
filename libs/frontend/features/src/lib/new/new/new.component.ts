@@ -1,9 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IAlbum, IArtist, ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
-import { SongService } from '../../song/song.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlbumDetailComponent } from '../../album/album-detail/album-detail.component';
 import { AlbumService } from '../../album/album.service';
 import { Location } from '@angular/common';
 
@@ -50,7 +47,6 @@ export class NewComponent implements OnInit, OnDestroy {
             }
         };
 
-        // Pass only the startDate to the API
         this.albumService.list(options).subscribe((albums) => {
             this.albums = albums;
             console.log('Albums updated');
@@ -63,13 +59,13 @@ export class NewComponent implements OnInit, OnDestroy {
 
         switch (filter) {
             case 'lastWeek':
-                startDate.setDate(now.getDate() - 7); // 7 days ago
+                startDate.setDate(now.getDate() - 7);
                 break;
             case 'lastMonth':
-                startDate.setMonth(now.getMonth() - 1); // 1 month ago
+                startDate.setMonth(now.getMonth() - 1);
                 break;
             case 'lastYear':
-                startDate.setFullYear(now.getFullYear() - 1); // 1 year ago
+                startDate.setFullYear(now.getFullYear() - 1);
                 break;
         }
 
@@ -77,6 +73,6 @@ export class NewComponent implements OnInit, OnDestroy {
     }
 
     goBack(): void {
-        this.location.back(); // Navigate to the previous page
+        this.location.back();
     }
 }

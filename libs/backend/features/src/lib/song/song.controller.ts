@@ -9,7 +9,7 @@ export class SongController {
     constructor(private songService: SongService) {}
 
     @Get('')
-    getAll(@Query('artist') artistParam? : string): Promise<ISong[]> {
+    getAll(@Query('artist') artistParam?: string): Promise<ISong[]> {
         return this.songService.getAll(artistParam);
     }
 

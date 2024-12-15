@@ -1,12 +1,10 @@
 <div class="container my-5">
-    <!-- Profile Header -->
     <div class="text-center mb-5">
         <img [src]="user.profileImgUrl || '/assets/person-placeholder.png'" class="img-fluid rounded-circle" style="max-height: 200px; object-fit: cover" />
         <h2 class="mt-3">{{ user.name }}</h2>
         <p class="text-muted">{{ user.emailAddress }}</p>
     </div>
 
-    <!-- User Info Section -->
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="p-4 border rounded-3 shadow-sm bg-light">
@@ -23,34 +21,28 @@
 <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="updateUserModalLabel">Update User Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <!-- Modal Body -->
             <div class="modal-body">
                 <form #updateUserForm="ngForm" (ngSubmit)="onSubmit()">
-                    <!-- Name Input -->
                     <div class="mb-3">
                         <label for="nameInput" class="form-label">Name</label>
                         <input type="text" id="nameInput" [(ngModel)]="user.name" name="name" class="form-control" placeholder="Enter your name" required />
                     </div>
 
-                    <!-- Email Input -->
                     <div class="mb-3">
                         <label for="emailInput" class="form-label">Email Address</label>
                         <input type="email" id="emailInput" [(ngModel)]="user.emailAddress" name="email" class="form-control" placeholder="Enter your email address" required />
                     </div>
 
-                    <!-- Profile Picture URL Input -->
                     <div class="mb-3">
                         <label for="profileImgInput" class="form-label">Profile Picture URL</label>
                         <input type="url" id="profileImgInput" [(ngModel)]="user.profileImgUrl" name="profileImgUrl" class="form-control" placeholder="Enter a URL for your profile picture" />
                     </div>
 
-                    <!-- Gender Picker -->
                     <div class="mb-3">
                         <label for="genderSelect" class="form-label">Gender</label>
                         <select id="genderSelect" [(ngModel)]="user.gender" name="gender" class="form-select">
@@ -61,7 +53,6 @@
                         </select>
                     </div>
 
-                    <!-- Preview Profile Picture -->
                     <div class="text-center my-3">
                         <img [src]="user.profileImgUrl || '/assets/person-placeholder.png'" class="img-fluid rounded-circle" style="max-height: 200px; object-fit: cover" />
                     </div>
@@ -71,9 +62,6 @@
                     </div>
                 </form>
             </div>
-
-            <!-- Modal Footer -->
-            
         </div>
     </div>
 </div>

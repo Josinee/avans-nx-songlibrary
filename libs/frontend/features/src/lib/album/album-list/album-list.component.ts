@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AlbumService } from '../album.service';
 import { IAlbum } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 })
 export class AlbumListComponent {
     @Input() albums: IAlbum[] | null = null;
-    //albums: IAlbum[] | null = null;
     subscription: Subscription | undefined = undefined;
 
     constructor(private albumService: AlbumService) {
@@ -20,15 +19,4 @@ export class AlbumListComponent {
     ngOnInit(): void {
         console.log('Albums received in AlbumListComponent:', this.albums);
     }
-
-    // ngOnInit(): void {
-    //     this.subscription = this.albumService.list().subscribe((results: IAlbum[] | null) => {
-    //         console.log(`results: ${results}`);
-    //         this.albums = results;
-    //     });
-    // }
-
-    // ngOnDestroy(): void {
-    //     if (this.subscription) this.subscription.unsubscribe();
-    // }
 }

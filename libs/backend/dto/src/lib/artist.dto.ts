@@ -1,20 +1,6 @@
-import {
-    IsNotEmpty,
-    IsString,
-    IsArray,
-} from 'class-validator';
-import {
-    Genres,
-    ICreateArtist,
-    IUpdateArtist,
-    IUpsertArtist,
+import { IsNotEmpty, IsString, IsArray } from 'class-validator';
+import { Genres, ICreateArtist, IUpdateArtist, IUpsertArtist } from '@avans-nx-songlibrary/api';
 
-} from '@avans-nx-songlibrary/api';
-
-/**
- * Use the `Pick` utility type to extract only the properties we want for
- * new to-do items
- */
 export class CreateArtistDto implements ICreateArtist {
     @IsString()
     @IsNotEmpty()
@@ -23,8 +9,6 @@ export class CreateArtistDto implements ICreateArtist {
     @IsString()
     @IsNotEmpty()
     description!: string;
-
-
 }
 
 export class UpdateArtistDto implements IUpdateArtist {
@@ -38,8 +22,6 @@ export class UpdateArtistDto implements IUpdateArtist {
 }
 
 export class UpsertArtistDto implements IUpsertArtist {
-
-
     @IsString()
     @IsNotEmpty()
     _id!: string;
@@ -47,8 +29,7 @@ export class UpsertArtistDto implements IUpsertArtist {
     @IsString()
     @IsNotEmpty()
     image!: string;
-    
-    
+
     @IsString()
     @IsNotEmpty()
     name!: string;
@@ -61,12 +42,7 @@ export class UpsertArtistDto implements IUpsertArtist {
     @IsNotEmpty()
     recordLabel!: string;
 
-
     @IsArray()
     @IsNotEmpty()
     genres!: Genres[];
-
-
 }
-
-

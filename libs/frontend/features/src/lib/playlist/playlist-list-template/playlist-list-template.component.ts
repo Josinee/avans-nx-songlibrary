@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICreatePlaylist, IPlaylist, IUser } from '@avans-nx-songlibrary/api';
+import { IPlaylist } from '@avans-nx-songlibrary/api';
 
 @Component({
     selector: 'playlist-list-template',
@@ -7,5 +7,5 @@ import { ICreatePlaylist, IPlaylist, IUser } from '@avans-nx-songlibrary/api';
     styleUrls: ['./playlist-list-template.component.css']
 })
 export class PlaylistListTemplateComponent {
-    @Input() playlists: IPlaylist[] = []
+    @Input() playlists: IPlaylist[] = [];
 }

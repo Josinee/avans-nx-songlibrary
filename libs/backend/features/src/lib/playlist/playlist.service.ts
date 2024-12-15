@@ -1,14 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { IPlaylist, IUser } from '@avans-nx-songlibrary/api';
-import { BehaviorSubject } from 'rxjs';
-import { Logger } from '@nestjs/common';
-import { Playlist } from './playlist.schema'
-import { Song } from '../song/song.schema'; 
+import { IPlaylist } from '@avans-nx-songlibrary/api';
+import { Playlist } from './playlist.schema';
 import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
-//import { CreateCatDto } from './dto/create-cat.dto';
-
 
 const httpOptions = {
     observe: 'body',
@@ -19,20 +14,29 @@ const httpOptions = {
 export class PlaylistService {
     TAG = 'PlaylistService';
     constructor(@InjectModel(Playlist.name) private playlistModel: Model<Playlist>) {}
-        
-    
+
     async create(createPlaylistDto: CreatePlaylistDto): Promise<Playlist> {
         const createdPlaylist = new this.playlistModel(createPlaylistDto);
         return createdPlaylist.save();
     }
 
     async getAll(): Promise<IPlaylist[]> {
-        console.log('getall in service')
-        return this.playlistModel.find({public: true}).exec();
+        console.log('getall in service');
+        return this.playlistModel.find({ public: true }).exec();
     }
 
     async getOne(id: string): Promise<IPlaylist> {
-        const playlist = await this.playlistModel.findById(id).populate({path: 'songs', select: '_id title duration', populate: [{path: 'artist', select: '_id name'}, {path: 'album', select: '_id title'}]}).exec();
+        const playlist = await this.playlistModel
+            .findById(id)
+            .populate({
+                path: 'songs',
+                select: '_id title duration',
+                populate: [
+                    { path: 'artist', select: '_id name' },
+                    { path: 'album', select: '_id title' }
+                ]
+            })
+            .exec();
         if (!playlist) {
             throw new NotFoundException(`Playlist could not be found!`);
         }
@@ -40,30 +44,27 @@ export class PlaylistService {
     }
 
     async getFromCreator(creator: string): Promise<IPlaylist[]> {
-        //const creatorObjectId = new Types.ObjectId(creator);
-      
         const playlists = await this.playlistModel.find({ creator: creator }).exec();
-      
-        //console.log('Query result:', playlists); // Debug log
+
         return playlists || [];
-      }
+    }
 
     async update(id: string, updatePlaylistDto: UpdatePlaylistDto): Promise<Playlist> {
         console.log('Received update for playlist:', id, 'with data:', updatePlaylistDto);
-        const updateData: any={};
+        const updateData: any = {};
 
         updatePlaylistDto.name && (updateData.name = updatePlaylistDto.name);
-        updatePlaylistDto.description !== undefined && (updateData.description = updatePlaylistDto.description === "" ? null : updatePlaylistDto.description);
+        updatePlaylistDto.description !== undefined && (updateData.description = updatePlaylistDto.description === '' ? null : updatePlaylistDto.description);
         updatePlaylistDto.duration && (updateData.duration = updatePlaylistDto.duration);
         updatePlaylistDto.lastUpdated && (updateData.lastUpdated = updatePlaylistDto.lastUpdated);
         updatePlaylistDto.numberOfSongs && (updateData.numberOfSongs = updatePlaylistDto.numberOfSongs);
-        updatePlaylistDto.image !== undefined && (updateData.image = updatePlaylistDto.image === "" ? null : updatePlaylistDto.image);
+        updatePlaylistDto.image !== undefined && (updateData.image = updatePlaylistDto.image === '' ? null : updatePlaylistDto.image);
         if (typeof updatePlaylistDto.public === 'boolean') {
             updateData.public = updatePlaylistDto.public;
         }
         updatePlaylistDto.songs && (updateData.songs = updatePlaylistDto.songs);
 
-        const playlist = await this.playlistModel.findByIdAndUpdate(id, updateData, {new: true}).exec();
+        const playlist = await this.playlistModel.findByIdAndUpdate(id, updateData, { new: true }).exec();
         if (!playlist) {
             throw new NotFoundException(`Playlist ${id} not found`);
         }
@@ -71,10 +72,9 @@ export class PlaylistService {
     }
 
     async delete(id: string): Promise<void> {
-        console.log("delte playlist ", id);
-        const filter  = { _id: id };
+        console.log('delte playlist ', id);
+        const filter = { _id: id };
         const deleted = await this.playlistModel.deleteOne(filter);
         console.log('endboss deleted');
     }
-
 }

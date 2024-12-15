@@ -4,7 +4,7 @@ import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router'
 import { IPlaylist, IUser } from '@avans-nx-songlibrary/api';
 import { LoginService } from 'libs/frontend/features/src/lib/login/login.service';
 import { PlaylistService } from 'libs/frontend/features/src/lib/playlist/playlist.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
     imports: [CommonModule, RouterLink, RouterOutlet, RouterModule],
@@ -15,9 +15,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 })
 export class SidebarComponent {
     public user: IUser | undefined;
-    personalPlaylists: IPlaylist[] = []; // Store playlists here
+    personalPlaylists: IPlaylist[] = [];
     subscription: Subscription | undefined = undefined;
-
 
     constructor(private loginService: LoginService, private playlistService: PlaylistService, private router: Router) {}
     ngOnInit(): void {
@@ -26,21 +25,15 @@ export class SidebarComponent {
         });
         this.subscription = this.playlistService.getPlaylistFromCreator(this.user!._id).subscribe(
             (playlists: IPlaylist[]) => {
-              this.personalPlaylists = playlists;  // Assign the fetched playlists to the personalPlaylists array
+                this.personalPlaylists = playlists;
             },
             (error) => {
-              console.error('Error fetching playlists:', error);
+                console.error('Error fetching playlists:', error);
             }
-          );
-
-        // Subscribe to playlists and update the component's playlist list whenever it changes
-        this.subscription = this.playlistService.playlists$.subscribe(
-          (playlists: IPlaylist[]) => {
-            this.personalPlaylists = playlists;  // Update the playlist list whenever it changes
-          }
         );
-      }
 
+        this.subscription = this.playlistService.playlists$.subscribe((playlists: IPlaylist[]) => {
+            this.personalPlaylists = playlists;
+        });
     }
-
-
+}

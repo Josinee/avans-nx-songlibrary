@@ -1,15 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ISong, IAlbum, IPlaylist, IUser } from '@avans-nx-songlibrary/api';
-import { of, Subscription, switchMap, tap } from 'rxjs';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IUser } from '@avans-nx-songlibrary/api';
 import { PlaylistService } from '../playlist.service';
 import { ICreatePlaylist } from '@avans-nx-songlibrary/api';
 import { LoginService } from '../../login/login.service';
 
 @Component({
     selector: 'playlist-create',
-    templateUrl: './playlist-create.component.html',
-    styles: ``
+    templateUrl: './playlist-create.component.html'
 })
 export class PlaylistCreateComponent {
     user!: IUser;
@@ -22,21 +20,20 @@ export class PlaylistCreateComponent {
         description: ' ',
         lastUpdated: new Date(),
         public: false,
-        image: '',
-      };
+        image: ''
+    };
 
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
-        // Subscribe to the currentUser$ observable to get the logged-in user
-        this.loginService.currentUser.subscribe(user => {
-            if(user){
+        this.loginService.currentUser.subscribe((user) => {
+            if (user) {
                 this.user = user;
-                console.log("init", this.user)
+                console.log('init', this.user);
             }
         });
-      }
-    
+    }
+
     onSubmit(): void {
         this.playlist.creator = this.user;
         console.log('onSubmit', this.playlist);
@@ -45,12 +42,11 @@ export class PlaylistCreateComponent {
                 next: (data) => {
                     console.log('Playlist created:', data);
                     this.router.navigate(['/playlist', data._id]);
-                }, error: (err)=> {
-                    console.error('Error creating playlist:', err)
+                },
+                error: (err) => {
+                    console.error('Error creating playlist:', err);
                 }
-            })
+            });
         }
     }
-
-
 }

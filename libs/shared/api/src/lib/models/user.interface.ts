@@ -1,6 +1,5 @@
-// import { IEntity } from 'libs/share-a-meal/common/src/lib/entity/entity.model';
 import { IPlaylist } from './playlist.interface';
-import { IToken, IUserRegistration } from './auth.interface';
+import { IUserRegistration } from './auth.interface';
 import { Id } from './id.type';
 
 export enum UserRole {
@@ -16,11 +15,7 @@ export enum UserGender {
     Unknown = 'Unknown'
 }
 
-/**
- * Minimal user information
- */
-
-export interface IUserIdentity { // extends IEntity {
+export interface IUserIdentity {
     name: string;
     emailAddress: string;
     profileImgUrl: string;
@@ -28,9 +23,6 @@ export interface IUserIdentity { // extends IEntity {
     token?: string;
 }
 
-/**
- * All user information, excl. domain entities
- */
 export interface IUserInfo extends IUserRegistration {
     _id: Id;
     profileImgUrl: string;
@@ -39,9 +31,6 @@ export interface IUserInfo extends IUserRegistration {
     isActive: boolean;
 }
 
-/**
- * All user information, incl. domain entities
- */
 export interface IUser extends IUserInfo {
     playlists: IPlaylist[];
 }

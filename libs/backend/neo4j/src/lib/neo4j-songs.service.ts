@@ -32,27 +32,13 @@ export class Neo4JService {
 
     async putLikedSong(user: string, song: string) {
         console.log('put liked song');
-        console.log(user, song)
+        console.log(user, song);
         const result = await this.neo4jService.write(`Match(n:User{id:'${user}'}), (s:Song{id: '${song}'}) create (n)-[:LIKES]->(s)`);
     }
 
     async deleteLikedSong(user: string, song: string) {
         console.log('delete liked song');
-        console.log(user, song)
+        console.log(user, song);
         const result = await this.neo4jService.write(`Match(n:User{id:'${user}'}), (s:Song{id: '${song}'}), (n)-[r:LIKES]->(s) delete (r)`);
     }
-
-    // async findSimilar(song: ISong): Promise<any> {
-    //     const results = await this.neo4jService.read(``);
-    // }
-    //     async findAll(): Promise<any> {
-    //         this.logger.log('findAll users');
-    //         const results = await this.neo4jService.read(
-    //             `MATCH people=()-[:WorksIn]->(t:Team {name:'Informatica'}) RETURN people;`
-    //         );
-    //         const users = results.records.map(
-    //             (record: any) => record._fields[0].start.properties
-    //         );
-    //         return users;
-    //     }
 }

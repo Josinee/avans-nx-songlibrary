@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
-//import { MealSort, IUserInfo } from '@avans-nx-workshop/shared/api';
+import { Document } from 'mongoose';
 import { Genres, ISong } from '@avans-nx-songlibrary/api';
 import { IsMongoId } from 'class-validator';
 import { IArtist, IAlbum } from '@avans-nx-songlibrary/api';
@@ -9,7 +8,6 @@ import * as mongoose from 'mongoose';
 export type SongDocument = Song & Document;
 @Schema()
 export class Song implements ISong {
-    
     @IsMongoId()
     _id!: string;
 
@@ -28,7 +26,7 @@ export class Song implements ISong {
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Album' })
     album!: IAlbum;
 
-    @Prop({ required: false, type: String})
+    @Prop({ required: false, type: String })
     genre!: Genres;
 }
 

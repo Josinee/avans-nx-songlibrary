@@ -3,36 +3,35 @@
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a [routerLink]="['homepage']" routerlink="/homepage" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+            <a [routerLink]="['homepage']" routerlink="/homepage" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis">
                 <i class="bi bi-house-fill"></i>
                 Home
             </a>
         </li>
         <li>
-            <a [routerLink]="['new']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+            <a [routerLink]="['new']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis">
                 <i class="bi bi-vinyl"></i>
                 New
             </a>
         </li>
         <li>
-            <a [routerLink]="['playlist-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+            <a [routerLink]="['playlist-list']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis">
                 <i class="bi bi-collection-play"></i>
                 Playlists
             </a>
         </li>
         <li>
-            <a [routerLink]="['discover']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link link-body-emphasis">
+            <a [routerLink]="['discover']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis">
                 <i class="bi bi-music-note-beamed"></i>
                 Discover
             </a>
         </li>
     </ul>
     <hr />
-    <div class="d-flex align-items-center justify-content-between ">
+    <div class="d-flex align-items-center justify-content-between">
         <p class="mb-0">Your playlists:</p>
         <button class="btn me-2" [routerLink]="['/playlist-create']"><i class="bi bi-plus-circle"></i></button>
-
-      </div>
+    </div>
 
     <div *ngFor="let playlist of personalPlaylists" class="ms-3 playlists">
         <a [routerLink]="['/playlist', playlist._id]" class=""

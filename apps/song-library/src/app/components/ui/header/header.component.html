@@ -4,11 +4,10 @@
             <h2 class="ms-4"><strong>Song Library</strong></h2>
         </a>
         <div *ngIf="user" class="d-flex">
-          
             <div class="dropdown me-5 loggedInUser">
                 <button class="btn btn-light d-flex link-body-emphasis text-decoration-none dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-                  <p class="m-1 me-3">{{user?.name}}</p>  
-                  <img [src]="user.profileImgUrl || '/assets/person-placeholder.png'" width="32" height="32" class="rounded-circle" />
+                    <p class="m-1 me-3">{{ user?.name }}</p>
+                    <img [src]="user.profileImgUrl || '/assets/person-placeholder.png'" width="32" height="32" class="rounded-circle" />
                 </button>
                 <ul class="dropdown-menu text-small shadow">
                     <li><a class="dropdown-item" [routerLink]="['user-detail', user?._id]">Profile</a></li>
@@ -19,12 +18,11 @@
         </div>
         <div *ngIf="!user">
             <div class="container d-flex flex-wrap justify-content-center me-5">
-              <div class="text-end">
-                <button class="btn btn-light me-2" [routerLink]="['login']">Log in</button>
-                <button class="btn btn-danger" [routerLink]="['register']">Register</button>
-              </div>
-
-          </div>
+                <div class="text-end">
+                    <button class="btn btn-light me-2" [routerLink]="['login']">Log in</button>
+                    <button class="btn btn-danger" [routerLink]="['register']">Register</button>
+                </div>
+            </div>
         </div>
     </div>
 </header>

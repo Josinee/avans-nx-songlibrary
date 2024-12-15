@@ -1,18 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ArtistService } from '../artist.service'
+import { ArtistService } from '../artist.service';
 import { IAlbum, IArtist, ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
 import { SongService } from '../../song/song.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlbumDetailComponent } from '../../album/album-detail/album-detail.component';
 import { AlbumService } from '../../album/album.service';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-artist-detail',
     templateUrl: './artist-detail.component.html',
-    styleUrl: './artist-detail.component.css',
-
+    styleUrl: './artist-detail.component.css'
 })
 export class ArtistDetailComponent implements OnInit, OnDestroy {
     activeTab: string = 'artist';
@@ -22,9 +20,15 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     albums: IAlbum[] | null = null;
     subscription: Subscription | undefined = undefined;
 
-
-    constructor(private artistService: ArtistService, private songService: SongService, private albumService: AlbumService, private route: ActivatedRoute, private router: Router, private location: Location) {
-        console.log("ja artist detail");
+    constructor(
+        private artistService: ArtistService,
+        private songService: SongService,
+        private albumService: AlbumService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private location: Location
+    ) {
+        console.log('ja artist detail');
     }
 
     ngOnInit(): void {
@@ -48,9 +52,6 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
                 });
             }
         });
-
-        
-        
     }
 
     ngOnDestroy(): void {
@@ -58,12 +59,10 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     }
 
     setTab(tabName: string): void {
-        this.activeTab = tabName;  // Update the active tab
+        this.activeTab = tabName;
     }
 
     goBack(): void {
-        this.location.back(); // Navigate to the previous page
-      }
-
+        this.location.back();
+    }
 }
-

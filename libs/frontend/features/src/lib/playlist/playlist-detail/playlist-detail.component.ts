@@ -1,16 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
-import { SongService } from '../../song/song.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlaylistService } from '../playlist.service';
-import { Form, NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
 
 @Component({
     selector: 'playlist-detail',
-    templateUrl: './playlist-detail.component.html',
-    styles: ``
+    templateUrl: './playlist-detail.component.html'
 })
 export class PlaylistDetailComponent implements OnInit, OnDestroy {
     playlist!: IPlaylist;
@@ -62,18 +59,13 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
 
             this.playlistService.update(this.playlist).subscribe((updatedPlaylist) => {
                 console.log('Updated Playlist from API:', updatedPlaylist);
-
-                // Update the local playlist object with the updated one from the response
-                this.playlist = updatedPlaylist; // Update the playlist with the new values
-
-                // Optional: You can also update the list of playlists in the sidebar
-                // if the component is using a playlist list
+                this.playlist = updatedPlaylist;
             });
         }
     }
 
     goBack(): void {
-        this.location.back(); // Navigate to the previous page
+        this.location.back();
     }
 
     convertToMinutesAndSeconds(seconds: number): string {

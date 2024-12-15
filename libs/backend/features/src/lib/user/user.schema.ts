@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
-// import { v4 as uuid } from 'uuid';
-import isEmail from 'validator/lib/isEmail';
+import { Document } from 'mongoose';
 import { IPlaylist, IUser, UserGender, UserRole } from '@avans-nx-songlibrary/api';
 import { IsMongoId } from 'class-validator';
 import * as mongoose from 'mongoose';
@@ -16,16 +14,13 @@ export class User implements IUser {
     @Prop({ required: true, type: String })
     name!: string;
 
-    @Prop({ required: true, select: false,
-        type: String
-    })
+    @Prop({ required: true, select: false, type: String })
     password = '';
 
-    @Prop({ required: true, type: String, select: true, unique: true
-    })
+    @Prop({ required: true, type: String, select: true, unique: true })
     emailAddress = '';
 
-    @Prop({ required: false, select: true})
+    @Prop({ required: false, select: true })
     profileImgUrl!: string;
 
     @Prop({ required: false, type: String, default: UserRole.Guest })

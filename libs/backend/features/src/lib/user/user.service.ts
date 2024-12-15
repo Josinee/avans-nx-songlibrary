@@ -1,9 +1,8 @@
-import { HttpException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './user.schema';
+import { User } from './user.schema';
 import { IUser, IUserInfo } from '@avans-nx-songlibrary/api';
-// import { Meal, MealDocument } from '@avans-nx-workshop/backend/features';
 import { CreateUserDto, UpdateUserDto } from '@avans-nx-songlibrary/backend/dto';
 import { Playlist } from '../playlist/playlist.schema';
 
@@ -11,10 +10,7 @@ import { Playlist } from '../playlist/playlist.schema';
 export class UserService {
     private readonly logger: Logger = new Logger(UserService.name);
 
-    constructor(
-        @InjectModel(User.name) private userModel: Model<User>,
-        @InjectModel(Playlist.name) private playlistModel: Model<Playlist>
-    ) {}
+    constructor(@InjectModel(User.name) private userModel: Model<User>, @InjectModel(Playlist.name) private playlistModel: Model<Playlist>) {}
 
     async findAll(): Promise<IUserInfo[]> {
         this.logger.log(`Finding all items`);

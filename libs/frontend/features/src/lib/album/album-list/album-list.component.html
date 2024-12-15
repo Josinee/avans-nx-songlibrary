@@ -1,27 +1,23 @@
-
-
 <div class="container m-3">
-  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4">
-    <!-- Loop through albums -->
-    <div *ngFor="let album of albums" class="col">
-      <!-- Album Card -->
-      <a [routerLink]="['/album', album._id]" class="text-decoration-none">
-      <div class="card h-100 border-0">
-        <div class="album-cover position-relative">
-          <img 
-          src="{{album?.image || '/assets/album-placeholder.png'}}"
-            class="card-img-top rounded-3" 
-            alt="{{ album.title }}" 
-            style="object-fit: cover; height: 200px; width: 100%; border-radius: 8px;">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-4">
+        <div *ngFor="let album of albums" class="col">
+            <a [routerLink]="['/album', album._id]" class="text-decoration-none">
+                <div class="card h-100 border-0">
+                    <div class="album-cover position-relative">
+                        <img
+                            src="{{ album?.image || '/assets/album-placeholder.png' }}"
+                            class="card-img-top rounded-3"
+                            alt="{{ album.title }}"
+                            style="object-fit: cover; height: 200px; width: 100%; border-radius: 8px"
+                        />
+                    </div>
+                    <div class="card-body text-center pt-3 pb-2">
+                        <h6 class="card-title text-truncate">{{ album.title }}</h6>
+                        <p class="card-text text-muted">{{ album.artist?.name }}</p>
+                        <p class="card-text text-muted text-sm">{{ album.dateOfRelease | date : 'yyyy' }}</p>
+                    </div>
+                </div>
+            </a>
         </div>
-        <div class="card-body text-center pt-3 pb-2">
-          <h6 class="card-title text-truncate">{{ album.title }}</h6>
-          <p class="card-text text-muted">{{ album.artist?.name }}</p>
-          <p class="card-text text-muted text-sm">{{ album.dateOfRelease | date :"yyyy" }}</p>
-        </div>
-      </div>
-    </a>
     </div>
-
-  </div>
 </div>

@@ -1,39 +1,27 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IAlbum, ISong, IUser } from '@avans-nx-songlibrary/api';
+import { ApiResponse, IUser } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
-import { environment } from '@avans-nx-songlibrary/shared/util-env'
+import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
-/**
- * See https://angular.io/guide/http#requesting-data-from-a-server
- */
 export const httpOptions = {
     observe: 'body',
-    responseType: 'json',
+    responseType: 'json'
 };
 
-/**
- *
- *
- */
 @Injectable({ providedIn: 'root' })
 export class UserService {
     endpoint = environment.dataApiUrl + '/user';
 
     constructor(private readonly http: HttpClient) {}
 
-
-    /**
-     * Get a single item from the service.
-     *
-     */
     public read(id: string | null, options?: any): Observable<IUser> {
         console.log(`read ${this.endpoint}/${id}`);
         return this.http
             .get<ApiResponse<IUser>>(this.endpoint + `/${id}`, {
                 ...options,
-                ...httpOptions,
+                ...httpOptions
             })
             .pipe(
                 tap(console.log),
@@ -43,21 +31,14 @@ export class UserService {
     }
 
     public update(user: IUser): Observable<IUser> {
-        return this.http
-        .put<ApiResponse<IUser>>(`${this.endpoint}/${user._id}`, user)
-        .pipe(
+        return this.http.put<ApiResponse<IUser>>(`${this.endpoint}/${user._id}`, user).pipe(
             map((response: ApiResponse<IUser>) => {
                 const updatedUser = response.results as IUser;
                 return updatedUser;
-            }),
-          );
-      }
+            })
+        );
+    }
 
-
-
-    /**
-     * Handle errors.
-     */
     public handleError(error: HttpErrorResponse): Observable<any> {
         console.log('handleError in MealService', error);
 

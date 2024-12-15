@@ -1,11 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IAlbum, IArtist, ISong, IUser } from '@avans-nx-songlibrary/api';
-import { Subscription } from 'rxjs';
-import { SongService } from '../../song/song.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlbumDetailComponent } from '../../album/album-detail/album-detail.component';
+import { Component, OnInit } from '@angular/core';
+import { ISong, IUser } from '@avans-nx-songlibrary/api';
 import { AlbumService } from '../../album/album.service';
-import { Location } from '@angular/common';
 import { DiscoverService } from '../discover.service';
 import { LoginService } from '../../login/login.service';
 
@@ -14,7 +9,7 @@ import { LoginService } from '../../login/login.service';
     templateUrl: './discover.component.html',
     styleUrl: './discover.component.css'
 })
-export class DiscoverComponent implements OnInit, OnDestroy {
+export class DiscoverComponent implements OnInit {
     songs: ISong[] = [];
     user!: IUser;
     constructor(private discoverService: DiscoverService, private loginService: LoginService, private albumService: AlbumService) {}
@@ -29,11 +24,5 @@ export class DiscoverComponent implements OnInit, OnDestroy {
         this.discoverService.getRecommendationsForUser(this.user._id).subscribe((songs) => {
             this.songs = songs || [];
         });
-
-        
     }
-
-    ngOnDestroy(): void {}
-
-    goBack(): void {}
 }
