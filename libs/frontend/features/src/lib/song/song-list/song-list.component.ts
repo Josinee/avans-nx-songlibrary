@@ -15,7 +15,6 @@ export class SongListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.songService.list().subscribe((results) => {
-            console.log(`results: ${results}`);
             this.songs = results || [];
         });
     }

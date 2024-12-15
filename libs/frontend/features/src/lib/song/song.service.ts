@@ -46,7 +46,7 @@ export class SongService {
     }
 
     public getByAlbum(albumId: string | null, options?: any): Observable<ISong[]> {
-        console.log(albumId + 'get by album in song service');
+
         if (albumId) {
         }
         return this.http
@@ -70,7 +70,7 @@ export class SongService {
     }
 
     public handleError(error: HttpErrorResponse): Observable<any> {
-        console.log('handleError in MealService', error);
+        console.log('handleError in songService', error);
 
         return throwError(() => new Error(error.message));
     }

@@ -21,7 +21,7 @@ export class PlaylistService {
     }
 
     async getAll(): Promise<IPlaylist[]> {
-        console.log('getall in service');
+
         return this.playlistModel.find({ public: true }).exec();
     }
 
@@ -72,9 +72,9 @@ export class PlaylistService {
     }
 
     async delete(id: string): Promise<void> {
-        console.log('delte playlist ', id);
+
         const filter = { _id: id };
         const deleted = await this.playlistModel.deleteOne(filter);
-        console.log('endboss deleted');
+
     }
 }

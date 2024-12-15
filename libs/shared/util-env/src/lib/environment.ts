@@ -1,5 +1,4 @@
 import { IEnvironment } from './environment.interface';
-console.log('in envirement.ts');
 export const environment: IEnvironment = {
     production: false,
 

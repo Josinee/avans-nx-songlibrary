@@ -22,14 +22,11 @@ export class UserDetailComponent implements OnInit {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-                console.log('init', this.user);
             }
         });
     }
 
     onSubmit() {
-        console.log('Updated User Details:', this.user);
-
         this.userService.update(this.user).subscribe((user) => {
             this.user = user;
         });

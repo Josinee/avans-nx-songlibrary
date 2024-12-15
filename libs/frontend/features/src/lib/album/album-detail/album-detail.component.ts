@@ -20,10 +20,9 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
             this.id = params.get('id');
-            console.log(this.id);
+
             if (this.id) {
                 this.albumService.read(this.id).subscribe((album: IAlbum) => {
-                    console.log(album);
                     this.album = album;
                     this.songs = album.songs || [];
                 });

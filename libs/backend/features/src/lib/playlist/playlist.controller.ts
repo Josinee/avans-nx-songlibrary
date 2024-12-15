@@ -16,7 +16,7 @@ export class PlaylistController {
     }
     @Get(':id')
     getOne(@Param('id') id: string): Promise<IPlaylist> {
-        console.log('getone');
+
         return this.playlistService.getOne(id);
     }
 
@@ -27,7 +27,7 @@ export class PlaylistController {
 
     @Put(':id')
     update(@Param('id') id: string, @Body() updatePlaylistDto: UpdatePlaylistDto): Promise<IPlaylist> {
-        console.log('update');
+
         return this.playlistService.update(id, updatePlaylistDto);
     }
 

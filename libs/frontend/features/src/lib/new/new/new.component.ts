@@ -29,7 +29,7 @@ export class NewComponent implements OnInit, OnDestroy {
 
         this.albumService.list(options).subscribe((albums) => {
             this.albums = albums;
-            console.log('Albums updated');
+
         });
     }
 
@@ -49,7 +49,7 @@ export class NewComponent implements OnInit, OnDestroy {
 
         this.albumService.list(options).subscribe((albums) => {
             this.albums = albums;
-            console.log('Albums updated');
+  
         });
     }
 

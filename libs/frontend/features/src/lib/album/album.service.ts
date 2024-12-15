@@ -23,9 +23,9 @@ export class AlbumService {
 
         if (options?.dateOfRelease?.startDate) {
             const startDate = options.dateOfRelease.startDate.toISOString();
-            console.log(startDate);
+
             params = params.append('startDate', startDate);
-            console.log(params);
+
         }
 
         return this.http

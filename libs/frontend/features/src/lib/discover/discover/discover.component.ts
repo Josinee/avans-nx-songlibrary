@@ -18,8 +18,7 @@ export class DiscoverComponent implements OnInit {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-                console.log('init', this.user);
-            }
+      }
         });
         this.discoverService.getRecommendationsForUser(this.user._id).subscribe((songs) => {
             this.songs = songs || [];

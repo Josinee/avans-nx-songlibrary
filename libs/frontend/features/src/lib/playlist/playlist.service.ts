@@ -97,7 +97,6 @@ export class PlaylistService {
     }
 
     public addToPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
-        console.log('add song to playlist');
         playlist.songs.push(song);
         playlist.numberOfSongs++;
         const durationSeconds = this.parseDuration(song.duration);
@@ -111,7 +110,7 @@ export class PlaylistService {
     }
 
     public removeFromPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
-        console.log('delete song from playlist');
+
         const songdelete = playlist.songs.indexOf(song);
         console.log(songdelete);
         playlist.songs.splice(songdelete, 1);

@@ -9,7 +9,7 @@ export class ArtistController {
 
     @Get('')
     getAll(): Promise<IArtist[]> {
-        console.log('getALl in artist controller');
+
         return this.artistService.getAll();
     }
 

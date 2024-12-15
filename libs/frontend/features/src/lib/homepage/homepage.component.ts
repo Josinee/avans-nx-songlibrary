@@ -19,7 +19,7 @@ export class HomepageComponent {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-                console.log('init', this.user);
+
             }
         });
 
@@ -37,12 +37,10 @@ export class HomepageComponent {
         });
 
         this.playlistService.list().subscribe((results) => {
-            console.log(`results: ${results}`);
             this.playlists = results!.slice(0, 4);
         });
 
         this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
-            console.log(`results: ${results}`);
             this.personalPlaylists = results.slice(0, 4);
         });
     }

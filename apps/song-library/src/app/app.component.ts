@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 AppComponent.user = user;
-                console.log(AppComponent.user);
                 console.log('User is logged in:', user);
                 this.router.navigate(['/homepage']);
             } else {

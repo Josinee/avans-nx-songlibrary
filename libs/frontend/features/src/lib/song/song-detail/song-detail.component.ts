@@ -21,12 +21,12 @@ export class SongDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
             this.id = params.get('id');
-            console.log(this.id);
+
             if (this.id) {
-                console.log('ja');
+
 
                 this.songService.read(this.id).subscribe((song: ISong) => {
-                    console.log(song);
+
                     this.song = song;
                 });
             }

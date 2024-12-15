@@ -13,7 +13,7 @@ export class AlbumListComponent {
     subscription: Subscription | undefined = undefined;
 
     constructor(private albumService: AlbumService) {
-        console.log('ja album list');
+      
     }
 
     ngOnInit(): void {

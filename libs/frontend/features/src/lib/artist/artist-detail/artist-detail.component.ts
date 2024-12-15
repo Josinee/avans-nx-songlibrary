@@ -28,7 +28,7 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
         private router: Router,
         private location: Location
     ) {
-        console.log('ja artist detail');
+       
     }
 
     ngOnInit(): void {
@@ -39,11 +39,11 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
                     if (artist) {
                         this.artist = artist;
                         this.subscription = this.songService.list(this.artist!._id).subscribe((results) => {
-                            console.log(`results: ${results}`);
+                   
                             this.songs = results;
                         });
                         this.subscription = this.albumService.list(this.artist!._id).subscribe((results) => {
-                            console.log(`results: ${results}`);
+
                             this.albums = results;
                         });
                     } else {

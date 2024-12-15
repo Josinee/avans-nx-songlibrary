@@ -22,7 +22,7 @@ export class HeaderComponent {
     }
 
     logout(): void {
-        console.log('logout in headercomp');
+
         this.loginService.logout();
         this.router.navigate(['/login']);
     }

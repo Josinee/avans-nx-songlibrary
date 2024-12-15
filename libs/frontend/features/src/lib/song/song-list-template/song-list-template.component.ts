@@ -27,28 +27,21 @@ export class SongListTemplateComponent {
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private songService: SongService) {}
 
     addToPlaylist(playlist: IPlaylist, song: ISong): void {
-        this.songService.putLikedSong(this.user, song).subscribe(
-            (response) => {
-                console.log('Song liked successfully:', response);
-            },
-            (error) => {
-                console.error('Error liking song', error);
-            }
-        );
+        this.songService.putLikedSong(this.user, song).subscribe();
+        
         if (!playlist) {
             console.error('Playlist not found');
             return;
         }
 
-        console.log('dat was een toast hoop ik');
-        console.log('Adding song', song, ' to playlist with  playlistId:', playlist);
+
         this.playlistService.addToPlaylist(playlist, song).subscribe(
             (response) => {
-                console.log('Song added successfully:', response);
+
                 this.showToast(`Succesfully added ${song.title} to ${playlist.name}`);
             },
             (error) => {
-                console.error('Error adding song to playlist:', error);
+
                 this.showToast(`Error when adding ${song.title} to ${playlist.name}`);
             }
         );
@@ -59,9 +52,9 @@ export class SongListTemplateComponent {
             console.error('Playlist not found');
             return;
         }
-        console.log('deleting song ', song._id);
+
         this.playlistService.removeFromPlaylist(playlist, song).subscribe((results) => {
-            console.log(results);
+
             this.showToast(`Succesfully removed ${song.title} from ${playlist.name}`);
         });
     }
@@ -70,12 +63,12 @@ export class SongListTemplateComponent {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-                console.log('init', this.user);
+
             }
         });
         this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
             if (results) {
-                console.log(`results: ${results}`);
+
                 this.playlists = results;
             } else {
                 console.error('Playlists not found');

@@ -29,18 +29,18 @@ export class PlaylistCreateComponent {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-                console.log('init', this.user);
+
             }
         });
     }
 
     onSubmit(): void {
         this.playlist.creator = this.user;
-        console.log('onSubmit', this.playlist);
+
         if (this.playlist) {
             this.playlistService.create(this.playlist).subscribe({
                 next: (data) => {
-                    console.log('Playlist created:', data);
+
                     this.router.navigate(['/playlist', data._id]);
                 },
                 error: (err) => {

@@ -24,7 +24,6 @@ export class LoginComponent {
         const password = this.loginUser.password;
         this.loginService.login(emailAddress, password).subscribe({
             next: (user) => {
-                console.log('user = ', user);
                 this.router.navigate(['homepage']);
             },
             error: (error: string) => {

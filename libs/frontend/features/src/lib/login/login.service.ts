@@ -19,7 +19,7 @@ export class LoginService {
     endpoint = environment.dataApiUrl + '/auth/login';
 
     constructor(private readonly http: HttpClient, private userService: UserService) {
-        console.log('constructor login service');
+
         this.getUserFromLocalStorage();
     }
 
@@ -39,7 +39,7 @@ export class LoginService {
                 tap(console.log),
 
                 map((response: any) => {
-                    console.log(response.results.token);
+
                     if (!response.results.token) {
                         this.handleError(response.results);
                         throw new Error(response.results.message);
@@ -47,7 +47,7 @@ export class LoginService {
                     const user = response.results as IUser;
                     this.saveUserToLocalStorage(user);
                     this.currentUser.next(user);
-                    console.log(this.currentUser);
+
 
                     return user;
                 }),
@@ -60,7 +60,7 @@ export class LoginService {
         if (localUser) {
             const user = JSON.parse(localUser);
             this.userService.read(user._id).subscribe((user) => {
-                console.log(user);
+
                 this.currentUser.next(user);
                 return user;
             });
@@ -77,7 +77,6 @@ export class LoginService {
     }
     
     public logout(): void {
-        console.log('logout in service');
         localStorage.removeItem(this.CURRENT_USER);
         this.currentUser.next(undefined);
     }
