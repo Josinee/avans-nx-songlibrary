@@ -19,7 +19,7 @@ export const routes: Routes = [
         ]
     },
 
-    { path: '', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
+    { path: '', component: MainLayoutComponent, children: [
           { path: 'homepage', pathMatch: 'full', component: HomepageComponent },
           { path: 'song-list', pathMatch: 'full', component: SongListComponent },
           { path: 'album/:id', pathMatch: 'full', component: AlbumDetailComponent },
