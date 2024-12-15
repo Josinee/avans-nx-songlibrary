@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '@avans-nx-songlibrary/api';
 import { PlaylistService } from '../playlist.service';
 import { ICreatePlaylist } from '@avans-nx-songlibrary/api';
+import { LoginService } from '../../login/login.service';
 
 @Component({
     selector: 'playlist-create',
@@ -15,13 +16,14 @@ export class PlaylistCreateComponent {
         numberOfSongs: 0,
         duration: 0,
         creationDate: new Date(),
+        creator: this.user,
         description: ' ',
         lastUpdated: new Date(),
         public: false,
         image: ''
     };
 
-    constructor(private playlistService: PlaylistService, private route: ActivatedRoute, private router: Router) {}
+    constructor(private playlistService: PlaylistService, private loginService: LoginService, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
         this.loginService.currentUser.subscribe((user) => {
@@ -33,6 +35,7 @@ export class PlaylistCreateComponent {
     }
 
     onSubmit(): void {
+        this.playlist.creator = this.user;
         console.log('onSubmit', this.playlist);
         if (this.playlist) {
             this.playlistService.create(this.playlist).subscribe({

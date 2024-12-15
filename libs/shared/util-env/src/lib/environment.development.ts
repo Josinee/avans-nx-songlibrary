@@ -8,7 +8,7 @@ export const environment: IEnvironment = {
     rcmndApiUrl: 'http://localhost:3100/api',
 
     MONGO_DB_CONNECTION_STRING: 'mongodb://localhost:27017/songlibrary',
-    NEO4J_DB_CONNECTION_STRING: 'neo4j://localhost:7687',
+    NEO4J_DB_CONNECTION_STRING: 'localhost',
     NEO4J_DB_DATABASE_NAME: 'recommendations',
     NEO4J_DB_USERNAME: 'neo4j',
     NEO4J_DB_PASSWORD: 'Wachtwoord',

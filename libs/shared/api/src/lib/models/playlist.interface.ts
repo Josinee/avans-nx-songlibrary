@@ -9,7 +9,7 @@ export interface IPlaylist {
     duration: number,
     numberOfSongs: number,
     songs: ISong[],
-    // creator: IUserInfo,
+    creator: IUserInfo,
     creationDate: Date,
     lastUpdated: Date,
     public: boolean,

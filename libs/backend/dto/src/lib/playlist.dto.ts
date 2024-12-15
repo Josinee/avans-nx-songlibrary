@@ -14,9 +14,9 @@ export class CreatePlaylistDto implements ICreatePlaylist {
     @IsNotEmpty()
     numberOfSongs!: number;
 
-    // @IsObject()
-    // @IsNotEmpty()
-    // creator!: IUserInfo;
+    @IsObject()
+    @IsNotEmpty()
+    creator!: IUserInfo;
 
     @IsDate()
     @IsNotEmpty()
