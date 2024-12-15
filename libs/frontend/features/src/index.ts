@@ -10,3 +10,4 @@ export * from './lib/playlist/playlist-create/playlist-create.component';
 export * from './lib/playlist/playlist-list/playlist-list.component';
 export * from './lib/playlist/playlist-detail/playlist-detail.component';
 export * from './lib/register/register.component';
+export * from './lib/users/user-detail/user-detail.component'

@@ -7,3 +7,4 @@ export * from './lib/playlist/playlist.schema';
 
 export * from './lib/user/user.schema';
 export * from './lib/user/user-exists.guard';
+export * from './lib/user.module'

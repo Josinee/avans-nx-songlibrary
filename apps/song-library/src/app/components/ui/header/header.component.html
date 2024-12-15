@@ -8,12 +8,10 @@
             <div class="dropdown me-5 loggedInUser">
                 <button class="btn btn-light d-flex link-body-emphasis text-decoration-none dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
                   <p class="m-1 me-3">{{user?.name}}</p>  
-                  <img src="{{ user?.profileImgUrl }}" alt="mdo" width="32" height="32" class="rounded-circle" />
+                  <img [src]="user.profileImgUrl || '/assets/person-placeholder.png'" width="32" height="32" class="rounded-circle" />
                 </button>
                 <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['user-detail', user?._id]">Profile</a></li>
                     <li><hr class="dropdown-divider" /></li>
                     <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
                 </ul>

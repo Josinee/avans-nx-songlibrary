@@ -25,7 +25,7 @@ export class User implements IUser {
     })
     emailAddress = '';
 
-    @Prop({ required: false, select: true, default: 'https://cdn-icons-png.flaticon.com/512/219/219969.png'})
+    @Prop({ required: false, select: true})
     profileImgUrl!: string;
 
     @Prop({ required: false, type: String, default: UserRole.Guest })

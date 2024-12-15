@@ -69,4 +69,17 @@ export class UpdateUserDto implements IUpdateUser {
     @IsString()
     @IsOptional()
     name!: string;
+
+    
+    @IsString()
+    @IsNotEmpty()
+    emailAddress!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    profileImgUrl = '';
+
+    @IsString()
+    @IsNotEmpty()
+    gender: UserGender = UserGender.Unknown;
 }

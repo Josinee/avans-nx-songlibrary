@@ -6,6 +6,7 @@ import { ApiResponse, IAlbum, ISong } from '@avans-nx-songlibrary/api';
 
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env'
+import { UserService } from '../users/user.service';
 
 export const httpOptions = {
     observe: 'body',
@@ -20,7 +21,7 @@ export class LoginService {
 
     endpoint = environment.dataApiUrl + '/auth/login';
 
-    constructor(private readonly http: HttpClient) {
+    constructor(private readonly http: HttpClient, private userService: UserService) {
         console.log("constructor login service")
         this.getUserFromLocalStorage();
 
@@ -59,10 +60,14 @@ export class LoginService {
     getUserFromLocalStorage(): void {
         const localUser = localStorage.getItem(this.CURRENT_USER);
         if(localUser) {
+
             const user = JSON.parse(localUser);
-            console.log(user)
-            this.currentUser.next(user);
-            return user;
+            this.userService.read(user._id).subscribe((user) => {
+                console.log(user)
+                this.currentUser.next(user);
+                return user;
+            })
+
         }
         //throw new Error('User not found in local storage');
 

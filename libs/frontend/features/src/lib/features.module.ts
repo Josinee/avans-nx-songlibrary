@@ -6,7 +6,7 @@ import { SongListTemplateComponent } from './song/song-list-template/song-list-t
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { SongDetailComponent } from './song/song-detail/song-detail.component';
-import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { SongService } from './song/song.service';
 import { PlaylistService } from './playlist/playlist.service';
 import { PlaylistCreateComponent } from './playlist/playlist-create/playlist-create.component';
@@ -23,15 +23,16 @@ import { RegisterService } from './register/register.service';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './users/user.service';
 
 
 
 
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ],
-    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent],
-    providers: [SongService, ArtistService, AlbumService, PlaylistService, LoginService, RegisterService],
-    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent]
+    declarations: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent],
+    providers: [SongService, ArtistService, AlbumService, PlaylistService, LoginService, RegisterService, UserService],
+    exports: [SongListComponent, SongListTemplateComponent, SongDetailComponent, ArtistDetailComponent, AlbumDetailComponent, AlbumListComponent, PlaylistCreateComponent, PlaylistListComponent, PlaylistDetailComponent, LoginComponent, RegisterComponent, UserDetailComponent]
 
 })
 export class FeaturesModule {}
