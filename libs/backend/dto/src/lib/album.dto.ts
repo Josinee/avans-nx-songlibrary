@@ -1,28 +1,11 @@
-import {
-    IsNotEmpty,
-    IsString,
-    IsOptional,
-    IsNumber,
-    IsObject
-} from 'class-validator';
-import {
-    IAlbum,
-    IArtist,
-    ICreateAlbum,
-    IUpdateAlbum,
-    IUpsertAlbum,
+import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IArtist, ICreateAlbum, IUpdateAlbum, IUpsertAlbum } from '@avans-nx-songlibrary/api';
 
-} from '@avans-nx-songlibrary/api';
-
-/**
- * Use the `Pick` utility type to extract only the properties we want for
- * new to-do items
- */
-export class CreateAlbumDto implements ICreateAlbum{
+export class CreateAlbumDto implements ICreateAlbum {
     @IsString()
     @IsNotEmpty()
     title!: string;
-    
+
     @IsNumber()
     @IsNotEmpty()
     duration!: number;
@@ -38,14 +21,13 @@ export class CreateAlbumDto implements ICreateAlbum{
     @IsNumber()
     @IsNotEmpty()
     artist!: IArtist;
-
 }
 
 export class UpdateAlbumDto implements IUpdateAlbum {
     @IsString()
     @IsNotEmpty()
     title!: string;
-    
+
     @IsNumber()
     @IsNotEmpty()
     duration!: number;
@@ -71,7 +53,7 @@ export class UpsertAlbumDto implements IUpsertAlbum {
     @IsString()
     @IsNotEmpty()
     title!: string;
-    
+
     @IsNumber()
     @IsNotEmpty()
     duration!: number;
@@ -87,8 +69,4 @@ export class UpsertAlbumDto implements IUpsertAlbum {
     @IsNumber()
     @IsNotEmpty()
     artist!: IArtist;
-
-
 }
-
-

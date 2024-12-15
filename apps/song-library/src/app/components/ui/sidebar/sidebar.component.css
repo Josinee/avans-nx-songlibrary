@@ -1,0 +1,16 @@
+.playlists > a {
+    color: black;
+    text-decoration: none;
+}
+
+.playlists:hover > a {
+    color: gray;
+}
+
+.sidebar {
+    background-color: whitesmoke;
+}
+
+.nav-link.active {
+    background-color: pink;
+}

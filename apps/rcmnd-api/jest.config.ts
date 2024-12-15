@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
   displayName: 'rcmnd-api',
   preset: '../../jest.preset.js',

@@ -1,34 +1,15 @@
-import {
-    IsNotEmpty,
-    IsString,
-    IsOptional,
-    IsNumber,
-    IsObject
-} from 'class-validator';
-import {
-    IAlbum,
-    IArtist,
-    ICreateSong,
-    IUpdateSong,
-    IUpsertSong,
+import { IsNotEmpty, IsString, IsOptional, IsNumber, IsObject, IsEnum } from 'class-validator';
+import { Genres, IAlbum, IArtist, ICreateSong, IUpdateSong, IUpsertSong } from '@avans-nx-songlibrary/api';
 
-} from '@avans-nx-songlibrary/api';
 
-/**
- * Use the `Pick` utility type to extract only the properties we want for
- * new to-do items
- */
 export class CreateSongDto implements ICreateSong {
-
-    
     @IsString()
     @IsNotEmpty()
     title!: string;
-    
+
     @IsNumber()
     @IsNotEmpty()
     duration!: number;
-
 
     @IsNumber()
     @IsNotEmpty()
@@ -38,13 +19,16 @@ export class CreateSongDto implements ICreateSong {
     @IsNotEmpty()
     artist!: IArtist;
 
+    @IsNotEmpty()
+    @IsEnum(Genres)
+    genre!: Genres;
 }
 
 export class UpdateSongDto implements IUpdateSong {
     @IsString()
     @IsOptional()
     image!: string;
-    
+
     @IsString()
     @IsOptional()
     title!: string;
@@ -59,19 +43,18 @@ export class UpdateSongDto implements IUpdateSong {
 
     @IsNumber()
     @IsOptional()
-    dateOfRelease!: Date
+    dateOfRelease!: Date;
 
     @IsOptional()
     @IsObject()
-    artist!: IArtist
+    artist!: IArtist;
 
     @IsOptional()
     @IsObject()
-    album!: IAlbum
+    album!: IAlbum;
 }
 
 export class UpsertSongDto implements IUpsertSong {
-
     @IsString()
     @IsNotEmpty()
     _id!: string;
@@ -83,7 +66,7 @@ export class UpsertSongDto implements IUpsertSong {
     @IsString()
     @IsNotEmpty()
     title!: string;
-    
+
     @IsNumber()
     @IsNotEmpty()
     duration!: number;
@@ -98,13 +81,13 @@ export class UpsertSongDto implements IUpsertSong {
 
     @IsNotEmpty()
     @IsObject()
-    artist!: IArtist
+    artist!: IArtist;
 
     @IsOptional()
     @IsObject()
-    album!: IAlbum
+    album!: IAlbum;
 
-
+    @IsOptional()
+    @IsEnum(Genres)
+    genre!: Genres;
 }
-
-

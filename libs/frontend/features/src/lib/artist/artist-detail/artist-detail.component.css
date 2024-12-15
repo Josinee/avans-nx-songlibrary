@@ -1,0 +1,26 @@
+.header {
+    background-color: #f7cddb;
+    border-radius: 5px;
+}
+
+.nav-tabs .nav-link {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 7px 15px;
+    color: white;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: white;
+    color: #f7cddb;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #ee9fbf;
+}
+
+.tab-content {
+    margin-top: 35px;
+}

@@ -1,16 +1,39 @@
-<form #playlistCreate="ngForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
+<form #playlistCreate="ngForm" (ngSubmit)="onSubmit()" class="container row m-3 py-3">
+    <div class="mb-3 col-7">
         <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" [(ngModel)]="playlist.name" name="playlistName" #playlistName="ngModel" id="name" required />
+        <input type="text" class="form-control" [(ngModel)]="playlist.name" name="playlistName" #playlistName="ngModel" id="name" required placeholder="Enter playlist name" />
+        <div *ngIf="playlistName.invalid && playlistName.touched" class="text-danger">Playlist name is required.</div>
+
+        <label for="description" class="form-label">Description</label>
+        <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="playlist.description"
+            name="playlistDescription"
+            #playlistDescription="ngModel"
+            id="description"
+            placeholder="Enter playlist description"
+        />
     </div>
 
-    <div class="mb-3">
-        <label for="description" class="form-label">description</label>
-        <input type="text" class="form-control" [(ngModel)]="playlist.description" name="playlistDescription" #playlistDescription="ngModel" id="description">
+    <div class="mb-3 col-5">
+        <label class="form-label">Image Preview</label>
+        <div>
+            <img [src]="playlist.image || '/assets/playlist-placeholder.png'" class="rounded" style="object-fit: cover; height: 150px; width: 150px" alt="Playlist Image" />
+        </div>
     </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+    <div class="col-10">
+        <div class="mb-3">
+            <label for="image" class="form-label">Playlist Image</label>
+            <input type="text" class="form-control" [(ngModel)]="playlist.image" name="playlistImage" #playlistImage="ngModel" id="image" placeholder="Enter image URL" />
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="playlist.public" name="playlistPublic" #playlistPublic="ngModel" id="public" />
+            <label class="form-check-label" for="public">Make playlist public</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
 </form>

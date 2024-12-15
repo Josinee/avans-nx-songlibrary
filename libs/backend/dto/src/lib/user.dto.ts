@@ -1,14 +1,5 @@
-import { IsNotEmpty, IsString, IsBoolean, IsOptional } from 'class-validator';
-import {
-    // ICreateUser,
-    IUpdateUser,
-    IUpsertUser,
-    IUserRegistration,
-    Id,
-    UserGender,
-    UserRole
-} from '@avans-nx-songlibrary/api';
-import { Playlist } from '@avans-nx-songlibrary/backend/features';
+import { IsNotEmpty, IsString, IsBoolean, IsOptional, IsArray } from 'class-validator';
+import { IPlaylist, IUpdateUser, IUpsertUser, IUserRegistration, Id, UserGender, UserRole } from '@avans-nx-songlibrary/api';
 
 export class CreateUserDto implements IUserRegistration {
     @IsString()
@@ -49,9 +40,9 @@ export class UpsertUserDto implements IUpsertUser {
     @IsNotEmpty()
     profileImgUrl = '';
 
-    @IsString()
+    @IsArray()
     @IsNotEmpty()
-    playlists: Playlist[] = [];
+    playlists: IPlaylist[] = [];
 
     @IsString()
     @IsNotEmpty()
@@ -68,4 +59,16 @@ export class UpdateUserDto implements IUpdateUser {
     @IsString()
     @IsOptional()
     name!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    emailAddress!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    profileImgUrl = '';
+
+    @IsString()
+    @IsNotEmpty()
+    gender: UserGender = UserGender.Unknown;
 }

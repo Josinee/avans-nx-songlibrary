@@ -9,12 +9,17 @@ import { PublicLayoutComponent } from "./components/layout/public-layout-compone
 import  { MainLayoutComponent } from './components/layout/main-layout-component'
 
 export const routes: Routes = [
-    { path: '', pathMatch: 'full', redirectTo: '/login' },
-    { path: '', component: PublicLayoutComponent, children: [
-        { path: 'login', component: LoginComponent },
-        { path: 'register', component: RegisterComponent}]},
+    { path: '', pathMatch: 'full', redirectTo: 'login' },
+    {
+        path: '',
+        component: PublicLayoutComponent,
+        children: [
+            { path: 'login', component: LoginComponent },
+            { path: 'register', component: RegisterComponent }
+        ]
+    },
 
-    { path: '', component: MainLayoutComponent, children: [
+    { path: '', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
           { path: 'homepage', pathMatch: 'full', component: HomepageComponent },
           { path: 'song-list', pathMatch: 'full', component: SongListComponent },
           { path: 'album/:id', pathMatch: 'full', component: AlbumDetailComponent },
@@ -28,26 +33,9 @@ export const routes: Routes = [
     }
     ];
 
-    //{ path: "users", pathMatch: "full", component: ListComponent },
-    // users/new moet voor users/:id, omdat new anders als de id wordt gezien.
-    // Volgorde is belangrijk in routing.
-    // { path: "users/new", pathMatch: "full", component: EditComponent },
-    // { path: "users/:id", pathMatch: "full", component: DetailComponent },
-    // { path: "users/:id/edit", pathMatch: "full", component: EditComponent },
-    // {
-    //     path: "columns",
-    //     component: ColumnsComponent,
-    //     children: [
-    //         { path: "new", pathMatch: "full", component: EditComponent },
-    //         { path: ":id", pathMatch: "full", component: DetailComponent },
-    //         { path: ":id/edit", pathMatch: "full", component: EditComponent },
-    //     ],
-    // },
-    // Catch-all route: als er geen URL match is gaan we naar component-a (of dashboard, of naar 404)
-    
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {}

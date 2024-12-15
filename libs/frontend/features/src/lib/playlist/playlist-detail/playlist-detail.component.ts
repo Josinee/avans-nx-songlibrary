@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IPlaylist, ISong } from '@avans-nx-songlibrary/api';
 import { Subscription } from 'rxjs';
-import { SongService } from '../../song/song.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlaylistService } from '../playlist.service';
-import { Form, NgForm } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'playlist-detail',
-    templateUrl: './playlist-detail.component.html',
-    styles: ``
+    templateUrl: './playlist-detail.component.html'
 })
 export class PlaylistDetailComponent implements OnInit, OnDestroy {
     playlist!: IPlaylist;
@@ -17,7 +15,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
 
     id: string | null = null;
     private sub: Subscription | null = null;
-    constructor(private playlistService: PlaylistService, private route: ActivatedRoute, private router: Router) {}
+    constructor(private playlistService: PlaylistService, private route: ActivatedRoute, private router: Router, private location: Location) {}
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
@@ -42,14 +40,37 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     }
 
     deletePlaylist(playlist: IPlaylist): void {
-        console.log("eersts", playlist);
-        this.playlistService.delete(playlist).subscribe({    
+        console.log('eersts', playlist);
+        this.playlistService.delete(playlist).subscribe({
             next: () => {
                 console.log('navigate');
                 this.router.navigate(['playlist-list']);
-                console.log(this.route)
+                console.log(this.route);
             },
             error: (err) => console.error('Failed to delete playlist', err)
         });
+    }
+    updatePlaylist(): void {
+        console.log('submit');
+        console.log('this playlist ', this.playlist);
+
+        if (this.playlist) {
+            console.log('Form is valid, updating playlist:', this.playlist);
+
+            this.playlistService.update(this.playlist).subscribe((updatedPlaylist) => {
+                console.log('Updated Playlist from API:', updatedPlaylist);
+                this.playlist = updatedPlaylist;
+            });
+        }
+    }
+
+    goBack(): void {
+        this.location.back();
+    }
+
+    convertToMinutesAndSeconds(seconds: number): string {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes} min and ${remainingSeconds} sec`;
     }
 }

@@ -1,0 +1,33 @@
+<div class="container p-4">
+    <h6 class="display-5">
+        <strong>Welcome, {{ user.name }}!</strong>
+    </h6>
+    <div class="mt-5">
+        <hr />
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="display-6 mb-0">Releases of this month</p>
+            <a class="btn btn-light p-2" [routerLink]="['/new']">See more <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <album-list [albums]="albums"></album-list>
+    </div>
+
+    <div>
+        <hr />
+        <div class="d-flex justify-content-between align-items-center mt-5">
+            <p class="display-6">Popular Playlists</p>
+            <a class="btn btn-light p-2" [routerLink]="['/playlist-list']">See more <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <playlist-list-template [playlists]="playlists"></playlist-list-template>
+    </div>
+
+    <div>
+        <hr />
+        <div class="d-flex justify-content-between align-items-center mt-5">
+            <p class="display-6">Your Playlists</p>
+            <a class="btn btn-light p-2" [routerLink]="['/playlist-list']">See more <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <playlist-list-template [playlists]="personalPlaylists"></playlist-list-template>
+    </div>
+</div>

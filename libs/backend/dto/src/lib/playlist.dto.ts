@@ -1,32 +1,11 @@
-import {
-    IsNotEmpty,
-    IsString,
-    IsOptional,
-    IsNumber,
-    IsObject,
-    IsArray,
-    IsDate
-} from 'class-validator';
-import {
-    ICreatePlaylist,
-    IUpdatePlaylist,
-    IUpsertPlaylist,
-    ISong,
-    Id,
-    IUserInfo
+import { IsNotEmpty, IsString, IsOptional, IsNumber, IsObject, IsArray, IsDate, IsBoolean } from 'class-validator';
+import { ICreatePlaylist, IUpdatePlaylist, IUpsertPlaylist, ISong, Id, IUserInfo } from '@avans-nx-songlibrary/api';
 
-} from '@avans-nx-songlibrary/api';
-
-/**
- * Use the `Pick` utility type to extract only the properties we want for
- * new to-do items
- */
 export class CreatePlaylistDto implements ICreatePlaylist {
-   
     @IsString()
     @IsNotEmpty()
     name!: string;
-    
+
     @IsNumber()
     @IsNotEmpty()
     duration!: number;
@@ -47,10 +26,15 @@ export class CreatePlaylistDto implements ICreatePlaylist {
     @IsNotEmpty()
     lastUpdated!: Date;
 
+    @IsBoolean()
+    public!: boolean;
+
+    @IsString()
+    @IsNotEmpty()
+    image!: string;
 }
 
 export class UpdatePlaylistDto implements IUpdatePlaylist {
-    
     @IsString()
     @IsOptional()
     name!: string;
@@ -65,24 +49,29 @@ export class UpdatePlaylistDto implements IUpdatePlaylist {
 
     @IsNumber()
     @IsOptional()
-    numberOfSongs!: number
+    numberOfSongs!: number;
 
     @IsOptional()
     @IsArray()
-    songs?: ISong[]
+    songs?: ISong[];
 
     @IsDate()
     @IsNotEmpty()
     lastUpdated!: Date;
 
+    @IsBoolean()
+    public!: boolean;
+
+    @IsString()
+    @IsOptional()
+    image!: string;
 }
 
 export class UpsertPlaylistDto implements IUpsertPlaylist {
-
     @IsString()
     @IsNotEmpty()
     _id!: Id;
-    
+
     @IsString()
     @IsNotEmpty()
     name!: string;
@@ -90,7 +79,7 @@ export class UpsertPlaylistDto implements IUpsertPlaylist {
     @IsString()
     @IsNotEmpty()
     description!: string;
-    
+
     @IsNumber()
     @IsNotEmpty()
     duration!: number;
@@ -100,7 +89,7 @@ export class UpsertPlaylistDto implements IUpsertPlaylist {
     numberOfSongs!: number;
 
     @IsArray()
-    songs!: ISong[]
+    songs!: ISong[];
 
     @IsObject()
     @IsNotEmpty()
@@ -114,8 +103,10 @@ export class UpsertPlaylistDto implements IUpsertPlaylist {
     @IsNotEmpty()
     lastUpdated!: Date;
 
+    @IsBoolean()
+    public!: boolean;
 
-
+    @IsString()
+    @IsNotEmpty()
+    image!: string;
 }
-
-

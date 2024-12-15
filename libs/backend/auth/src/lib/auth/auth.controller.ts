@@ -1,20 +1,8 @@
-import {
-    Controller,
-    Request,
-    Post,
-    UseGuards,
-    Logger,
-    Body
-} from '@nestjs/common';
+import { Controller, Post, Logger, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Public } from '../decorators/decorators';
-import {
-    IUserCredentials,
-    IUserIdentity,
-    IUserRegistration
-} from '@avans-nx-songlibrary/api';
+import { IUserCredentials, IUserIdentity } from '@avans-nx-songlibrary/api';
 import { CreateUserDto } from '@avans-nx-songlibrary/backend/dto';
-import { UserExistGuard } from '@avans-nx-songlibrary/backend/user';
 
 @Controller('auth')
 export class AuthController {
@@ -30,7 +18,6 @@ export class AuthController {
     }
 
     @Public()
-    @UseGuards(UserExistGuard)
     @Post('register')
     async register(@Body() user: CreateUserDto): Promise<IUserIdentity> {
         this.logger.log('Register');

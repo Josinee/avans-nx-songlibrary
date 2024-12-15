@@ -12,8 +12,10 @@ export interface IPlaylist {
     // creator: IUserInfo,
     creationDate: Date,
     lastUpdated: Date,
+    public: boolean,
+    image: string,
 }
 
-export type ICreatePlaylist = Pick<IPlaylist,'name' | 'numberOfSongs' | 'duration' | 'creationDate' | 'lastUpdated' > & { description?: IPlaylist['description']};
+export type ICreatePlaylist = Pick<IPlaylist,'name' | 'numberOfSongs' | 'duration' | 'creationDate' | 'lastUpdated' | 'creator' | 'public' | 'image'> & { description?: IPlaylist['description']};
 export type IUpdatePlaylist = Partial<Omit<IPlaylist, '_id' | 'creationDate'>>;
 export type IUpsertPlaylist = IPlaylist;
