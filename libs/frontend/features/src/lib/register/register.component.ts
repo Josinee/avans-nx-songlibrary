@@ -7,7 +7,7 @@ import { RegisterService } from './register.service';
 @Component({
     selector: 'register',
     templateUrl: './register.component.html',
-    styleUrl: './register.component.css'
+
 })
 export class RegisterComponent {
     registerUser: IUserRegistration = {
