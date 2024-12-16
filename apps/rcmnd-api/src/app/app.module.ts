@@ -5,6 +5,7 @@ import { Neo4jModule } from 'nest-neo4j'
 import { Neo4jBackendModule } from '../../../../libs/backend/neo4j/src/index'
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
 import { env } from 'process';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [Neo4jModule.forRoot({
@@ -14,7 +15,7 @@ import { env } from 'process';
     port: 7687,
     username: environment.NEO4J_DB_USERNAME,
     password: environment.NEO4J_DB_PASSWORD,
-  }), Neo4jBackendModule ],
+  }), Neo4jBackendModule, ConfigModule.forRoot() ],
   controllers: [AppController,],
   providers: [AppService],
 })
