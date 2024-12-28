@@ -34,7 +34,7 @@ export interface IAlbum {
     duration: number,
     dateOfRelease: Date,
     numberOfSongs: number,
-    genre: Genres,
+    genre: Genres[],
     artist: IArtist,
     songs: ISong[],
     type: AlbumType,

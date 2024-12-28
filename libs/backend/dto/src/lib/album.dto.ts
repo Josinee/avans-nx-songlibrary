@@ -77,7 +77,7 @@ export class UpsertAlbumDto implements IUpsertAlbum {
 
     @IsEnum(Genres)
     @IsNotEmpty()
-    genre!: Genres;
+    genre!: Genres[];
 
     @IsEnum(AlbumType)
     @IsNotEmpty()
