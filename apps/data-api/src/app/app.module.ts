@@ -8,10 +8,10 @@ import { AlbumModule } from '@avans-nx-songlibrary/backend/features';
 import { UserModule } from '@avans-nx-songlibrary/backend/features';
 import { AuthModule } from '@avans-nx-songlibrary/backend/auth';
 import { MongooseModule } from '@nestjs/mongoose';
-import { environment } from '@avans-nx-songlibrary/shared/util-env';
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
-    imports: [UserModule, SongModule, PlaylistModule, ArtistModule, AlbumModule, AuthModule, MongooseModule.forRoot(environment.MONGO_DB_CONNECTION_STRING)],
+    imports: [ConfigModule.forRoot({isGlobal: true}),UserModule, SongModule, PlaylistModule, ArtistModule, AlbumModule, AuthModule, MongooseModule.forRoot(process.env.MONGO_DB_CONNECTION_STRING)],
     controllers: [AppController],
     providers: [AppService]
 })
