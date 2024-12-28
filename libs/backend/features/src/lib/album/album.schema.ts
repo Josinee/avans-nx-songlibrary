@@ -26,7 +26,7 @@ export class Album implements IAlbum {
     numberOfSongs!: number;
 
     @Prop({ required: true, enum: Genres, type: String })
-    genre!: Genres;
+    genre!: Genres[];
 
     @Prop({ required: true, enum: AlbumType, type: String })
     type!: AlbumType;
