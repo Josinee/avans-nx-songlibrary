@@ -22,7 +22,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(
-    `🚀 data-api is running on: http://localhost:${port}/${globalPrefix} with ${process.env.MONGO_DB_CONNECTION_STRING}`
+    `🚀 data-api is running on: http://localhost:${port}/${globalPrefix}`
   );
 }
 

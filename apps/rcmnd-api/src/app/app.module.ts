@@ -7,11 +7,10 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [Neo4jModule.forRoot({
-    scheme: 'neo4j',
-    database: process.env.NEO4J_DB_DATABASE_NAME,
+    scheme: 'neo4j+s',
     host: process.env.NEO4J_DB_CONNECTION_STRING,
-    port: 7687,
-    username: process.env.NEO4J_DB_USERNAME,
+    port: '7687',
+    username: 'neo4j',
     password: process.env.NEO4J_DB_PASSWORD,
   }), Neo4jBackendModule, ConfigModule.forRoot({isGlobal: true}), ],
   controllers: [AppController,],

@@ -8,7 +8,9 @@ import { environment } from '@avans-nx-songlibrary/shared/util-env';
 dotenv.config();
 
 async function bootstrap() {
-
+  Logger.log('conn',process.env.NEO4J_DB_CONNECTION_STRING)
+  Logger.log('name',process.env.NEO4J_DB_DATABASE_NAME)
+  Logger.log('pass',process.env.NEO4J_DB_PASSWORD)
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
@@ -24,7 +26,10 @@ async function bootstrap() {
   Logger.log(
     `🚀 rcmnd-api is running on: http://localhost:${port}/${globalPrefix}`
   );
-
+  console.log('Environment variables:');
+console.log('Connection String:', process.env.NEO4J_DB_CONNECTION_STRING);
+console.log('Database Name:', process.env.NEO4J_DB_DATABASE_NAME);
+console.log('Password:', process.env.NEO4J_DB_PASSWORD);
 }
 
 bootstrap();
