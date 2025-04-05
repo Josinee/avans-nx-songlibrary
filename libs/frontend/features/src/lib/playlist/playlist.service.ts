@@ -65,6 +65,7 @@ export class PlaylistService {
 
     public read(id: string | null, options?: any): Observable<IPlaylist> {
         console.log(`read ${this.endpoint}` + `/${id}`);
+        console.log('deze tap')
         return this.http
             .get<ApiResponse<IPlaylist>>(this.endpoint + `/${id}`, {
                 ...options,
@@ -75,6 +76,7 @@ export class PlaylistService {
                 map((response: any) => response.results as IPlaylist),
                 catchError(this.handleError)
             );
+
     }
 
     public create(playlist: ICreatePlaylist, options?: any): Observable<IPlaylist> {
@@ -102,6 +104,7 @@ export class PlaylistService {
         const durationSeconds = this.parseDuration(song.duration);
         playlist.duration += durationSeconds;
         playlist.lastUpdated = new Date();
+        console.log('deze kan niet toch')
         return this.http.put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions }).pipe(
             tap((response) => console.log(response)),
             map((response: any) => response.results),
@@ -115,9 +118,10 @@ export class PlaylistService {
         console.log(songdelete);
         playlist.songs.splice(songdelete, 1);
         playlist.numberOfSongs--;
-        playlist.duration -= song.duration;
+        const durationSeconds = this.parseDuration(song.duration);
+        playlist.duration -= durationSeconds;
         playlist.lastUpdated = new Date();
-
+        console.log('of deze')
         return this.http.put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions }).pipe(
             tap((response) => console.log(response)),
             map((response: any) => response.results),
@@ -126,6 +130,7 @@ export class PlaylistService {
     }
 
     public update(playlist: IPlaylist): Observable<IPlaylist> {
+        console.log("denk dat dit hem is");
         return this.http.put<ApiResponse<IPlaylist>>(`${this.endpoint}/${playlist._id}`, playlist).pipe(
             map((response: ApiResponse<IPlaylist>) => {
                 const updatedPlaylist = response.results as IPlaylist;

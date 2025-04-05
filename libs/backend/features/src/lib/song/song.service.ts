@@ -26,7 +26,7 @@ export class SongService {
 
     async getAll(artist?: string): Promise<ISong[]> {
         if (artist) {
-            return this.songModel.find({ artist }).select('title artist album duration').exec();
+            return this.songModel.find({ artist }).select('title artist album duration').populate({path: 'album', select: "_id title"}).exec();
         }
         return this.songModel.find().select('title artist album duration').populate({ path: 'artist', select: '_id name' }).populate({ path: 'album', select: '_id title' }).exec();
     }

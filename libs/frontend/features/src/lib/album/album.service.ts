@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IAlbum} from '@avans-nx-songlibrary/api';
+import { ApiResponse, IAlbum, ICreateAlbum} from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
@@ -23,9 +23,11 @@ export class AlbumService {
 
         if (options?.dateOfRelease?.startDate) {
             const startDate = options.dateOfRelease.startDate.toISOString();
-
             params = params.append('startDate', startDate);
-
+        }
+        if (options?.artist) {
+            const artist = options.artist
+            params = params.append('artist', artist);
         }
 
         return this.http
@@ -53,6 +55,13 @@ export class AlbumService {
                 map((response: any) => response.results as IAlbum),
                 catchError(this.handleError)
             );
+    }
+
+    public create(album: ICreateAlbum, options?: any): Observable<IAlbum> {
+        return this.http.post<IAlbum>(this.endpoint, album, {... options, ...httpOptions}).pipe(
+            map((response: any) => response.results as IAlbum),
+            catchError(this.handleError)
+        )
     }
 
     public handleError(error: HttpErrorResponse): Observable<any> {

@@ -23,7 +23,7 @@ export class Song implements ISong {
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Artist' })
     artist!: IArtist;
 
-    @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Album' })
+    @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'Album' })
     album!: IAlbum;
 
     @Prop({ required: false, type: String })

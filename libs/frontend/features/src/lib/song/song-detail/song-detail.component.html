@@ -25,8 +25,8 @@
                     <span class="fs-5 fw-bold">{{ song?.artist?.name }}</span>
                 </a>
             </div>
-
-            <div class="album-info mt-5">
+            
+            <div *ngIf="song?.album" class="album-info mt-5">
                 <h4 class="mb-3">Featured in Album</h4>
                 <a [routerLink]="['/album', song?.album?._id]" class="hover-effect">
                     <div class="d-flex align-items-center">

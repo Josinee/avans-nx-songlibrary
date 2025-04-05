@@ -28,20 +28,17 @@ export class SongListTemplateComponent {
 
     addToPlaylist(playlist: IPlaylist, song: ISong): void {
         this.songService.putLikedSong(this.user, song).subscribe();
-        
+
         if (!playlist) {
             console.error('Playlist not found');
             return;
         }
 
-
-        this.playlistService.addToPlaylist(playlist, song).subscribe(
-            (response) => {
-
+        this.playlistService.addToPlaylist(playlist, song).subscribe((results) => {
+                this.songs = results.songs
                 this.showToast(`Succesfully added ${song.title} to ${playlist.name}`);
             },
             (error) => {
-
                 this.showToast(`Error when adding ${song.title} to ${playlist.name}`);
             }
         );
@@ -52,10 +49,10 @@ export class SongListTemplateComponent {
             console.error('Playlist not found');
             return;
         }
-
         this.playlistService.removeFromPlaylist(playlist, song).subscribe((results) => {
-
+            this.songs = results.songs
             this.showToast(`Succesfully removed ${song.title} from ${playlist.name}`);
+            // this.refreshSongList();
         });
     }
 
@@ -63,12 +60,10 @@ export class SongListTemplateComponent {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-
             }
         });
         this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
             if (results) {
-
                 this.playlists = results;
             } else {
                 console.error('Playlists not found');
@@ -91,5 +86,11 @@ export class SongListTemplateComponent {
 
     closeToast() {
         this.toastVisible = false;
+    }
+
+    refreshSongList(): void {
+        if (this.playlist) {
+            this.playlistService.getSongsByPlaylist(this.playlist._id).subscribe((results) => (this.songs = results));
+        }
     }
 }

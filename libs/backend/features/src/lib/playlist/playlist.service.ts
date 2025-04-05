@@ -64,7 +64,14 @@ export class PlaylistService {
         }
         updatePlaylistDto.songs && (updateData.songs = updatePlaylistDto.songs);
 
-        const playlist = await this.playlistModel.findByIdAndUpdate(id, updateData, { new: true }).exec();
+        const playlist = await this.playlistModel.findByIdAndUpdate(id, updateData, { new: true }).populate({
+            path: 'songs',
+            select: '_id title duration',
+            populate: [
+                { path: 'artist', select: '_id name' },
+                { path: 'album', select: '_id title' }
+            ]
+        }).exec();
         if (!playlist) {
             throw new NotFoundException(`Playlist ${id} not found`);
         }

@@ -4,6 +4,14 @@ import { Genres, IAlbum, IArtist, ICreateSong, IUpdateSong, IUpsertSong } from '
 
 export class CreateSongDto implements ICreateSong {
     @IsString()
+    @IsOptional()
+    songText!: string;
+
+    @IsNumber()
+    @IsOptional()
+    album?: IAlbum | undefined;
+    
+    @IsString()
     @IsNotEmpty()
     title!: string;
 

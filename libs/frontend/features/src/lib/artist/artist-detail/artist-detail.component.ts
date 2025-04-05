@@ -38,11 +38,15 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
                 this.artistService.read(this.id).subscribe((artist: IArtist) => {
                     if (artist) {
                         this.artist = artist;
-                        this.subscription = this.songService.list(this.artist!._id).subscribe((results) => {
+                        const options = {
+                            artist: this.artist!._id
+                        };
+                        this.subscription = this.songService.list(options).subscribe((results) => {
                    
                             this.songs = results;
                         });
-                        this.subscription = this.albumService.list(this.artist!._id).subscribe((results) => {
+
+                        this.subscription = this.albumService.list(options).subscribe((results) => {
 
                             this.albums = results;
                         });

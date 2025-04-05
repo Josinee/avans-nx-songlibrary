@@ -29,8 +29,27 @@ export class Neo4JService {
         return songs;
     }
 
-    async putLikedSong(user: string, song: string) {
-        const result = await this.neo4jService.write(`Match(n:User{id:'${user}'}), (s:Song{id: '${song}'}) create (n)-[:LIKES]->(s)`);
+    async putLikedSong(user: { id: string; username?: string }, song: { id: string; title?: string, genre?: string, artist?: string, album?: string }) {
+        console.log('put liked song')
+        await this.neo4jService.write(`
+            MERGE (n:User {id: $userId})
+            ON CREATE SET n.name = $username
+            MERGE (s:Song {id: $songId})
+                        ON CREATE SET 
+                s.name = $title,
+                s.genre = $genre,
+                s.artist = $artist,
+                s.album = $album
+            MERGE (n)-[:LIKES]->(s)
+        `, {
+            userId: user.id,
+            username: user.username || null,
+            songId: song.id,
+            title: song.title || null,
+            genre: song.genre || null,
+            artist: song.artist || null,
+            album: song.album || null,
+        });
     }
 
     async deleteLikedSong(user: string, song: string) {

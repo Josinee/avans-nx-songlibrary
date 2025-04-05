@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, IArtist } from '@avans-nx-songlibrary/api';
+import { ApiResponse, IArtist, ICreateArtist } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
@@ -43,6 +43,13 @@ export class ArtistService {
                 map((response: any) => response.results as IArtist),
                 catchError(this.handleError)
             );
+    }
+
+    public create(artist: ICreateArtist, options?: any): Observable<IArtist> {
+        return this.http.post<IArtist>(this.endpoint, artist, {... options, ...httpOptions}).pipe(
+            map((response: any) => response.results as IArtist),
+            catchError(this.handleError)
+        )
     }
 
     public handleError(error: HttpErrorResponse): Observable<any> {

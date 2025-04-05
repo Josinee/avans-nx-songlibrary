@@ -3,7 +3,9 @@ export * from './lib/features.module';
 export * from './lib/song/song-detail/song-detail.component';
 export * from './lib/song/song-list/song-list.component';
 export * from './lib/song/song-list-template/song-list-template.component';
+export * from './lib/song/song-create/song-create.component'
 export * from './lib/artist/artist-detail/artist-detail.component';
+export * from './lib/artist/artist-create/artist-create.component';
 export * from './lib/album/album-detail/album-detail.component';
 export * from './lib/album/album-list/album-list.component';
 export * from './lib/playlist/playlist-create/playlist-create.component';

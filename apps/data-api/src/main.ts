@@ -6,9 +6,8 @@ import { ApiResponseInterceptor } from '@avans-nx-songlibrary/backend/dto'
 
 import * as dotenv from 'dotenv';
 dotenv.config();
-
 async function bootstrap() {
-  Logger.log(process.env.MONGO_DB_CONNECTION_STRING);
+
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);

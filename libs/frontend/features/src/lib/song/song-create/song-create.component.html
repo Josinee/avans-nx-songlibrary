@@ -1,0 +1,41 @@
+<form #songCreate="ngForm" (ngSubmit)="onSubmit()" class="container row m-3 py-3">
+    <div class="mb-3 col-7">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="song.title" name="songTitle" #songTitle="ngModel" id="title" required placeholder="Enter song title" />
+        <div *ngIf="songTitle.invalid && songTitle.touched" class="text-danger">Song title is required.</div>
+
+        <label for="songText" class="form-label">Song Text</label>
+        <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="song.songText"
+            name="songText"
+            #songText="ngModel"
+            id="songText"
+            placeholder="Enter song text"
+        />
+    </div>
+    <div class="mb-3 col-8">
+
+    <label for="genre">Artist</label>
+    <select [(ngModel)]="song.artist" name="artist" class="form-control" (change)="onArtistChange()">
+        <option *ngFor="let artist of artists" [ngValue]="artist">{{ artist.name }}</option>
+    </select>
+
+    <label for="genre">Genre</label>
+    <select [(ngModel)]="song.genre" name="genre" class="form-control">
+        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+    </select>
+
+    
+    <label for="genre">Album</label>
+    <select [(ngModel)]="song.album" name="album" class="form-control">
+        <option *ngFor="let album of albums;">{{album.title}}</option>
+    </select>
+
+</div>
+
+
+    <button type="submit" class="btn btn-primary w-100">Submit</button>
+
+</form>

@@ -13,7 +13,9 @@ import {
     AboutComponent,
     UserDetailComponent,
     NewComponent,
-    DiscoverComponent
+    DiscoverComponent,
+    SongCreateComponent,
+    ArtistCreateComponent
 } from '@avans-nx-songlibrary/features';
 import { ArtistDetailComponent } from '@avans-nx-songlibrary/features';
 import { AlbumDetailComponent } from '@avans-nx-songlibrary/features';
@@ -38,10 +40,12 @@ export const routes: Routes = [
             { path: 'about', pathMatch: 'full', component: AboutComponent },
             { path: 'homepage', pathMatch: 'full', component: HomepageComponent },
             { path: 'song-list', pathMatch: 'full', component: SongListComponent },
+            { path: 'song-create', pathMatch: 'full', component: SongCreateComponent},
             { path: 'album/:id', pathMatch: 'full', component: AlbumDetailComponent },
             { path: 'album-list', pathMatch: 'full', component: AlbumListComponent },
             { path: 'song/:id', pathMatch: 'full', component: SongDetailComponent },
             { path: 'artist/:id', pathMatch: 'full', component: ArtistDetailComponent },
+            { path: 'artist-create', pathMatch: 'full', component: ArtistCreateComponent},
             { path: 'playlist-list', pathMatch: 'full', component: PlaylistListComponent },
             { path: 'playlist-create', pathMatch: 'full', component: PlaylistCreateComponent },
             { path: 'playlist/:id', pathMatch: 'full', component: PlaylistDetailComponent },

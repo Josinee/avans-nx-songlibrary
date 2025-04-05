@@ -1,7 +1,7 @@
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ApiResponse, ISong, IUser } from '@avans-nx-songlibrary/api';
+import { ApiResponse, ICreateSong, ISong, IUser } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
@@ -19,8 +19,16 @@ export class SongService {
     public list(options?: any): Observable<ISong[] | null> {
         console.log(`list ${this.endpoint}`);
 
+        let params = new HttpParams();
+
+        if (options?.artist) {
+            const artist = options.artist
+            params = params.append('artist', artist);
+        }
+
         return this.http
             .get<ApiResponse<ISong[]>>(this.endpoint, {
+                params: params,
                 ...options,
                 ...httpOptions
             })
@@ -62,11 +70,22 @@ export class SongService {
     }
 
     public putLikedSong(user: IUser, song: ISong, options?: any) {
-        return this.http.put<void>(`${environment.rcmndApiUrl}/songs/${user._id}/${song._id}`, null).pipe(
+        const body = {
+            user: { id: user._id, username: user.name },
+            song: { id: song._id, title: song.title, genre: song.genre, artist: song.artist._id, album: song.album._id },
+        };
+    
+        return this.http.put<void>(`${environment.rcmndApiUrl}/songs`, body, options).pipe(
             tap((response) => console.log('Response: ', response)),
-            map((response: any) => response.results),
             catchError(this.handleError)
         );
+    }
+
+    public create(song: ICreateSong, options?: any): Observable<ISong> {
+        return this.http.post<ISong>(this.endpoint, song, { ... options, ...httpOptions}).pipe(
+            map((response: any) => response.results as ISong),
+            catchError(this.handleError)
+        )
     }
 
     public handleError(error: HttpErrorResponse): Observable<any> {

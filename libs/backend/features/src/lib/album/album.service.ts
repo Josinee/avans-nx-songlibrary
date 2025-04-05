@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { IAlbum } from '@avans-nx-songlibrary/api';
 import { Album } from './album.schema';
 import { SongService } from '../song/song.service';
+import { CreateAlbumDto } from '@avans-nx-songlibrary/backend/dto';
 
 const httpOptions = {
     observe: 'body',
@@ -15,24 +16,26 @@ export class AlbumService {
     TAG = 'AlbumService';
     constructor(@InjectModel(Album.name) private albumModel: Model<Album>, private readonly songService: SongService) {}
 
-    async getAll(dateOfReleaseFilter?: string): Promise<IAlbum[]> {
-        if (dateOfReleaseFilter) {
-            const filterDate = new Date(dateOfReleaseFilter);
-
-            if (isNaN(filterDate.getTime())) {
-                throw new Error('Invalid date format');
-            }
-
-            return this.albumModel
-                .find({
-                    dateOfRelease: { $gte: filterDate }
-                })
-                .populate('artist')
-                .exec();
+    async getAll(filters: { dateOfRelease?: string, artist?: string }): Promise<IAlbum[]> {
+        console.log('Service filters:', filters);
+      
+        const query: Record<string, any> = {};
+        if (filters.dateOfRelease) {
+          const dateOfRelease = new Date(filters.dateOfRelease);
+          if (!isNaN(dateOfRelease.getTime())) {
+            query['dateOfRelease'] = { $gte: dateOfRelease };
+          }
         }
-
-        return this.albumModel.find().populate('artist').exec();
-    }
+      
+        if (filters.artist) {
+          query['artist'] = filters.artist;
+        }
+      
+        return this.albumModel
+          .find(query).sort({dateOfRelease: -1})
+          .populate('artist')
+          .exec();
+      }
 
     async getOne(id: string): Promise<any> {
         const album = await this.albumModel.findById(id).populate('artist').exec();
@@ -42,5 +45,10 @@ export class AlbumService {
         const songs = await this.songService.getAllByAlbum(id);
 
         return { ...album.toObject(), songs };
+    }
+
+    async create(createAlbum: CreateAlbumDto): Promise<Album> {
+        const createdAlbum = new this.albumModel(createAlbum);
+        return createdAlbum.save();
     }
 }

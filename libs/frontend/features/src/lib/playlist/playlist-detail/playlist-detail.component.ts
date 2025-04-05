@@ -40,23 +40,16 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     }
 
     deletePlaylist(playlist: IPlaylist): void {
-
         this.playlistService.delete(playlist).subscribe({
             next: () => {
-
                 this.router.navigate(['playlist-list']);
-
             },
             error: (err) => console.error('Failed to delete playlist', err)
         });
     }
+    
     updatePlaylist(): void {
-
-
-
         if (this.playlist) {
-
-
             this.playlistService.update(this.playlist).subscribe((updatedPlaylist) => {
                 console.log('Updated Playlist from API:', updatedPlaylist);
                 this.playlist = updatedPlaylist;
