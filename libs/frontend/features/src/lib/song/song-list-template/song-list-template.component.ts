@@ -58,6 +58,7 @@ export class SongListTemplateComponent {
             console.error('Playlist not found');
             return;
         }
+        
         this.songService.removeLikedSong(this.user, song).subscribe();//TODO song uit liked songs halen behalve als het in een andere eigen playlist staat.
         this.playlistService.removeFromPlaylist(playlist, song).subscribe((results) => {
             this.songs = results.songs

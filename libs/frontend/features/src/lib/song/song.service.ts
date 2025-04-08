@@ -4,6 +4,7 @@ import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import { ApiResponse, ICreateSong, ISong, IUser } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
+import { PlaylistService } from '../playlist/playlist.service';
 
 export const httpOptions = {
     observe: 'body',
@@ -14,7 +15,7 @@ export const httpOptions = {
 export class SongService {
     endpoint = environment.dataApiUrl + '/song';
 
-    constructor(private readonly http: HttpClient) {}
+    constructor(private readonly http: HttpClient, private playlistService: PlaylistService) {}
 
     public list(options?: any): Observable<ISong[] | null> {
         console.log(`list ${this.endpoint}`);
@@ -87,8 +88,26 @@ export class SongService {
         );
     }
 
-    public removeLikedSong(user: IUser, song: ISong, options?: any) {
-        return this.http.delete<void>(`${environment.rcmndApiUrl}/${song._id}/${user._id}`, )
+    public removeLikedSong(user: IUser, song: ISong, options?: any): Observable<Observable<void> | []> {
+        let songInOtherPlaylist = false;
+        return this.playlistService.getPlaylistFromCreator(user._id).pipe(
+            map(playlists => {
+                playlists.forEach(playlist => {
+                    if(playlist.songs && Array.isArray(playlist.songs)) {
+                        playlist.songs.forEach(playlistSong=> {
+                            const playlistSongId = (playlistSong as any);
+                            if(playlistSongId === song._id){
+                                songInOtherPlaylist = true;
+                            }
+                        })
+                    }
+                });
+                if (!songInOtherPlaylist) {
+                    return this.http.delete<void>(`${environment.rcmndApiUrl}/songs/${song._id}/${user._id}`);
+                }
+                return [];
+            })
+        );
     }
 
 

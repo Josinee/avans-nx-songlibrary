@@ -124,7 +124,6 @@ export class PlaylistService {
             playlist.duration -= this.parseDuration(song.duration);
             playlist.lastUpdated = new Date();
         }
-    
         return this.http.put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions }).pipe(
             tap((response) => console.log(response)),
             map((response: any) => response.results),
@@ -133,7 +132,6 @@ export class PlaylistService {
     }
 
     public update(playlist: IPlaylist): Observable<IPlaylist> {
-        console.log("denk dat dit hem is");
         return this.http.put<ApiResponse<IPlaylist>>(`${this.endpoint}/${playlist._id}`, playlist).pipe(
             map((response: ApiResponse<IPlaylist>) => {
                 const updatedPlaylist = response.results as IPlaylist;
@@ -148,9 +146,6 @@ export class PlaylistService {
 
     public delete(playlist: IPlaylist): Observable<void> {
         console.log('Deleting playlist with ID:', playlist._id);
-        playlist.songs.forEach(element => {
-            //TODO alle playlist songs uit liked halen behalve als ze in een andere eigen playlist staan
-        });
         return this.http.delete<void>(`${this.endpoint}/${playlist._id}`).pipe(
             tap(() => {
                 console.log(`Playlist ${playlist._id} deleted successfully`);

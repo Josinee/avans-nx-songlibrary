@@ -11,7 +11,8 @@ import { interval, Subscription } from 'rxjs';
     styleUrl: './discover.component.css'
 })
 export class DiscoverComponent implements OnInit {//TODO tekst pagina aanpassen
-    //TODO automatisch matchen op basis van genre artiest en album als er op de pagina wordt geklikt maybe? of om de zoveel tijd
+    //TODO automatisch verwijderen zodra het is toegevoegd aan playlist
+    //TODO als het nummer nog in een andere playlist staat niet verwijderen, anders wel
     songs: ISong[] = [];
     user!: IUser;
     subscription: Subscription = new Subscription;
@@ -22,10 +23,9 @@ export class DiscoverComponent implements OnInit {//TODO tekst pagina aanpassen
             if (user) {
                 this.user = user;
                 this.loadSongs();
-                const loadInterval = interval(10000).subscribe(() => {this.loadSongs();});
+                const loadInterval = interval(5000).subscribe(() => {this.loadSongs();});
 
                 this.subscription.add(loadInterval)
-                
       }
     });
 

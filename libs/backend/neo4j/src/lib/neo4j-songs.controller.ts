@@ -56,7 +56,7 @@ export class Neo4JController {
 
 
     @Delete(':song/:user')
-    async deleteLikedSong(@Param('user') song: string, @Param('song') user: string): Promise<any> {
-        await this.neo4jService.deleteLikedSong(user, song);
+    async deleteLikedSong(@Param('song') song: string, @Param('user') user: string): Promise<any> {
+        return await this.neo4jService.deleteLikedSong(song, user);
     }
 }

@@ -78,7 +78,8 @@ export class Neo4JService {
         });
     }
 
-    async deleteLikedSong(user: string, song: string) {
+    async deleteLikedSong(song: string, user: string) {
         const result = await this.neo4jService.write(`Match(n:User{id:'${user}'}), (s:Song{id: '${song}'}), (n)-[r:LIKES]->(s) delete (r)`);
+        return result;
     }
 }
