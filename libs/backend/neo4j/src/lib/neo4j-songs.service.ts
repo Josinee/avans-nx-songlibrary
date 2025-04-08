@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Neo4jService } from 'nest-neo4j/dist';
 import { ISong } from '@avans-nx-songlibrary/api';
 
-@Injectable()
+@Injectable() 
 export class Neo4JService {
     private readonly logger: Logger = new Logger(Neo4jService.name);
 
@@ -19,6 +19,14 @@ export class Neo4JService {
         const results = await this.neo4jService.read(`MATCH (song:Song {id: '${song}'})-[:SIMILAR_TO]-(similarSong:Song) RETURN similarSong`);
         const songs = results.records.map((record: any) => record._fields[0].properties);
         return songs;
+    }
+
+    async matchSimilar(): Promise<any> {
+        const match = await this.neo4jService.write(`MATCH (s1:Song), (s2:Song)
+                                                        WHERE (s1.artist = s2.artist OR s1.genre = s2.genre OR s1.album = s2.album)
+                                                        AND s1.id < s2.id
+                                                        MERGE (s1)-[:SIMILAR_TO]->(s2)`)
+
     }
 
     async getRecommendationsFromUser(user: string): Promise<ISong[]> {

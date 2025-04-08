@@ -5,20 +5,20 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Song</th>
-                    <th *ngIf="context == 'playlist'" scope="col">Artist</th>
+                    <th *ngIf="context == 'playlist' || context == 'discover'" scope="col">Artist</th>
                     <th *ngIf="context !== 'album'" scope="col">Album</th>
-                    <th scope="col">Duration</th>
+                    <th *ngIf="context !== 'discover'" scope="col">Duration</th>
                     <th scope="col"></th>
-                    <th>hoi</th>
+                    <th hidden></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let song of songs; let i = index" >
                     <td>{{ i + 1 }}</td>
                     <td [routerLink]="['/song', song._id]">{{ song.title }}</td>
-                    <td *ngIf="context == 'playlist'" [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</td>
+                    <td *ngIf="context == 'playlist'|| context == 'discover'" [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</td>
                     <td *ngIf="context !== 'album'" [routerLink]="['/album', song.album?._id]">{{ song.album?.title || 'no album' }}</td>
-                    <td>{{ song.duration}}</td>
+                    <td *ngIf="context !== 'discover'">{{ song.duration}}</td>
                     
                     
                     <td>
@@ -59,7 +59,7 @@
                             </ul>
                         </div>
                     </td>
-                    <td>{{ song.genre }}</td>
+                    <td hidden>{{ song.genre }}</td>
                 </tr>
             </tbody>
         </table>

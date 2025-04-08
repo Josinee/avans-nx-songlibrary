@@ -3,6 +3,7 @@ import { ISong, IUser } from '@avans-nx-songlibrary/api';
 import { AlbumService } from '../../album/album.service';
 import { DiscoverService } from '../discover.service';
 import { LoginService } from '../../login/login.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
     selector: 'discover',
@@ -13,23 +14,33 @@ export class DiscoverComponent implements OnInit {//TODO tekst pagina aanpassen
     //TODO automatisch matchen op basis van genre artiest en album als er op de pagina wordt geklikt maybe? of om de zoveel tijd
     songs: ISong[] = [];
     user!: IUser;
+    subscription: Subscription = new Subscription;
     constructor(private discoverService: DiscoverService, private loginService: LoginService, private albumService: AlbumService) {}
 
     ngOnInit(): void {
-        console.log("is this thing on??")
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-                console.log(user._id)
-console.log('And this one?')
-                this.discoverService.getRecommendationsForUser(this.user._id).subscribe((songs) => {
-                    console.log("hier??/")
-                    this.songs = songs || [];
-                    console.log(songs);
-                });
-      }
+                this.loadSongs();
+                const loadInterval = interval(10000).subscribe(() => {this.loadSongs();});
 
-        });
+                this.subscription.add(loadInterval)
+                
+      }
+    });
 
     }
+
+    loadSongs(): void{
+        this.discoverService.matchSimilar();
+        this.discoverService.getRecommendationsForUser(this.user._id).subscribe((songs)=>{
+            this.songs = songs || [];
+        })
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+      }
 }

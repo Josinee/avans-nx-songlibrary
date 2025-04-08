@@ -10,7 +10,7 @@ import { LoginService } from '../../login/login.service';
     templateUrl: 'song-list-template.component.html',
     styleUrl: 'song-list-template.component.css'
 })
-export class SongListTemplateComponent {//TODO Hoi met genre weghalen maar het wel laten werken
+export class SongListTemplateComponent {
     subscription: Subscription | undefined = undefined;
     @Input() songs: ISong[] | null = null;
     @Input() context: string | undefined;
@@ -23,26 +23,34 @@ export class SongListTemplateComponent {//TODO Hoi met genre weghalen maar het w
 
     playlists: IPlaylist[] = [];
     user!: IUser;
+    addedSong: ISong | null = null;
 
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private songService: SongService) {}
 
     addToPlaylist(playlist: IPlaylist, song: ISong): void {
-        console.log(song._id, song.album, song.artist._id, song.genre, song.title, song.duration, song.songText)
-        this.songService.putLikedSong(this.user, song).subscribe();
-
-        if (!playlist) {
-            console.error('Playlist not found');
-            return;
-        }
-
-        this.playlistService.addToPlaylist(playlist, song).subscribe((results) => {
-                this.songs = results.songs
-                this.showToast(`Succesfully added ${song.title} to ${playlist.name}`);
-            },
-            (error) => {
-                this.showToast(`Error when adding ${song.title} to ${playlist.name}`);
+        this.songService.read(song._id).subscribe((result)=>{
+            this.addedSong = result as ISong;
+            if(this.addedSong){
+                console.log(this.addedSong._id, this.addedSong.album, this.addedSong.artist._id, this.addedSong.genre, this.addedSong.title, this.addedSong.duration, this.addedSong.songText)
+                this.songService.putLikedSong(this.user, this.addedSong).subscribe();
+        
+                if (!playlist) {
+                    console.error('Playlist not found');
+                    return;
+                }
+        
+                this.playlistService.addToPlaylist(playlist, this.addedSong).subscribe((results) => {
+                        //this.songs = results.songs
+                        this.showToast(`Succesfully added ${this.addedSong?.title} to ${playlist.name}`);
+                    },
+                    (error) => {
+                        this.showToast(`Error when adding ${this.addedSong?.title} to ${playlist.name}`);
+                    }
+                );
             }
-        );
+        })
+        
+        
     }
 
     removeFromPlaylist(playlist: IPlaylist, song: ISong): void {

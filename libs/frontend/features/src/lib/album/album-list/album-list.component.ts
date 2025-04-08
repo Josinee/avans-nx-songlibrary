@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 })
 export class AlbumListComponent {
     @Input() albums: IAlbum[] | null = null;
-    subscription: Subscription | undefined = undefined;
 
     constructor(private albumService: AlbumService) {
       

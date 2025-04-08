@@ -36,4 +36,10 @@ export class SidebarComponent {//TODO mooi maken
             this.personalPlaylists = playlists;
         });
     }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+      }
 }

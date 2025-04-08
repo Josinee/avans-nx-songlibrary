@@ -33,8 +33,14 @@ export class DiscoverService {
             );
     }
 
+    public matchSimilar(): void {
+      this.http.get<ApiResponse<any[]>>(this.endpoint + '/match').subscribe({
+        next: () => console.log('matched similar'),
+        error: (err) => console.error('matching failed', err)
+      });
+    }
+
     public getRecommendationsForUser(user: string, options?: any): Observable<ISong[]> {
-        console.log('Hello?')
         return this.http
           .get<ApiResponse<any[]>>(this.endpoint + `/recommendations/${user}`, {
             ...options,
@@ -43,12 +49,11 @@ export class DiscoverService {
           })
           
           .pipe(
-            map((response: any) => response), // Extraheer de body (ApiResponse)
+            map((response: any) => response),
             mergeMap((apiResponse: ApiResponse<any[]>) => {
               const recommendations = apiResponse.results;
               console.log('Recommendations from rcmnd API:', recommendations);
             if(recommendations){
-                console.log('Hello?')
               const songRequests: Observable<ISong>[] = recommendations.map((rec) =>
                 forkJoin({
                   artist: this.artistService.read(rec.artist),
@@ -60,23 +65,23 @@ export class DiscoverService {
                       genre: rec.genre,
                       artist: artist,
                       album: album,
-                      duration: 0,
+                      duration: rec.duration,
                       songText: '',
                   } as unknown as ISong))
                 )
               );
-              console.log("ja huh waarom doet ie het dan niet")
               return forkJoin(songRequests);
             } else {
-                console.log("niet hier toch")
-                return ['niet gelukt'];
+                return [];
             }
             }),
             tap(console.log),
             catchError(this.handleError)
           );
       }
-    
+    public setSimilar(): void {
+
+    }
     
 
     public read(id: string | null, options?: any): Observable<IArtist> {

@@ -5,6 +5,11 @@ import { Neo4JService } from './neo4j-songs.service';
 export class Neo4JController {
     constructor(private readonly neo4jService: Neo4JService) {}
 
+    @Get('match')
+    async matchSimilar(): Promise<any> {
+        await this.neo4jService.matchSimilar();
+    }
+    
     @Get('')
     async getAll(): Promise<any> {
         const results = await this.neo4jService.findAll();
@@ -22,6 +27,8 @@ export class Neo4JController {
         const results = await this.neo4jService.getRecommendationsFromUser(user);
         return results;
     }
+
+
 
     @Post()
     async postSong(@Body() body: {song: { id: string, title: string, genre: string, artist: string, album?: string}}): Promise<any> {
