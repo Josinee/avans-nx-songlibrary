@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { IAlbum } from '@avans-nx-songlibrary/api';
 import { Album } from './album.schema';
 import { SongService } from '../song/song.service';
-import { CreateAlbumDto } from '@avans-nx-songlibrary/backend/dto';
+import { CreateAlbumDto, UpdateAlbumDto } from '@avans-nx-songlibrary/backend/dto';
 
 const httpOptions = {
     observe: 'body',
@@ -26,7 +26,7 @@ export class AlbumService {
             query['dateOfRelease'] = { $gte: dateOfRelease };
           }
         }
-      
+       
         if (filters.artist) {
           query['artist'] = filters.artist;
         }
@@ -50,5 +50,15 @@ export class AlbumService {
     async create(createAlbum: CreateAlbumDto): Promise<Album> {
         const createdAlbum = new this.albumModel(createAlbum);
         return createdAlbum.save();
+    }
+
+    async update(id: string, updateAlbum: UpdateAlbumDto): Promise<Album> {
+      const album = await this.albumModel.findById(id);
+      if (!album) {
+        throw new Error('Album niet gevonden');
+      }
+
+      Object.assign(album, updateAlbum);
+      return album.save();
     }
 }

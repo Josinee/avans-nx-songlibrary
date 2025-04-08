@@ -64,6 +64,13 @@ export class AlbumService {
         )
     }
 
+    public update(album: IAlbum, options?: any): Observable<IAlbum> {
+        return this.http.put<IAlbum>(`${this.endpoint}/${album._id}`, album, { ...options, ...httpOptions }).pipe(
+            map((response: any) => response.results as IAlbum),
+            catchError(this.handleError)
+        );
+    }
+
     public handleError(error: HttpErrorResponse): Observable<any> {
         console.log('handleError in AlbumService', error);
 

@@ -15,9 +15,9 @@ export class CreateSongDto implements ICreateSong {
     @IsNotEmpty()
     title!: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    duration!: number;
+    duration!: string;
 
     @IsNumber()
     @IsNotEmpty()
@@ -41,9 +41,9 @@ export class UpdateSongDto implements IUpdateSong {
     @IsOptional()
     title!: string;
 
-    @IsNumber()
+    @IsString()
     @IsOptional()
-    duration!: number;
+    duration!: string;
 
     @IsString()
     @IsOptional()
@@ -75,9 +75,9 @@ export class UpsertSongDto implements IUpsertSong {
     @IsNotEmpty()
     title!: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    duration!: number;
+    duration!: string;
 
     @IsString()
     @IsOptional()

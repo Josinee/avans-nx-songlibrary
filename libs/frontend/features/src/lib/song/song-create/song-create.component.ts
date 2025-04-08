@@ -9,13 +9,13 @@ import { AlbumService } from '../../album/album.service';
     selector: 'song-create',
     templateUrl: './song-create.component.html'
 })
-export class SongCreateComponent {
+export class SongCreateComponent {//TODO mooi maken
     artists: IArtist[] | null = null;
     genres = Object.values(Genres);
     
     song: ICreateSong = {
         title: '',
-        duration: 0,
+        duration: '',
         artist: {
             _id: '',
             image: '',
@@ -68,5 +68,8 @@ export class SongCreateComponent {
             }
         }
     }
+
+
+    
     
 }

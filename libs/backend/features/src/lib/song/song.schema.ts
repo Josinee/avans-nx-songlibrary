@@ -15,7 +15,7 @@ export class Song implements ISong {
     title!: string;
 
     @Prop({ required: true })
-    duration!: number;
+    duration!: string;
 
     @Prop({ required: true })
     songText!: string;

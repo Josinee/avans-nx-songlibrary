@@ -18,7 +18,7 @@ export class PlaylistService {
     async create(createPlaylistDto: CreatePlaylistDto): Promise<Playlist> {
         const createdPlaylist = new this.playlistModel(createPlaylistDto);
         return createdPlaylist.save();
-    }
+    } 
 
     async getAll(): Promise<IPlaylist[]> {
 

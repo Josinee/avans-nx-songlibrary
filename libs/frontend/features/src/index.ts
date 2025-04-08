@@ -8,6 +8,8 @@ export * from './lib/artist/artist-detail/artist-detail.component';
 export * from './lib/artist/artist-create/artist-create.component';
 export * from './lib/album/album-detail/album-detail.component';
 export * from './lib/album/album-list/album-list.component';
+export * from './lib/album/album-create/album-create.component'
+export * from './lib/album/album-update/album-update.component'
 export * from './lib/playlist/playlist-create/playlist-create.component';
 export * from './lib/playlist/playlist-list/playlist-list.component';
 export * from './lib/playlist/playlist-detail/playlist-detail.component';

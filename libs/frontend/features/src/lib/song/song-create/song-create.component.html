@@ -5,18 +5,17 @@
         <div *ngIf="songTitle.invalid && songTitle.touched" class="text-danger">Song title is required.</div>
 
         <label for="songText" class="form-label">Song Text</label>
-        <input
-            type="text"
+        <textarea
             class="form-control"
             [(ngModel)]="song.songText"
             name="songText"
             #songText="ngModel"
             id="songText"
             placeholder="Enter song text"
-        />
+        ></textarea>
     </div>
     <div class="mb-3 col-8">
-
+ 
     <label for="genre">Artist</label>
     <select [(ngModel)]="song.artist" name="artist" class="form-control" (change)="onArtistChange()">
         <option *ngFor="let artist of artists" [ngValue]="artist">{{ artist.name }}</option>
@@ -27,10 +26,16 @@
         <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
     </select>
 
+    <div class="mb-3 col-7">
+        <label for="duration" class="form-label">Duration</label>
+        <input type="time" class="form-control" [(ngModel)]="song.duration" name="songDuration" #songDuration="ngModel" id="Duration" required placeholder="Enter song duration" />
+    <div *ngIf="songDuration.invalid && songDuration.touched" class="text-danger">Song duration is required.</div>
+
+
     
     <label for="genre">Album</label>
     <select [(ngModel)]="song.album" name="album" class="form-control">
-        <option *ngFor="let album of albums;">{{album.title}}</option>
+        <option *ngFor="let album of albums;" [value]="album._id">{{album.title}}</option>
     </select>
 
 </div>
@@ -38,4 +43,4 @@
 
     <button type="submit" class="btn btn-primary w-100">Submit</button>
 
-</form>
+

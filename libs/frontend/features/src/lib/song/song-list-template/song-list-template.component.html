@@ -9,15 +9,18 @@
                     <th *ngIf="context !== 'album'" scope="col">Album</th>
                     <th scope="col">Duration</th>
                     <th scope="col"></th>
+                    <th>hoi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let song of songs; let i = index">
+                <tr *ngFor="let song of songs; let i = index" >
                     <td>{{ i + 1 }}</td>
                     <td [routerLink]="['/song', song._id]">{{ song.title }}</td>
                     <td *ngIf="context == 'playlist'" [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</td>
-                    <td *ngIf="context !== 'album'" [routerLink]="['/album', song.album._id]">{{ song.album.title || 'no album' }}</td>
-                    <td>{{ song.duration / 100 | number : '1.2-3' }}</td>
+                    <td *ngIf="context !== 'album'" [routerLink]="['/album', song.album?._id]">{{ song.album?.title || 'no album' }}</td>
+                    <td>{{ song.duration}}</td>
+                    
+                    
                     <td>
                         <div class="dropstart">
                             <button type="button" class="btn btn-link text-body" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,6 +59,7 @@
                             </ul>
                         </div>
                     </td>
+                    <td>{{ song.genre }}</td>
                 </tr>
             </tbody>
         </table>

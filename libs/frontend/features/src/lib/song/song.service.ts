@@ -1,6 +1,6 @@
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import { ApiResponse, ICreateSong, ISong, IUser } from '@avans-nx-songlibrary/api';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
@@ -24,6 +24,10 @@ export class SongService {
         if (options?.artist) {
             const artist = options.artist
             params = params.append('artist', artist);
+        }
+        if (options?.album){
+            const album = options.album
+            params = params.append('album', album);
         }
 
         return this.http
@@ -70,22 +74,56 @@ export class SongService {
     }
 
     public putLikedSong(user: IUser, song: ISong, options?: any) {
+        console.log("Put liked song")
+        console.log(user._id + "  " + song._id + song.title + song.genre + song.artist._id+ song.album)
         const body = {
             user: { id: user._id, username: user.name },
-            song: { id: song._id, title: song.title, genre: song.genre, artist: song.artist._id, album: song.album._id },
+            song: { id: song._id, title: song.title, genre: song.genre, artist: song.artist._id, album: song.album },
         };
-    
+        console.log("body" +body.song.id)
         return this.http.put<void>(`${environment.rcmndApiUrl}/songs`, body, options).pipe(
             tap((response) => console.log('Response: ', response)),
             catchError(this.handleError)
         );
     }
 
+    public removeLikedSong(user: IUser, song: ISong, options?: any) {
+        return this.http.delete<void>(`${environment.rcmndApiUrl}/${song._id}/${user._id}`, )
+    }
+
+
     public create(song: ICreateSong, options?: any): Observable<ISong> {
-        return this.http.post<ISong>(this.endpoint, song, { ... options, ...httpOptions}).pipe(
+        console.log("Putsong")
+        console.log(song.title + song.genre + song.artist._id+ song.album)
+        return this.http.post<any>(this.endpoint, song, { ...options, ...httpOptions }).pipe(
+          map((response: any) => response.results as ISong),
+          switchMap((createdSong: ISong) => {
+            const body = {
+              song: {
+                id: createdSong._id,
+                title: createdSong.title,
+                genre: createdSong.genre,
+                artist: createdSong.artist,
+                album: createdSong.album,
+              },
+            };
+            return this.http.post<void>(`${environment.rcmndApiUrl}/songs`, body, options).pipe(
+              tap((response) => console.log('Response: ', response)),
+              map(() => createdSong),
+              catchError(this.handleError)
+            );
+          }),
+          catchError(this.handleError)
+        );
+      }
+    
+    public update(song: ISong, options?: any): Observable<ISong> {
+        console.log("songservice front"+ song.album?.title)
+        return this.http.put<ISong>(`${this.endpoint}/${song._id}`, song, { ...options, ...httpOptions }).pipe(
             map((response: any) => response.results as ISong),
             catchError(this.handleError)
-        )
+        );
+
     }
 
     public handleError(error: HttpErrorResponse): Observable<any> {

@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     selector: 'artist-create',
     templateUrl: './artist-create.component.html'
 })
-export class ArtistCreateComponent {
+export class ArtistCreateComponent {//TODO MOOI MAKEN
     artist: ICreateArtist = {}
     genres = Object.values(Genres);
 

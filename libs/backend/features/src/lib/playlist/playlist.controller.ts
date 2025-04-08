@@ -20,7 +20,7 @@ export class PlaylistController {
         return this.playlistService.getOne(id);
     }
 
-    @Post('')
+    @Post('') 
     create(@Body() data: CreatePlaylistDto): Promise<IPlaylist> {
         return this.playlistService.create(data);
     }

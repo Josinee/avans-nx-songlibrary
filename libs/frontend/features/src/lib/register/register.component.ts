@@ -30,5 +30,6 @@ export class RegisterComponent {
                 console.error('Something went wrong');
             }
         });
+        
     }
 }

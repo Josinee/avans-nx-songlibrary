@@ -5,10 +5,10 @@ import { Genres, IAlbum } from './album.interface';
 export interface ISong {
     _id: Id,
     title: string,
-    duration: number,
+    duration: string,
     songText: string,
     artist: IArtist,
-    album: IAlbum,
+    album: IAlbum | null,
     genre: Genres
 }
 

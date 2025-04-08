@@ -11,6 +11,7 @@
             <a [routerLink]="['/artist', album!.artist._id]" class="h5 text-muted">{{ album?.artist?.name }}</a>
             <p class="text-muted mt-2 mb-1">{{ album?.dateOfRelease | date }} - {{ album?.numberOfSongs }} song{{ album?.numberOfSongs! > 1 ? 's' : '' }}</p>
             <p class="text-muted">{{ album?.type }}</p>
+            <a [routerLink]="['/album-update', album!._id]">Update</a>
         </div>
     </div>
 </div>

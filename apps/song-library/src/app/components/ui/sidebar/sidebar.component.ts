@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
+export class SidebarComponent {//TODO mooi maken
     public user: IUser | undefined;
     personalPlaylists: IPlaylist[] = [];
     subscription: Subscription | undefined = undefined;

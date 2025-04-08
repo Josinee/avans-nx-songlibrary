@@ -25,7 +25,7 @@ export class Album implements IAlbum {
     @Prop({ required: true })
     numberOfSongs!: number;
 
-    @Prop({ required: true, enum: Genres, type: String })
+    @Prop({ required: true })
     genre!: Genres[];
 
     @Prop({ required: true, enum: AlbumType, type: String })
@@ -34,8 +34,8 @@ export class Album implements IAlbum {
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Artist' })
     artist!: IArtist;
 
-    @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'Song' })
-    songs!: ISong[];
+    // @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'Song' })
+    // songs!: ISong[];
 }
 
 export const AlbumSchema = SchemaFactory.createForClass(Album);

@@ -10,7 +10,7 @@ import { LoginService } from '../../login/login.service';
     templateUrl: 'song-list-template.component.html',
     styleUrl: 'song-list-template.component.css'
 })
-export class SongListTemplateComponent {
+export class SongListTemplateComponent {//TODO Hoi met genre weghalen maar het wel laten werken
     subscription: Subscription | undefined = undefined;
     @Input() songs: ISong[] | null = null;
     @Input() context: string | undefined;
@@ -27,6 +27,7 @@ export class SongListTemplateComponent {
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private songService: SongService) {}
 
     addToPlaylist(playlist: IPlaylist, song: ISong): void {
+        console.log(song._id, song.album, song.artist._id, song.genre, song.title, song.duration, song.songText)
         this.songService.putLikedSong(this.user, song).subscribe();
 
         if (!playlist) {
@@ -49,6 +50,7 @@ export class SongListTemplateComponent {
             console.error('Playlist not found');
             return;
         }
+        this.songService.removeLikedSong(this.user, song).subscribe();//TODO song uit liked songs halen behalve als het in een andere eigen playlist staat.
         this.playlistService.removeFromPlaylist(playlist, song).subscribe((results) => {
             this.songs = results.songs
             this.showToast(`Succesfully removed ${song.title} from ${playlist.name}`);
@@ -57,6 +59,7 @@ export class SongListTemplateComponent {
     }
 
     ngOnInit(): void {
+        
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;

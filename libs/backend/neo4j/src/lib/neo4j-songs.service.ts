@@ -29,8 +29,26 @@ export class Neo4JService {
         return songs;
     }
 
+    async postSong(song: { id: string, title: string, genre: string, artist: string, album?: string}) {
+        console.log("in neoservice " + song.id + song.title + song.genre + song.album + song.artist)
+        await this.neo4jService.write(`           
+             MERGE (s:Song {id: $songId})
+                        ON CREATE SET 
+                s.name = $title,
+                s.genre = $genre,
+                s.artist = $artist,
+                s.album = $album`, {
+                    songId: song.id,
+            title: song.title || null,
+            genre: song.genre || null,
+            artist: song.artist || null,
+            album: song.album || null,
+                });
+    }
+
     async putLikedSong(user: { id: string; username?: string }, song: { id: string; title?: string, genre?: string, artist?: string, album?: string }) {
         console.log('put liked song')
+        console.log(song.id + song.title + song.genre + song.album + song.artist)
         await this.neo4jService.write(`
             MERGE (n:User {id: $userId})
             ON CREATE SET n.name = $username

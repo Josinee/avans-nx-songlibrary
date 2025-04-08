@@ -1,0 +1,50 @@
+<button class="btn" (click)="goBack()"><i class="bi bi-arrow-up-left-square"></i></button>
+
+<div class="container m-4">
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center">
+            <img src="{{ album?.image || '/assets/album-placeholder.png' }}" class="img-fluid rounded shadow" style="object-fit: cover; width: 100%; max-width: 250px; height: 250px" />
+        </div>
+
+        <div class="col-md-8">
+            <h2 class="display-6">{{ album?.title }}</h2>
+            <a [routerLink]="['/artist', album!.artist._id]" class="h5 text-muted">{{ album?.artist?.name }}</a>
+            <p class="text-muted mt-2 mb-1">{{ album?.dateOfRelease | date }} - {{ album?.numberOfSongs }} song{{ album?.numberOfSongs! > 1 ? 's' : '' }}</p>
+            <p class="text-muted">{{ album?.type }}</p>
+            <a [routerLink]="['/album-update', album!._id]">Update</a>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <div>
+        <div>
+            <h4>Nummers in dit album</h4>
+            <ul *ngIf="songs">
+                <li *ngFor="let song of songs">
+                    {{ song.title }}
+                    <button (click)="removeSong(song)">Verwijderen</button>
+                </li>
+            </ul>
+            <p *ngIf="!songs || songs.length === 0">Er zijn nog geen nummers in dit album.</p>
+        </div>
+        
+        <form (ngSubmit)="onSubmit()" *ngIf="album">
+            <div>
+                <label for="title">Titel:</label>
+                <input type="text" id="title" name="title" [(ngModel)]="album.title" required>
+            </div>
+            <button type="submit">Opslaan</button>
+            <button type="button" (click)="goBack()">Terug</button>
+        </form>
+
+        <div>
+            <h4>Voeg een nummer toe</h4>
+            <select #songSelect>
+                <option value="">Selecteer een nummer</option>
+                <option *ngFor="let song of allSongs" [value]="song._id">{{song.title}}</option>
+            </select>
+            <button (click)="addSelectedSong(songSelect.value)">Toevoegen</button>
+        </div>
+    </div>
+    
+</div>

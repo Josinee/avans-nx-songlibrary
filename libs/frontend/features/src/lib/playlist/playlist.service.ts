@@ -65,7 +65,6 @@ export class PlaylistService {
 
     public read(id: string | null, options?: any): Observable<IPlaylist> {
         console.log(`read ${this.endpoint}` + `/${id}`);
-        console.log('deze tap')
         return this.http
             .get<ApiResponse<IPlaylist>>(this.endpoint + `/${id}`, {
                 ...options,
@@ -92,10 +91,15 @@ export class PlaylistService {
         );
     }
 
-    public parseDuration(duration: number): number {
-        const minutes = Math.floor(duration / 100);
-        const seconds = duration % 100;
-        return minutes * 60 + seconds;
+    public parseDuration(duration: string): number {
+        const [minutes, seconds] = duration.split(':').map(Number);
+    
+        if (isNaN(minutes) || isNaN(seconds)) {
+            console.error('Ongeldig duration formaat:', duration);
+            return 0;
+        }
+    
+        return (minutes * 60) + seconds;
     }
 
     public addToPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
@@ -104,7 +108,7 @@ export class PlaylistService {
         const durationSeconds = this.parseDuration(song.duration);
         playlist.duration += durationSeconds;
         playlist.lastUpdated = new Date();
-        console.log('deze kan niet toch')
+
         return this.http.put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions }).pipe(
             tap((response) => console.log(response)),
             map((response: any) => response.results),
@@ -113,15 +117,14 @@ export class PlaylistService {
     }
 
     public removeFromPlaylist(playlist: IPlaylist, song: ISong, options?: any): Observable<IPlaylist> {
-
-        const songdelete = playlist.songs.indexOf(song);
-        console.log(songdelete);
-        playlist.songs.splice(songdelete, 1);
-        playlist.numberOfSongs--;
-        const durationSeconds = this.parseDuration(song.duration);
-        playlist.duration -= durationSeconds;
-        playlist.lastUpdated = new Date();
-        console.log('of deze')
+        const index = playlist.songs.indexOf(song);
+        if (index > -1) {
+            playlist.songs.splice(index, 1);
+            playlist.numberOfSongs--;
+            playlist.duration -= this.parseDuration(song.duration);
+            playlist.lastUpdated = new Date();
+        }
+    
         return this.http.put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions }).pipe(
             tap((response) => console.log(response)),
             map((response: any) => response.results),
@@ -145,7 +148,9 @@ export class PlaylistService {
 
     public delete(playlist: IPlaylist): Observable<void> {
         console.log('Deleting playlist with ID:', playlist._id);
-
+        playlist.songs.forEach(element => {
+            //TODO alle playlist songs uit liked halen behalve als ze in een andere eigen playlist staan
+        });
         return this.http.delete<void>(`${this.endpoint}/${playlist._id}`).pipe(
             tap(() => {
                 console.log(`Playlist ${playlist._id} deleted successfully`);
