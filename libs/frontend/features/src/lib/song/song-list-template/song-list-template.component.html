@@ -8,6 +8,7 @@
                     <th *ngIf="context == 'playlist' || context == 'discover'" scope="col">Artist</th>
                     <th *ngIf="context !== 'album'" scope="col">Album</th>
                     <th *ngIf="context !== 'discover'" scope="col">Duration</th>
+                    <th *ngIf="context == 'discover'">Connection</th>
                     <th scope="col"></th>
                     <th hidden></th>
                 </tr>
@@ -19,8 +20,19 @@
                     <td *ngIf="context == 'playlist'|| context == 'discover'" [routerLink]="['/artist', song.artist._id]">{{ song.artist.name }}</td>
                     <td *ngIf="context !== 'album'" [routerLink]="['/album', song.album?._id]">{{ song.album?.title || 'no album' }}</td>
                     <td *ngIf="context !== 'discover'">{{ song.duration}}</td>
-                    
-                    
+                    <td>
+                        <ng-container *ngIf="context == 'discover' && getRelationships(song).length">
+                            <h4>
+                              <ng-container *ngFor="let rel of getRelationships(song); let i = index; let last = last">
+                                <span [ngClass]="getRelationshipColor(rel)" class="badge text-bg-secondary">
+                                  {{ getPascalCase(rel) }}
+                                  
+                                </span>
+                                <span *ngIf="!last">,</span>
+                              </ng-container>
+                            </h4>
+                          </ng-container>
+                    </td>
                     <td>
                         <div class="dropstart">
                             <button type="button" class="btn btn-link text-body" data-bs-toggle="dropdown" aria-expanded="false">
@@ -58,7 +70,7 @@
                                 </div>
                             </ul>
                         </div>
-                    </td>
+
                     <td hidden>{{ song.genre }}</td>
                 </tr>
             </tbody>

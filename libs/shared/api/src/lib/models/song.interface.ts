@@ -13,6 +13,7 @@ export interface ISong {
 }
 
 
+
 export type ICreateSong = Pick<ISong, 'title' | 'duration' | 'artist' | 'songText'> & {genre?: Genres; album?: IAlbum;}
 export type IUpdateSong = Partial<Omit<ISong, '_id'>>;
 export type IUpsertSong = ISong;

@@ -101,4 +101,34 @@ export class SongListTemplateComponent {
             this.playlistService.getSongsByPlaylist(this.playlist._id).subscribe((results) => (this.songs = results));
         }
     }
+
+    getRelationships(song: any): string[] {
+        return song?.relationshipTypes || [];
+    }
+
+    getPascalCase(relationship: string): string {
+        switch (relationship) {
+            case 'SIMILAR_ARTIST':
+              return 'Liked artist';
+            case 'SIMILAR_GENRE':
+              return 'Liked Genre';
+            case 'SIMILAR_ALBUM':
+              return 'Liked Album';
+             default:
+               return 'badge bg-secondary';
+           }
+    }
+      
+    getRelationshipColor(relationship: string): string {
+      switch (relationship) {
+        case 'SIMILAR_ARTIST':
+          return 'badge bg-primary';
+        case 'SIMILAR_GENRE':
+          return 'badge bg-success';
+        case 'SIMILAR_ALBUM':
+          return 'badge bg-warning';
+         default:
+           return 'badge bg-secondary';
+       }
+    }
 }

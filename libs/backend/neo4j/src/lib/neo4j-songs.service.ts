@@ -10,17 +10,49 @@ export class Neo4JService {
 
     async matchSimilar(): Promise<any> {
         const match = await this.neo4jService.write(`MATCH (s1:Song), (s2:Song)
-                                                        WHERE (s1.artist = s2.artist OR s1.genre = s2.genre OR s1.album = s2.album)
-                                                        AND s1.id < s2.id
-                                                        MERGE (s1)-[:SIMILAR_TO]->(s2)`)
+                    WHERE s1.id < s2.id
+
+                    FOREACH (_ IN CASE WHEN s1.artist = s2.artist THEN [1] ELSE [] END |
+                    MERGE (s1)-[:SIMILAR_ARTIST]->(s2)
+                    )
+
+                    FOREACH (_ IN CASE WHEN s1.genre = s2.genre THEN [1] ELSE [] END |
+                    MERGE (s1)-[:SIMILAR_GENRE]->(s2)
+                    )
+
+                    FOREACH (_ IN CASE WHEN s1.album = s2.album THEN [1] ELSE [] END |
+                    MERGE (s1)-[:SIMILAR_ALBUM]->(s2)
+                    )`)
 
     }
 
-    async getRecommendationsFromUser(user: string): Promise<ISong[]> {
-        const results = await this.neo4jService.read(`MATCH (u:User {id: '${user}'})-[:LIKES]->(likedSong) MATCH (likedSong)-[:SIMILAR_TO]-(similarSong)
-                                                            WHERE NOT (u)-[:LIKES]->(similarSong)
-                                                            RETURN DISTINCT similarSong`);
-        const songs = results.records.map((record: any) => record._fields[0].properties);
+    async getRecommendationsFromUser(user: string): Promise<any> {
+        const results = await this.neo4jService.read(`
+            MATCH (u:User {id: '${user}'})-[:LIKES]->(liked:Song)
+                MATCH (candidate:Song)
+                WHERE NOT (u)-[:LIKES]->(candidate)
+                OPTIONAL MATCH (liked)-[r:SIMILAR_GENRE|SIMILAR_ARTIST|SIMILAR_ALBUM]->(candidate)
+                WITH candidate, count (r) AS matchCount, collect(DISTINCT type(r)) AS relationshipTypes
+                WHERE matchCount > 0
+                ORDER BY matchCount DESC
+                RETURN candidate AS similarSong, relationshipTypes, matchCount
+        `);
+    
+        if (!results.records || results.records.length === 0) {
+            return [];
+        }
+    
+        const songs = results.records.map((record: any) => {
+            const song = record._fields[0].properties;
+            const relationshipTypes = record._fields[1];
+            const matchCount = record._fields[2].low;
+            return { 
+                song,
+                relationshipTypes,
+                matchCount 
+            };
+        });
+    
         return songs;
     }
 

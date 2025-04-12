@@ -14,6 +14,7 @@ export class Neo4JController {
     @Get('recommendations/:user')
     async getRecommendationsForUser(@Param('user') user: string): Promise<any> {
         const results = await this.neo4jService.getRecommendationsFromUser(user);
+
         return results;
     }
 
