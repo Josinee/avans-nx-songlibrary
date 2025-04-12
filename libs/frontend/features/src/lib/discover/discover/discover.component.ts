@@ -11,8 +11,6 @@ import { interval, Subscription } from 'rxjs';
     styleUrl: './discover.component.css'
 })
 export class DiscoverComponent implements OnInit {//TODO tekst pagina aanpassen
-    //TODO automatisch verwijderen zodra het is toegevoegd aan playlist
-    //TODO als het nummer nog in een andere playlist staat niet verwijderen, anders wel
     songs: ISong[] = [];
     user!: IUser;
     subscription: Subscription = new Subscription;

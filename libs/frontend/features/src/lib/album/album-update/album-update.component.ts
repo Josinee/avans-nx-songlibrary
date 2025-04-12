@@ -16,6 +16,7 @@ export class AlbumUpdateComponent {//TODO update mooim maken
     allSongs: ISong[] | null = null;
     selectedSong: ISong[] | undefined;
 
+
     constructor(private albumService: AlbumService, private songService: SongService, private route: ActivatedRoute, private location: Location, private router: Router) {}
 
     ngOnInit(): void {
@@ -77,6 +78,24 @@ export class AlbumUpdateComponent {//TODO update mooim maken
             }
         });
     }
+
+    deleteAlbum(): void {
+        if(this.album){
+            this.albumService.delete(this.album).subscribe({
+                next: () => {
+                    console.log('verwijderd')
+                    this.router.navigate(['homepage'])
+                },
+                error: (err) => {
+
+                    console.error(err);
+                }
+            });
+
+        }
+    }
+    
+
 
     onSubmit(): void {
         if (this.album) {

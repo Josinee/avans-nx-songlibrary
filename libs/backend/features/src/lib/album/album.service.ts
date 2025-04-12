@@ -61,4 +61,14 @@ export class AlbumService {
       Object.assign(album, updateAlbum);
       return album.save();
     }
+
+
+
+  async delete(id: string): Promise<void> {
+      const filter = { _id: id };
+      const deleted = await this.albumModel.deleteOne(filter);
+
+  }
+
+   
 }

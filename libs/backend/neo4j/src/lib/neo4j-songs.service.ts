@@ -54,6 +54,17 @@ export class Neo4JService {
                 });
     }
 
+    async postUser(user: {id: string; username?: string}) {
+        await this.neo4jService.write(`
+            MERGE (u:User {id: $userId})
+            On CREATE SET u.name = $username`, {
+                userId: user.id || null,
+                username: user.username || null
+            });
+
+        }
+    
+
     async putLikedSong(user: { id: string; username?: string }, song: { id: string; title?: string, genre?: string, artist?: string, album?: string }) {
         console.log('put liked song')
         console.log(song.id + song.title + song.genre + song.album + song.artist)

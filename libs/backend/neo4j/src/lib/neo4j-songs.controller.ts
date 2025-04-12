@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Neo4JService } from './neo4j-songs.service';
+import { promises } from 'dns';
 
 @Controller('songs')
 export class Neo4JController {
@@ -30,7 +31,7 @@ export class Neo4JController {
 
 
 
-    @Post()
+    @Post('')
     async postSong(@Body() body: {song: { id: string, title: string, genre: string, artist: string, album?: string}}): Promise<any> {
         if(!body.song) {
             throw new Error('No song found');
@@ -39,6 +40,13 @@ export class Neo4JController {
         await this.neo4jService.postSong(body.song);
 
         return {}
+    }
+
+    @Post('user')
+    async postUser(@Body() user: { id: string, username?: string}): Promise<any> {
+        if(user) {
+            await this.neo4jService.postUser(user);
+        }
     }
 
     @Put()

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Post, Put, Query } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { Get, Param } from '@nestjs/common';
 import { IAlbum } from '@avans-nx-songlibrary/api';
@@ -27,5 +27,10 @@ export class AlbumController {
     @Put(':id')
     update(@Param('id') id: string, @Body() data: UpdateAlbumDto): Promise<IAlbum> {
       return this.albumService.update(id, data);
+    }
+
+    @Delete(':id')
+    delete(@Param('id') id: string): Promise<void> {
+        return this.albumService.delete(id)
     }
 }

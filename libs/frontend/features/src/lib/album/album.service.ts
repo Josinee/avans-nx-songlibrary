@@ -71,6 +71,15 @@ export class AlbumService {
         );
     }
 
+    public delete(album: IAlbum): Observable<void> {
+        return this.http.delete<void>(`${this.endpoint}/${[album._id]}`).pipe(
+            tap(() => {
+                console.log(`Album ${album._id} deleted successfully`)
+            }),
+            catchError(this.handleError)
+        )
+    }
+
     public handleError(error: HttpErrorResponse): Observable<any> {
         console.log('handleError in AlbumService', error);
 

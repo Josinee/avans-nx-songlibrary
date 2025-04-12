@@ -1,7 +1,7 @@
-import { IUserIdentity, IUserRegistration } from '@avans-nx-songlibrary/api';
+import { IUser, IUserIdentity, IUserRegistration } from '@avans-nx-songlibrary/api';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { environment } from '@avans-nx-songlibrary/shared/util-env';
 
@@ -20,7 +20,17 @@ export class RegisterService {
         console.log(`create ${this.endpoint}`);
         return this.http.post<IUserRegistration>(this.endpoint, { name, emailAddress, password }, { ...options, ...httpOptions }).pipe(
             map((response: any) => response.results),
+            switchMap((createdUser: IUser) => {
+                const user = {
+                    id: createdUser._id,
+                    username: createdUser.name
+                };
+            return this.http.post<void>(`${environment.rcmndApiUrl}/songs/user`, user, options).pipe(
+                catchError(this.handleError) 
+            )
+            }),
             catchError(this.handleError)
+            
         );
     }
 
@@ -29,4 +39,7 @@ export class RegisterService {
 
         return throwError(() => new Error(error.message));
     }
+    
 }
+
+

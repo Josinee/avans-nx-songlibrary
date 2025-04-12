@@ -25,7 +25,8 @@ export class RegisterComponent {
         const password = this.registerUser.password;
         this.registerService.register(name, emailAddress, password).subscribe((user: IUserIdentity) => {
             if (user) {
-                this.router.navigate(['login']);
+                this.router.navigate(['login']); 
+                
             } else {
                 console.error('Something went wrong');
             }
