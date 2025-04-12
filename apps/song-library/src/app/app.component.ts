@@ -20,10 +20,8 @@ export class AppComponent implements OnInit {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 AppComponent.user = user;
-                console.log('User is logged in:', user);
                 this.router.navigate(['/homepage']);
             } else {
-                console.log('No user logged in');
                 this.router.navigate(['/login']);
             }
         });

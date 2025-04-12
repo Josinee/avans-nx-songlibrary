@@ -51,7 +51,6 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     updatePlaylist(): void {
         if (this.playlist) {
             this.playlistService.update(this.playlist).subscribe((updatedPlaylist) => {
-                console.log('Updated Playlist from API:', updatedPlaylist);
                 this.playlist = updatedPlaylist;
             });
         }

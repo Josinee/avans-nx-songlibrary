@@ -19,8 +19,6 @@ export class DiscoverService {
     constructor(private readonly http: HttpClient, private artistService: ArtistService, private albumService: AlbumService) {}
 
     public list(song: string, options?: any): Observable<ISong[] | null> {
-        console.log(`list ${this.endpoint}`);
-
         return this.http
             .get<ApiResponse<ISong[]>>(this.endpoint + `/${song}`, {
                 ...options,
@@ -40,7 +38,51 @@ export class DiscoverService {
       });
     }
 
-    public getRecommendationsForUser(user: string, options?: any): Observable<ISong[]> {
+    public getRecommendationsForUser(user: string, options?: any): Observable<any[]> {
+      return this.http
+          .get<ApiResponse<any[]>>(this.endpoint + `/recommendations/${user}`, {
+              ...options,
+              ...httpOptions,
+          })
+          .pipe(
+              map((response: any) => response),
+              mergeMap((apiResponse: ApiResponse<any[]>) => {
+                  const recommendations = apiResponse.results;
+  
+                  if (recommendations) {
+                      const songRequests: Observable<any>[] = recommendations.map((rec) =>
+                          forkJoin({
+                            artist: rec.song.artist ? this.artistService.read(rec.song.artist) : of(null),
+                            album: rec.song.album ? this.albumService.read(rec.song.album) : of(null),
+                          }).pipe(
+                              map(({ artist, album }) => ({
+                                  song: { 
+                                      _id: rec.song.id,
+                                      title: rec.song.name,
+                                      genre: rec.song.genre,
+                                      artist: artist,
+                                      album: album,
+                                      duration: 0,
+                                      songText: '',
+                                  },
+                                  relationshipTypes: rec.relationshipTypes,
+                                  matchCount: rec.matchCount
+                              }))
+                          )
+                          
+                      );
+                      return forkJoin(songRequests);
+                  } else {
+
+                      return [];
+                  }
+              }),
+              tap(console.log),
+              catchError(this.handleError)
+          );
+  }
+
+      public getRelationshipsForSong(songId: string): Observable<any[]> {
         return this.http
           .get<ApiResponse<any[]>>(this.endpoint + `/recommendations/${user}`, {
             ...options,
@@ -85,7 +127,6 @@ export class DiscoverService {
     
 
     public read(id: string | null, options?: any): Observable<IArtist> {
-        console.log(`read ${this.endpoint}/${id}`);
         return this.http
             .get<ApiResponse<IArtist>>(this.endpoint + `/${id}`, {
                 ...options,

@@ -29,7 +29,6 @@ export class PlaylistCreateComponent {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-
             }
         });
     }

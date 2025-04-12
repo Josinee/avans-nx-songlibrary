@@ -5,10 +5,6 @@ import { IPlaylist } from '@avans-nx-songlibrary/api';
 import { Playlist } from './playlist.schema';
 import { CreatePlaylistDto, UpdatePlaylistDto } from '@avans-nx-songlibrary/backend/dto';
 
-const httpOptions = {
-    observe: 'body',
-    responseType: 'json' as const
-};
 
 @Injectable()
 export class PlaylistService {
@@ -21,7 +17,6 @@ export class PlaylistService {
     } 
 
     async getAll(): Promise<IPlaylist[]> {
-
         return this.playlistModel.find({ public: true }).exec();
     }
 
@@ -45,7 +40,6 @@ export class PlaylistService {
 
     async getFromCreator(creator: string): Promise<IPlaylist[]> {
         const playlists = await this.playlistModel.find({ creator: creator }).exec();
-
         return playlists || [];
     }
 
@@ -79,7 +73,6 @@ export class PlaylistService {
     }
 
     async delete(id: string): Promise<void> {
-
         const filter = { _id: id };
         const deleted = await this.playlistModel.deleteOne(filter);
 

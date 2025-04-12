@@ -24,8 +24,6 @@ export class LoginService {
     }
 
     login(emailAddress: string, password: string, options?: any): Observable<IUser> {
-        console.log(`login at ${environment.dataApiUrl}login`);
-
         return this.http
             .post(
                 this.endpoint,
@@ -47,8 +45,6 @@ export class LoginService {
                     const user = response.results as IUser;
                     this.saveUserToLocalStorage(user);
                     this.currentUser.next(user);
-
-
                     return user;
                 }),
                 catchError(this.handleError)
@@ -60,7 +56,6 @@ export class LoginService {
         if (localUser) {
             const user = JSON.parse(localUser);
             this.userService.read(user._id).subscribe((user) => {
-
                 this.currentUser.next(user);
                 return user;
             });
@@ -71,8 +66,6 @@ export class LoginService {
         localStorage.setItem(this.CURRENT_USER, JSON.stringify(user));
     }
     public handleError(error: HttpErrorResponse): Observable<any> {
-        console.log('handleError in MealService', error);
-
         return throwError(() => new Error(error.message));
     }
     

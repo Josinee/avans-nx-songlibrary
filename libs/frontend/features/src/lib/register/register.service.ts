@@ -17,7 +17,6 @@ export class RegisterService {
     constructor(private readonly http: HttpClient) {}
 
     public register(name: string, emailAddress: string, password: string, options?: any): Observable<IUserIdentity> {
-        console.log(`create ${this.endpoint}`);
         return this.http.post<IUserRegistration>(this.endpoint, { name, emailAddress, password }, { ...options, ...httpOptions }).pipe(
             map((response: any) => response.results),
             switchMap((createdUser: IUser) => {

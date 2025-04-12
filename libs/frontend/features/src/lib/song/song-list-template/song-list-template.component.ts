@@ -31,7 +31,6 @@ export class SongListTemplateComponent {
         this.songService.read(song._id).subscribe((result)=>{
             this.addedSong = result as ISong;
             if(this.addedSong){
-                console.log(this.addedSong._id, this.addedSong.album, this.addedSong.artist._id, this.addedSong.genre, this.addedSong.title, this.addedSong.duration, this.addedSong.songText)
                 this.songService.putLikedSong(this.user, this.addedSong).subscribe();
         
                 if (!playlist) {
@@ -40,7 +39,6 @@ export class SongListTemplateComponent {
                 }
         
                 this.playlistService.addToPlaylist(playlist, this.addedSong).subscribe((results) => {
-                        //this.songs = results.songs
                         this.showToast(`Succesfully added ${this.addedSong?.title} to ${playlist.name}`);
                     },
                     (error) => {
@@ -58,12 +56,10 @@ export class SongListTemplateComponent {
             console.error('Playlist not found');
             return;
         }
-        
-        this.songService.removeLikedSong(this.user, song).subscribe();//TODO song uit liked songs halen behalve als het in een andere eigen playlist staat.
+        this.songService.removeLikedSong(this.user, song).subscribe();
         this.playlistService.removeFromPlaylist(playlist, song).subscribe((results) => {
             this.songs = results.songs
             this.showToast(`Succesfully removed ${song.title} from ${playlist.name}`);
-            // this.refreshSongList();
         });
     }
 

@@ -22,7 +22,7 @@ export class UserService {
         this.logger.log(`finding user with id ${_id}`);
         const item = await this.userModel.findOne({ _id }).exec();
         if (!item) {
-            this.logger.debug('Item not found');
+            this.logger.debug('User not found');
         }
         return item;
     }

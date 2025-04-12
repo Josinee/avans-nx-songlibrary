@@ -18,8 +18,6 @@ export class SongService {
     constructor(private readonly http: HttpClient, private playlistService: PlaylistService) {}
 
     public list(options?: any): Observable<ISong[] | null> {
-        console.log(`list ${this.endpoint}`);
-
         let params = new HttpParams();
 
         if (options?.artist) {
@@ -45,7 +43,6 @@ export class SongService {
     }
 
     public read(id: string | null, options?: any): Observable<ISong> {
-        console.log(`read ${this.endpoint}/${id}`);
         return this.http
             .get<ApiResponse<ISong>>(this.endpoint + `/${id}`, {
                 ...options,
@@ -59,7 +56,6 @@ export class SongService {
     }
 
     public getByAlbum(albumId: string | null, options?: any): Observable<ISong[]> {
-
         if (albumId) {
         }
         return this.http
@@ -75,13 +71,11 @@ export class SongService {
     }
 
     public putLikedSong(user: IUser, song: ISong, options?: any) {
-        console.log("Put liked song")
-        console.log(user._id + "  " + song._id + song.title + song.genre + song.artist._id+ song.album)
         const body = {
             user: { id: user._id, username: user.name },
             song: { id: song._id, title: song.title, genre: song.genre, artist: song.artist._id, album: song.album },
         };
-        console.log("body" +body.song.id)
+
         return this.http.put<void>(`${environment.rcmndApiUrl}/songs`, body, options).pipe(
             tap((response) => console.log('Response: ', response)),
             catchError(this.handleError)
@@ -112,8 +106,6 @@ export class SongService {
 
 
     public create(song: ICreateSong, options?: any): Observable<ISong> {
-        console.log("Putsong")
-        console.log(song.title + song.genre + song.artist._id+ song.album)
         return this.http.post<any>(this.endpoint, song, { ...options, ...httpOptions }).pipe(
           map((response: any) => response.results as ISong),
           switchMap((createdSong: ISong) => {
@@ -137,7 +129,6 @@ export class SongService {
       }
     
     public update(song: ISong, options?: any): Observable<ISong> {
-        console.log("songservice front"+ song.album?.title)
         return this.http.put<ISong>(`${this.endpoint}/${song._id}`, song, { ...options, ...httpOptions }).pipe(
             map((response: any) => response.results as ISong),
             catchError(this.handleError)

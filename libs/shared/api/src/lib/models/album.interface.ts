@@ -36,7 +36,6 @@ export interface IAlbum {
     numberOfSongs: number,
     genre: Genres[],
     artist: IArtist,
-    // songs: ISong[],
     type: AlbumType,
 }
 

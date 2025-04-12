@@ -17,7 +17,6 @@ export class ArtistService {
     constructor(private readonly http: HttpClient) {}
 
     public list(options?: any): Observable<IArtist[] | null> {
-        console.log(`list ${this.endpoint}`);
 
         return this.http
             .get<ApiResponse<IArtist[]>>(this.endpoint, {
@@ -32,7 +31,6 @@ export class ArtistService {
     }
 
     public read(id: string | null, options?: any): Observable<IArtist> {
-        console.log(`read ${this.endpoint}/${id}`);
         return this.http
             .get<ApiResponse<IArtist>>(this.endpoint + `/${id}`, {
                 ...options,

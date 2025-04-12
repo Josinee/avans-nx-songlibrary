@@ -11,35 +11,18 @@ export class Neo4JController {
         await this.neo4jService.matchSimilar();
     }
     
-    @Get('')
-    async getAll(): Promise<any> {
-        const results = await this.neo4jService.findAll();
-        return results;
-    }
-
-    @Get(':song')
-    async getSimilar(@Param('song') song: string): Promise<any> {
-        const results = await this.neo4jService.findSimilar(song);
-        return results;
-    }
-
     @Get('recommendations/:user')
     async getRecommendationsForUser(@Param('user') user: string): Promise<any> {
         const results = await this.neo4jService.getRecommendationsFromUser(user);
         return results;
     }
 
-
-
     @Post('')
     async postSong(@Body() body: {song: { id: string, title: string, genre: string, artist: string, album?: string}}): Promise<any> {
         if(!body.song) {
             throw new Error('No song found');
         }
-        console.log("song controller neo" + body.song + body.song.id + body.song.album, body.song.artist, body.song.genre, body.song.title)
         await this.neo4jService.postSong(body.song);
-
-        return {}
     }
 
     @Post('user')
@@ -52,13 +35,10 @@ export class Neo4JController {
     @Put()
     async putLikedSong(@Body() body: { user: { id: string; username?: string }, song: { id: string; title?: string, genre?: string, artist?: string, album?: string} }): Promise<any> {
         const { user, song } = body;
-
         if (!user || !song) {
             throw new Error('Both user and song are required in the request body');
         }
-        console.log("song controller neo"+ song.id + song.album, song.artist, song.genre, song.title)
         await this.neo4jService.putLikedSong(user, song);
-
         return { message: 'Relationship created or already exists' };
     }
 

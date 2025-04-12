@@ -17,8 +17,6 @@ export class AlbumService {
     constructor(private readonly http: HttpClient) {}
 
     public list(options?: any): Observable<IAlbum[] | null> {
-        console.log(`list ${this.endpoint}`);
-
         let params = new HttpParams();
 
         if (options?.dateOfRelease?.startDate) {
@@ -44,7 +42,6 @@ export class AlbumService {
     }
 
     public read(id: string | null, options?: any): Observable<IAlbum> {
-        console.log(`read ${this.endpoint + `/${id}`}`);
         return this.http
             .get<ApiResponse<IAlbum>>(this.endpoint + `/${id}`, {
                 ...options,

@@ -25,7 +25,6 @@ export class SongController {
 
     @Put(':id')
     update(@Param('id') id: string, @Body() data: UpdateSongDto): Promise<ISong>{
-        console.log("songcontroller" + data)
         return this.songService.update(id, data)
     }
 }

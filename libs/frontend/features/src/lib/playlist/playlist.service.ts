@@ -19,8 +19,6 @@ export class PlaylistService {
     constructor(private readonly http: HttpClient) {}
 
     public list(options?: any): Observable<IPlaylist[] | null> {
-        console.log(`list ${this.endpoint}`);
-
         return this.http
             .get<ApiResponse<IPlaylist[]>>(this.endpoint, {
                 ...options,
@@ -34,7 +32,6 @@ export class PlaylistService {
     }
 
     public getSongsByPlaylist(id: string, options?: any): Observable<ISong[]> {
-        console.log(`list ${this.endpoint}` + `/${id}`);
         return this.http
             .get<ApiResponse<ISong[]>>(this.endpoint + `/${id}`, {
                 ...options,
@@ -64,7 +61,6 @@ export class PlaylistService {
     }
 
     public read(id: string | null, options?: any): Observable<IPlaylist> {
-        console.log(`read ${this.endpoint}` + `/${id}`);
         return this.http
             .get<ApiResponse<IPlaylist>>(this.endpoint + `/${id}`, {
                 ...options,
@@ -79,7 +75,6 @@ export class PlaylistService {
     }
 
     public create(playlist: ICreatePlaylist, options?: any): Observable<IPlaylist> {
-        console.log(`create ${this.endpoint}`);
         return this.http.post<IPlaylist>(this.endpoint, playlist, { ...options, ...httpOptions }).pipe(
             map((response: any) => response.results),
             map((newPlaylist: IPlaylist) => {
@@ -95,7 +90,7 @@ export class PlaylistService {
         const [minutes, seconds] = duration.split(':').map(Number);
     
         if (isNaN(minutes) || isNaN(seconds)) {
-            console.error('Ongeldig duration formaat:', duration);
+            console.error('Invalid time:', duration);
             return 0;
         }
     
@@ -135,7 +130,6 @@ export class PlaylistService {
         return this.http.put<ApiResponse<IPlaylist>>(`${this.endpoint}/${playlist._id}`, playlist).pipe(
             map((response: ApiResponse<IPlaylist>) => {
                 const updatedPlaylist = response.results as IPlaylist;
-                console.log(response.results);
                 const currentPlaylists = this.playlistsSubject.value;
                 const updatedPlaylists = currentPlaylists.map((p) => (p._id === updatedPlaylist._id ? updatedPlaylist : p));
                 this.playlistsSubject.next(updatedPlaylists);
@@ -145,11 +139,8 @@ export class PlaylistService {
     }
 
     public delete(playlist: IPlaylist): Observable<void> {
-        console.log('Deleting playlist with ID:', playlist._id);
         return this.http.delete<void>(`${this.endpoint}/${playlist._id}`).pipe(
             tap(() => {
-                console.log(`Playlist ${playlist._id} deleted successfully`);
-
                 const updatedPlaylists = this.playlistsSubject.value.filter((p) => p._id !== playlist._id);
                 this.playlistsSubject.next(updatedPlaylists);
             }),

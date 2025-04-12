@@ -42,21 +42,20 @@ export class AlbumUpdateComponent {//TODO update mooim maken
     
     addSelectedSong(songId: string): void {
         if (songId && this.allSongs) {
-            const songToAdd = this.allSongs.find(song => song._id === songId); // Nu zonder '?'
+            const songToAdd = this.allSongs.find(song => song._id === songId);
             if (songToAdd && this.album) {
                 songToAdd.album = this.album;
                 this.songService.update(songToAdd).subscribe({
                     next: (updatedSong) => {
-                        console.log('Song succesvol toegevoegd aan album', updatedSong);
                         if (this.songs) {
                             this.songs = [...this.songs, updatedSong];
                         } else {
                             this.songs = [updatedSong];
                         }
-                        this.allSongs = this.allSongs!.filter(song => song._id !== updatedSong._id); // Nu zonder '?'
+                        this.allSongs = this.allSongs!.filter(song => song._id !== updatedSong._id);
                     },
                     error: (err) => {
-                        console.error('Fout bij het toevoegen van song aan album:', err);
+                        console.error('Error with adding song to album:', err);
                     }
                 });
             }
@@ -71,10 +70,9 @@ export class AlbumUpdateComponent {//TODO update mooim maken
         song.album = null;
         this.songService.update(song).subscribe({
             next: (updatedSong) => {
-                console.log('Song succesvol verwijderd van album', updatedSong);
             },
             error: (err) => {
-                console.error('Fout bij het verwijderen van song van album:', err);
+                console.error('Error with removing song from album:', err);
             }
         });
     }
@@ -83,11 +81,9 @@ export class AlbumUpdateComponent {//TODO update mooim maken
         if(this.album){
             this.albumService.delete(this.album).subscribe({
                 next: () => {
-                    console.log('verwijderd')
                     this.router.navigate(['homepage'])
                 },
                 error: (err) => {
-
                     console.error(err);
                 }
             });

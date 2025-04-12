@@ -5,10 +5,6 @@ import { ISong } from '@avans-nx-songlibrary/api';
 import { Song } from './song.schema';
 import { CreateSongDto } from '@avans-nx-songlibrary/backend/dto';
 
-const httpOptions = {
-    observe: 'body',
-    responseType: 'json' as const
-};
 
 @Injectable()
 export class SongService {
@@ -22,12 +18,10 @@ export class SongService {
 
     async update(id: string, updateSongDto: any): Promise<Song> {
         const song = await this.songModel.findById(id).populate('album');
-    
         if (!song) {
           throw new NotFoundException(`Song with ID "${id}" not found`);
         }
         const updatedSong = await this.songModel.findByIdAndUpdate(id, updateSongDto, { new: true }).populate('album');
-        console.log("songservice back" + updatedSong?.album.title)
         return updatedSong as Song;
       }
 

@@ -6,10 +6,6 @@ import { Album } from './album.schema';
 import { SongService } from '../song/song.service';
 import { CreateAlbumDto, UpdateAlbumDto } from '@avans-nx-songlibrary/backend/dto';
 
-const httpOptions = {
-    observe: 'body',
-    responseType: 'json' as const
-};
 
 @Injectable()
 export class AlbumService {
@@ -17,8 +13,6 @@ export class AlbumService {
     constructor(@InjectModel(Album.name) private albumModel: Model<Album>, private readonly songService: SongService) {}
 
     async getAll(filters: { dateOfRelease?: string, artist?: string }): Promise<IAlbum[]> {
-        console.log('Service filters:', filters);
-      
         const query: Record<string, any> = {};
         if (filters.dateOfRelease) {
           const dateOfRelease = new Date(filters.dateOfRelease);
@@ -55,7 +49,7 @@ export class AlbumService {
     async update(id: string, updateAlbum: UpdateAlbumDto): Promise<Album> {
       const album = await this.albumModel.findById(id);
       if (!album) {
-        throw new Error('Album niet gevonden');
+        throw new Error('Album not found');
       }
 
       Object.assign(album, updateAlbum);

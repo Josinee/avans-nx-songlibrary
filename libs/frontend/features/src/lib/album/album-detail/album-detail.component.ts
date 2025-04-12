@@ -24,11 +24,9 @@ export class AlbumDetailComponent implements OnInit, OnDestroy {
             if (this.id) {
                 this.albumService.read(this.id).subscribe((album: IAlbum) => {
                     this.album = album;
-                    console.log("hier eerst album")
                     if(album){
                         this.songService.list({album: this.album._id}).subscribe((results) => {
                             this.songs = results
-                            console.log('nu songs')
                         });
                     }
                 });

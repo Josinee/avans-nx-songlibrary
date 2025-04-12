@@ -19,7 +19,6 @@ export class HomepageComponent {
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-
             }
         });
 

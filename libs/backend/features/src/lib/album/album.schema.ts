@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { IsMongoId } from 'class-validator';
-import { IArtist, IAlbum, ISong, Genres, AlbumType } from '@avans-nx-songlibrary/api';
+import { IArtist, IAlbum, Genres, AlbumType } from '@avans-nx-songlibrary/api';
 import * as mongoose from 'mongoose';
 
 export type AlbumDocument = Album & Document;
@@ -33,9 +33,6 @@ export class Album implements IAlbum {
 
     @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Artist' })
     artist!: IArtist;
-
-    // @Prop({ required: false, type: mongoose.Schema.Types.ObjectId, ref: 'Song' })
-    // songs!: ISong[];
 }
 
 export const AlbumSchema = SchemaFactory.createForClass(Album);

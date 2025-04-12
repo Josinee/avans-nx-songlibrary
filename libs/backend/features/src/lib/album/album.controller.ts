@@ -10,7 +10,6 @@ export class AlbumController {
 
     @Get('')
     async getAll(@Query('startDate') dateOfRelease?: string, @Query('artist') artist?: string): Promise<IAlbum[]> {
-        console.log('Fetching albums with filters:', { dateOfRelease, artist });
         return this.albumService.getAll({ dateOfRelease, artist });
     }
 

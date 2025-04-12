@@ -45,8 +45,6 @@ export class AlbumCreateComponent {//TODO Mooi maken
             if(this.album.duration){
                 this.album.duration = this.numberTimeToSeconds(this.album.duration);
             }
-            
-            console.log(this.album.duration);
                 this.albumService.create(this.album).subscribe({
                     next: (data) => {
                         this.router.navigate(['/album', data._id]);
@@ -59,24 +57,19 @@ export class AlbumCreateComponent {//TODO Mooi maken
         }
     }
 
-    numberTimeToSeconds = (time: number | string): number => {
-        if (typeof time === 'number') {
-            return time;
-        }
-        
+    numberTimeToSeconds = (time: number | string): number => {    
         const timeString = time.toString().padStart(6, '0');
         const timeParts = timeString.split(':');
         if (timeParts.length !== 3) {
-            console.error('Ongeldig tijdformaat:', timeString);
             return NaN;
         }
-    
+
         const hours = Number(timeParts[0]);
         const minutes = Number(timeParts[1]);
         const seconds = Number(timeParts[2]);
     
         if (isNaN(hours) || isNaN(minutes) || isNaN(seconds)) {
-            console.error('Ongeldige tijdcomponenten:', { hours, minutes, seconds });
+            console.error('Invalid Time:', { hours, minutes, seconds });
             return NaN;
         }
 

@@ -22,17 +22,14 @@ export class PlaylistListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.playlistService.list().subscribe((results) => {
-
             this.playlists = results;
         });
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
-
             }
         });
         this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
-
             this.privatePlaylists = results;
         });
     }

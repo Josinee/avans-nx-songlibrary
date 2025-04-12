@@ -21,12 +21,8 @@ export class SongDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
             this.id = params.get('id');
-
             if (this.id) {
-
-
                 this.songService.read(this.id).subscribe((song: ISong) => {
-
                     this.song = song;
                 });
             }

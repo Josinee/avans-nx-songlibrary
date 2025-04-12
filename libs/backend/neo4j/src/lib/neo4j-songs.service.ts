@@ -8,19 +8,6 @@ export class Neo4JService {
 
     constructor(private readonly neo4jService: Neo4jService) {}
 
-    async findAll(): Promise<any> {
-        const results = await this.neo4jService.read(`MATCH (n) RETURN n LIMIT 25`);
-        const songs = results.records.filter((record: any) => record._fields[0].labels.includes('Song')).map((record: any) => record._fields[0].properties);
-
-        return songs;
-    }
-
-    async findSimilar(song: string): Promise<ISong[]> {
-        const results = await this.neo4jService.read(`MATCH (song:Song {id: '${song}'})-[:SIMILAR_TO]-(similarSong:Song) RETURN similarSong`);
-        const songs = results.records.map((record: any) => record._fields[0].properties);
-        return songs;
-    }
-
     async matchSimilar(): Promise<any> {
         const match = await this.neo4jService.write(`MATCH (s1:Song), (s2:Song)
                                                         WHERE (s1.artist = s2.artist OR s1.genre = s2.genre OR s1.album = s2.album)
@@ -38,7 +25,6 @@ export class Neo4JService {
     }
 
     async postSong(song: { id: string, title: string, genre: string, artist: string, album?: string}) {
-        console.log("in neoservice " + song.id + song.title + song.genre + song.album + song.artist)
         await this.neo4jService.write(`           
              MERGE (s:Song {id: $songId})
                         ON CREATE SET 
@@ -66,8 +52,6 @@ export class Neo4JService {
     
 
     async putLikedSong(user: { id: string; username?: string }, song: { id: string; title?: string, genre?: string, artist?: string, album?: string }) {
-        console.log('put liked song')
-        console.log(song.id + song.title + song.genre + song.album + song.artist)
         await this.neo4jService.write(`
             MERGE (n:User {id: $userId})
             ON CREATE SET n.name = $username

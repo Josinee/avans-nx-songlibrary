@@ -58,7 +58,7 @@ export class AuthService {
     async register(user: CreateUserDto): Promise<IUserIdentity> {
         this.logger.log(`Register user ${user.name}`);
         if (await this.userModel.findOne({ emailAddress: user.emailAddress })) {
-            this.logger.debug('user exists');
+            this.logger.debug('User already exists');
             throw new ConflictException('User already exist');
         }
         this.logger.debug('User not found, creating');
