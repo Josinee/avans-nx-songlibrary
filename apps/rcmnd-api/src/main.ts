@@ -28,7 +28,7 @@ async function bootstrap() {
   console.log('Environment variables:');
 console.log('Connection String:', process.env.NEO4J_DB_CONNECTION_STRING);
 console.log('Database Name:', process.env.NEO4J_DB_NAME);
-console.log('Password:', process.env.NEO4J_DB_PASSWORD);
+
 }
 
 bootstrap();
