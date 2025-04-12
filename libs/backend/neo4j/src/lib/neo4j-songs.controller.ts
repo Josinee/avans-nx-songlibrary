@@ -11,21 +11,22 @@ export class Neo4JController {
         await this.neo4jService.matchSimilar();
     }
     
-    @Get('')
-    async getAll(): Promise<any> {
-        const results = await this.neo4jService.findAll();
-        return results;
-    }
+    // @Get('')
+    // async getAll(): Promise<any> {
+    //     const results = await this.neo4jService.findAll();
+    //     return results;
+    // }
 
-    @Get(':song')
-    async getSimilar(@Param('song') song: string): Promise<any> {
-        const results = await this.neo4jService.findSimilar(song);
-        return results;
-    }
+    // @Get(':song')
+    // async getSimilar(@Param('song') song: string): Promise<any> {
+    //     const results = await this.neo4jService.findSimilar(song);
+    //     return results;
+    // }
 
     @Get('recommendations/:user')
     async getRecommendationsForUser(@Param('user') user: string): Promise<any> {
         const results = await this.neo4jService.getRecommendationsFromUser(user);
+
         return results;
     }
 
