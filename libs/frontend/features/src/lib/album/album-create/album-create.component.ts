@@ -7,9 +7,10 @@ import { AlbumService } from '../../album/album.service';
 
 @Component({
     selector: 'album-create',
-    templateUrl: './album-create.component.html'
+    templateUrl: './album-create.component.html',//TODO alle kleuren matchen in het hele project good luck girl
+    styleUrl: './album-create.component.css'
 })
-export class AlbumCreateComponent {//TODO Mooi maken
+export class AlbumCreateComponent {
     album: ICreateAlbum = {
         title: '',
         image: '',

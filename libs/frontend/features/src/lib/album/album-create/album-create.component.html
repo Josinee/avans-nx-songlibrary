@@ -1,62 +1,70 @@
 <form #artistCreate="ngForm" (ngSubmit)="onSubmit()" class="container row m-3 py-3">
-    <div class="mb-3 col-7">
-        <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" [(ngModel)]="album.title" name="albumTitle" #albumTitle="ngModel" id="Name" required placeholder="Enter album title" />
-        <div *ngIf="albumTitle.invalid && albumTitle.touched" class="text-danger">Album title is required.</div>
+    <div class="row">
+        <div class="mb-3 col-12 col-md-6">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" [(ngModel)]="album.title" name="albumTitle" #albumTitle="ngModel" id="Name" required placeholder="Enter album title" />
+            <div *ngIf="albumTitle.invalid && albumTitle.touched" class="text-danger">Album title is required.</div>
+        </div>
 
-    </div>
-    <div class="mb-3 col-8">
-
-        <div class="mb-3 col-5">
+        <div class="mb-3 col-12 col-md-6">
             <label class="form-label">Image Preview</label>
             <div>
                 <img [src]="album.image || '/assets/album.png'" class="rounded" style="object-fit: cover; height: 150px; width: 150px" alt="Album Image" />
             </div>
+            <div>
+                <label for="image" class="form-label">Image URL</label>
+                <input type="text" class="form-control" [(ngModel)]="album.image" name="albumImage" #albumImage="ngModel" id="image" placeholder="Enter image URL" />
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">Album Image</label>
-            <input type="text" class="form-control" [(ngModel)]="album.image" name="albumImage" #albumImage="ngModel" id="image" placeholder="Enter image URL" />
-        </div>
-
-
-        <div class="mb-3 col-7">
-            <label for="description" class="form-label">Duration</label>
-            <input type="time" step="500" class="form-control" [(ngModel)]="album.duration" name="albumDuration" #albumDuration="ngModel" id="Duration" required placeholder="Enter album duration" />
-            <div *ngIf="albumDuration.invalid && albumDuration.touched" class="text-danger">album duration is required.</div>
-    
-        </div>
-        <div class="mb-3 col-7">
-            <label for="dateOfRelease" class="form-label">Date of release </label>
-            <input type="date" class="form-control" [(ngModel)]="album.dateOfRelease" name="albumDateOfRelease" #albumDateOfRelease="ngModel" id="dateOfRelease" required placeholder="Enter album date of release" />
-            <div *ngIf="albumDateOfRelease.invalid && albumDateOfRelease.touched" class="text-danger">Album date of release is required.</div>
-    
-        </div>
-
-        <label for="artist">Artist</label>
-        <select [(ngModel)]="album.artist" name="artist" class="form-control">
-            <option *ngFor="let artist of artists" [value]="artist._id">{{ artist.name }}</option>
-        </select>
-        <label for="artist">Album type</label>
-        <select [(ngModel)]="album.type" name="type" class="form-control">
-            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
-        </select>
-
-    <label for="genre">Genre</label>
-    <select [(ngModel)]="album.genre" name="genres" class="form-control" multiple>
-        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
-    </select>
-
-    <div class="mb-3 col-7">
-        <label for="numberOfSongs" class="form-label">Number of Songs </label>
-        <input type="number" class="form-control" [(ngModel)]="album.numberOfSongs" name="albumNumberOfSongs" #albumNumberOfSongs="ngModel" id="numberOfSongs" required placeholder="Enter album number of songs" />
-        <div *ngIf="albumNumberOfSongs.invalid && albumNumberOfSongs.touched" class="text-danger">Album number of songs is required.</div>
+        
 
     </div>
 
+    <div class="row">
+        <div class="mb-3 col-12 col-md-6">
+            <label for="description" class="form-label">Duration</label>
+            <input type="time" step="500" class="form-control" [(ngModel)]="album.duration" name="albumDuration" #albumDuration="ngModel" id="Duration" required placeholder="Enter album duration" />
+            <div *ngIf="albumDuration.invalid && albumDuration.touched" class="text-danger">Album duration is required.</div>
+        </div>
 
-</div>
+        <div class="mb-3 col-12 col-md-6">
+            <label for="dateOfRelease" class="form-label">Date of release</label>
+            <input type="date" class="form-control" [(ngModel)]="album.dateOfRelease" name="albumDateOfRelease" #albumDateOfRelease="ngModel" id="dateOfRelease" required placeholder="Enter album date of release" />
+            <div *ngIf="albumDateOfRelease.invalid && albumDateOfRelease.touched" class="text-danger">Album date of release is required.</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-12 col-md-6">
+            <label for="artist" class="form-label">Artist</label>
+            <select [(ngModel)]="album.artist" name="artist" class="form-control">
+                <option *ngFor="let artist of artists" [value]="artist._id">{{ artist.name }}</option>
+            </select>
+        </div>
+
+        <div class="mb-3 col-12 col-md-6">
+            <label for="type" class="form-label">Album Type</label>
+            <select [(ngModel)]="album.type" name="type" class="form-control">
+                <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-12 col-md-6">
+            <label for="genre" class="form-label">Genre</label>
+            <select [(ngModel)]="album.genre" name="genres" class="form-control" multiple>
+                <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+            </select>
+        </div>
+
+        <div class="mb-3 col-12 col-md-6">
+            <label for="numberOfSongs" class="form-label">Number of Songs</label>
+            <input type="number" class="form-control" [(ngModel)]="album.numberOfSongs" name="albumNumberOfSongs" #albumNumberOfSongs="ngModel" id="numberOfSongs" required placeholder="Enter album number of songs" />
+            <div *ngIf="albumNumberOfSongs.invalid && albumNumberOfSongs.touched" class="text-danger">Album number of songs is required.</div>
+        </div>
+    </div>
 
 
-    <button type="submit" class="btn btn-primary w-100">Submit</button>
-
+    <button type="submit" class="btn btn-outline-primary w-100 mt-3">Submit</button>
 </form>

@@ -6,9 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'artist-create',
-    templateUrl: './artist-create.component.html'
+    templateUrl: './artist-create.component.html',
+    styleUrl: './artist-create.component.css'
 })
-export class ArtistCreateComponent {//TODO MOOI MAKEN
+export class ArtistCreateComponent {
     artist: ICreateArtist = {}
     genres = Object.values(Genres);
 

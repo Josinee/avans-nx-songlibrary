@@ -28,17 +28,30 @@
         </li>
     </ul>
     <hr />
+    
+    <!-- Your Playlists Section -->
     <div class="d-flex align-items-center justify-content-between">
         <p class="mb-0">Your playlists:</p>
         <button class="btn me-2" [routerLink]="['/playlist-create']"><i class="bi bi-plus-circle"></i></button>
     </div>
 
+    <!-- List of Playlists -->
     <div *ngFor="let playlist of personalPlaylists" class="ms-3 playlists">
-        <a [routerLink]="['/playlist', playlist._id]" class=""
-            ><p>{{ playlist.name }}</p></a
-        >
+        <a [routerLink]="['/playlist', playlist._id]" class="">
+            <p>{{ playlist.name }}</p>
+        </a>
     </div>
-    <button class="btn me-2" [routerLink]="['/song-create']">Add song</button>
-    <button class="btn me-2" [routerLink]="['/artist-create']">Add artist</button>
-    <button class="btn me-2" [routerLink]="['/album-create']">Add album</button>
+
+    <!-- Add Song, Artist, and Album Buttons -->
+    <div class="mt-4">
+        <button class="btn btn-outline-primary me-2 w-100 mb-2" [routerLink]="['/song-create']">
+            <i class="bi bi-music-note-beamed"></i> Add Song
+        </button>
+        <button class="btn btn-outline-info me-2 w-100 mb-2" [routerLink]="['/artist-create']">
+            <i class="bi bi-person"></i> Add Artist
+        </button>
+        <button class="btn btn-outline-warning me-2 w-100 mb-2" [routerLink]="['/album-create']">
+            <i class="bi bi-record-vinyl"></i> Add Album
+        </button>
+    </div>
 </div>

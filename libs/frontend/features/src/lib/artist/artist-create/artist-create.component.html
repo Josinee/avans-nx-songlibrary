@@ -1,45 +1,46 @@
 <form #artistCreate="ngForm" (ngSubmit)="onSubmit()" class="container row m-3 py-3">
-    <div class="mb-3 col-7">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" [(ngModel)]="artist.name" name="artistName" #artistName="ngModel" id="Name" required placeholder="Enter artist name" />
-        <div *ngIf="artistName.invalid && artistName.touched" class="text-danger">Artist name is required.</div>
+    <div class="row">
+        <!-- Eerste kolom: Name, Description en Record Label -->
+        <div class="mb-3 col-12 col-md-6">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="artist.name" name="artistName" #artistName="ngModel" id="Name" required placeholder="Enter artist name" />
+            <div *ngIf="artistName.invalid && artistName.touched" class="text-danger">Artist name is required.</div>
+        </div>
 
+        <div class="mb-3 col-12 col-md-6">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="artist.description" name="artistDescription" #artistDescription="ngModel" id="Description" required placeholder="Enter artist description" />
+            <div *ngIf="artistDescription.invalid && artistDescription.touched" class="text-danger">Artist description is required.</div>
+        </div>
+
+        <div class="mb-3 col-12 col-md-6">
+            <label for="recordLabel" class="form-label">Record Label</label>
+            <input type="text" class="form-control" [(ngModel)]="artist.recordLabel" name="artistRecordLabel" #artistRecordLabel="ngModel" id="recordLabel" required placeholder="Enter artist record label" />
+            <div *ngIf="artistRecordLabel.invalid && artistRecordLabel.touched" class="text-danger">Artist record label is required.</div>
+        </div>
     </div>
-    <div class="mb-3 col-8">
 
-        <div class="mb-3 col-5">
+    <div class="row">
+        <!-- Tweede kolom: Image Preview, Image URL en Genre -->
+        <div class="mb-3 col-12 col-md-6">
             <label class="form-label">Image Preview</label>
             <div>
                 <img [src]="artist.image || '/assets/artist.png'" class="rounded" style="object-fit: cover; height: 150px; width: 150px" alt="Artist Image" />
             </div>
         </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">Artist Image</label>
-            <input type="text" class="form-control" [(ngModel)]="artist.image" name="artistImage" #ArtistImage="ngModel" id="image" placeholder="Enter image URL" />
+
+        <div class="mb-3 col-12 col-md-6">
+            <label for="image" class="form-label">Artist Image (URL)</label>
+            <input type="text" class="form-control" [(ngModel)]="artist.image" name="artistImage" #artistImage="ngModel" id="image" placeholder="Enter image URL" />
         </div>
-
-
-        <div class="mb-3 col-7">
-            <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" [(ngModel)]="artist.description" name="artistDescription" #artistDescription="ngModel" id="Description" required placeholder="Enter artist description" />
-            <div *ngIf="artistDescription.invalid && artistDescription.touched" class="text-danger">Artist description is required.</div>
-    
+        
+        <div class="mb-3 col-12 col-md-6">
+            <label for="genre" class="form-label">Genre</label>
+            <select [(ngModel)]="artist.genres" name="genres" class="form-control" multiple>
+                <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+            </select>
         </div>
-        <div class="mb-3 col-7">
-            <label for="name" class="form-label">Record Label</label>
-            <input type="text" class="form-control" [(ngModel)]="artist.recordLabel" name="artistRecordLabel" #artistRecordLabel="ngModel" id="Name" required placeholder="Enter artist record label" />
-            <div *ngIf="artistRecordLabel.invalid && artistRecordLabel.touched" class="text-danger">Artist record label is required.</div>
-    
-        </div>
-    <label for="genre">Genre</label>
-    <select [(ngModel)]="artist.genres" name="genres" class="form-control" multiple>
-        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
-    </select>
+    </div>
 
-
-</div>
-
-
-    <button type="submit" class="btn btn-primary w-100">Submit</button>
-
+    <button type="submit" class="btn btn-outline-primary w-100 mt-3">Submit</button>
 </form>

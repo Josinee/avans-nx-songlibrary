@@ -1,6 +1,7 @@
 .playlists > a {
     color: black;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .playlists:hover > a {
@@ -8,9 +9,75 @@
 }
 
 .sidebar {
-    background-color: whitesmoke;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-right: 1px solid #ddd;
 }
 
 .nav-link.active {
-    background-color: pink;
+    background-color: #f1c4d3;
+    border-radius: 5px;
+}
+
+.nav-link {
+    font-weight: 400;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+button {
+    font-weight: 500;
+    border-radius: 30px;
+}
+
+button i {
+    margin-right: 8px;
+}
+
+button:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-outline-info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: white;
 }

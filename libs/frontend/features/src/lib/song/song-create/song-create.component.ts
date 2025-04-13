@@ -7,9 +7,10 @@ import { AlbumService } from '../../album/album.service';
 
 @Component({
     selector: 'song-create',
-    templateUrl: './song-create.component.html'
+    templateUrl: './song-create.component.html',
+    styleUrl: './song-create.component.css'
 })
-export class SongCreateComponent {//TODO mooi maken
+export class SongCreateComponent {
     artists: IArtist[] | null = null;
     genres = Object.values(Genres);
     

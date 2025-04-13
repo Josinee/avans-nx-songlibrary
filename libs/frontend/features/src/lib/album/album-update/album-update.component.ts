@@ -7,9 +7,10 @@ import { SongService } from "../../song/song.service";
 
 @Component({
     selector: 'album-update',
-    templateUrl: './album-update.component.html'
+    templateUrl: './album-update.component.html',
+    styleUrl: './album-update.component.css',
 })
-export class AlbumUpdateComponent {//TODO update mooim maken
+export class AlbumUpdateComponent {//TODO update mooim maken, terug knoppen maar 1tje maken enzo pagina is niet logisch
     album: IAlbum | null = null;
     songs: ISong[] | null = null;
     id: string | null = null;
