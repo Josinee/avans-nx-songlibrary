@@ -105,7 +105,7 @@ export class PlaylistService {
         playlist.lastUpdated = new Date();
 
         return this.http.put<IPlaylist>(`${this.endpoint}/${playlist._id}`, playlist, { ...options, ...httpOptions }).pipe(
-            tap((response) => console.log(response)),
+            tap(console.log),
             map((response: any) => response.results),
             catchError(this.handleError)
         );

@@ -1,6 +1,6 @@
 <form #songCreate="ngForm" (ngSubmit)="onSubmit()" class="container row m-3 py-3">
     <div class="row">
-        <!-- Eerste kolom: Name, Song Text -->
+
         <div class="mb-3 col-12 col-md-6">
             <label for="title" class="form-label">Song Title</label>
             <input type="text" class="form-control" [(ngModel)]="song.title" name="songTitle" #songTitle="ngModel" id="title" required placeholder="Enter song title" />
@@ -21,7 +21,6 @@
     </div>
 
     <div class="row">
-        <!-- Tweede kolom: Artist, Genre, Duration, Album -->
         <div class="mb-3 col-12 col-md-6">
             <label for="artist" class="form-label">Artist</label>
             <select [(ngModel)]="song.artist" name="artist" class="form-control" (change)="onArtistChange()">

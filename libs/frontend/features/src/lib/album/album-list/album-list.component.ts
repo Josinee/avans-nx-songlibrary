@@ -15,7 +15,4 @@ export class AlbumListComponent {
       
     }
 
-    ngOnInit(): void {
-        console.log('Albums received in AlbumListComponent:', this.albums);
-    }
 }

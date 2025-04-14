@@ -1,3 +1,4 @@
+<div *ngIf="playlist">
 <button class="btn" (click)="goBack()"><i class="bi bi-arrow-up-left-square"></i></button>
 
 <div class="modal" tabindex="-1" id="exampleModal">
@@ -74,3 +75,4 @@
     </div>
 </div>
 <song-list-template [songs]="songs" [context]="'playlist'" [playlist]="playlist"></song-list-template>
+</div>
