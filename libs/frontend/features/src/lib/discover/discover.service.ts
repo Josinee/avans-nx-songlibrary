@@ -33,7 +33,6 @@ export class DiscoverService {
 
     public matchSimilar(): void {
       this.http.get<ApiResponse<any[]>>(this.endpoint + '/match').subscribe({
-        next: () => console.log('matched similar'),
         error: (err) => console.error('matching failed', err)
       });
     }
@@ -48,7 +47,6 @@ export class DiscoverService {
               map((response: any) => response),
               mergeMap((apiResponse: ApiResponse<any[]>) => {
                   const recommendations = apiResponse.results;
-                  console.log('Recommendations from rcmnd API:', recommendations);
   
                   if (recommendations) {
                       const songRequests: Observable<any>[] = recommendations.map((rec) =>
