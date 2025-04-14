@@ -1,0 +1,23 @@
+name: deploy to Render
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: deploy data api
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_DATA_API }}
+
+      - name: deploy rcmnd api
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_RCMND_API }}
+
+      - name: deploy webapp
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_WEBAPP }}
