@@ -26,7 +26,7 @@ export class SongCreateComponent {
             genres: []
         },
         genre: Genres.Blues,
-        songText: '',
+        songText: " ",
         album: undefined
     };
     albums: IAlbum[] | null | undefined;
