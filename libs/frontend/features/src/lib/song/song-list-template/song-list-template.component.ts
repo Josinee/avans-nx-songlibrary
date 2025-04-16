@@ -28,7 +28,8 @@ export class SongListTemplateComponent {
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private songService: SongService) {}
 
     addToPlaylist(playlist: IPlaylist, song: ISong): void {
-        this.songService.read(song._id).subscribe((result)=>{
+        if(playlist.creator == this.user) {
+            this.songService.read(song._id).subscribe((result)=>{
             this.addedSong = result as ISong;
             if(this.addedSong && this.user){
                 this.songService.putLikedSong(this.user, this.addedSong).subscribe();
@@ -47,12 +48,15 @@ export class SongListTemplateComponent {
                 );
             }
         })
+        }
+        
         
         
     }
 
     removeFromPlaylist(playlist: IPlaylist, song: ISong): void {
-        if (!playlist) {
+        if(playlist.creator == this.user) {
+            if (!playlist) {
             console.error('Playlist not found');
             return;
         }
@@ -63,6 +67,8 @@ export class SongListTemplateComponent {
             this.showToast(`Succesfully removed ${song.title} from ${playlist.name}`);
         });
         }
+        }
+        
         
     }
 

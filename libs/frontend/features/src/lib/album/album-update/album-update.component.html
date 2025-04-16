@@ -1,7 +1,5 @@
 <div *ngIf="album">
-<button class="btn btn-outline-primary ms-2 mt-2" (click)="goBack()">
-    <i class="bi bi-arrow-up-left-square"></i> Terug
-  </button>
+  <button class="btn" (click)="goBack()"><i class="bi bi-arrow-up-left-square"></i></button>
   
   <div class="container album-container m-4">
     <div class="row mb-4">
@@ -20,12 +18,18 @@
           {{ album.dateOfRelease | date }} - {{ album.numberOfSongs }} song{{ album.numberOfSongs > 1 ? 's' : '' }}
         </p>
         <p class="text-muted">{{ album.type }}</p>
-        <div class="mt-3">
-          <a [routerLink]="['/album-update', album._id]" class="btn btn-outline-primary me-2">Update Album</a>
-          <button class="btn btn-danger" (click)="deleteAlbum()">Album verwijderen</button>
-        </div>
       </div>
     </div>
+
+    <div class="mb-3 col-12">
+
+      <div>
+          <label for="image" class="form-label">Image URL</label>
+          <input type="text" class="form-control" [(ngModel)]="album.image" name="albumImage" #albumImage="ngModel" id="image" placeholder="Enter image URL" />
+      </div>
+  </div>
+
+  
   
     <div class="mt-4">
       <div>
@@ -56,21 +60,38 @@
           required
         />
       </div>
+
+      <div class="row">
+        <div class="mb-3 col-12 col-md-6">
+            <label for="description" class="form-label">Duration</label>
+            <input type="time" step="500" class="form-control" [(ngModel)]="album.duration" name="albumDuration" #albumDuration="ngModel" id="Duration" required placeholder="album.duration" />
+            <div *ngIf="albumDuration.invalid && albumDuration.touched" class="text-danger">Album duration is required.</div>
+        </div>
+
+        <div class="mb-3 col-12 col-md-6">
+            <label for="dateOfRelease" class="form-label">Date of release</label>
+            <input type="date" class="form-control" [(ngModel)]="album.dateOfRelease" name="albumDateOfRelease" #albumDateOfRelease="ngModel" id="dateOfRelease" required placeholder="album.dateOfRelease" />
+            <div *ngIf="albumDateOfRelease.invalid && albumDateOfRelease.touched" class="text-danger">Album date of release is required.</div>
+        </div>
+    </div>
+
+      <div class="mt-4">
+        <h4 class="mb-3">Voeg een nummer toe</h4>
+        <div class="d-flex mb-3">
+          <select #songSelect class="form-control flex-grow-1 me-2">
+            <option value="">Selecteer een nummer</option>
+            <option *ngFor="let song of allSongs" [value]="song._id">{{ song.title }}</option>
+          </select>
+          <button class="btn btn-outline-success" (click)="addSelectedSong(songSelect.value)">Toevoegen</button>
+        </div>
+      </div>
       <div class="d-flex mb-3">
         <button type="submit" class="btn btn-primary w-50 me-2">Opslaan</button>
-        <button type="button" class="btn btn-outline-secondary w-50" (click)="goBack()">Terug</button>
+        <button class="btn btn-danger w-50" (click)="deleteAlbum()">Album verwijderen</button>
+
       </div>
     </form>
   
-    <div class="mt-4">
-      <h4 class="mb-3">Voeg een nummer toe</h4>
-      <div class="d-flex mb-3">
-        <select #songSelect class="form-control flex-grow-1 me-2">
-          <option value="">Selecteer een nummer</option>
-          <option *ngFor="let song of allSongs" [value]="song._id">{{ song.title }}</option>
-        </select>
-        <button class="btn btn-outline-success" (click)="addSelectedSong(songSelect.value)">Toevoegen</button>
-      </div>
-    </div>
+    
   </div>
 </div>
