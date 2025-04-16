@@ -34,8 +34,6 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
                     if (playlist) {
                         this.playlist = playlist;
                         this.songs = playlist.songs;
-                        console.log(this.user?._id)
-                        console.log(this.playlist.creator)
                     } else {
                         console.error('Playlist not found');
                     }
