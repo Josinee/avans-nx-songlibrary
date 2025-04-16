@@ -36,6 +36,7 @@ export class Neo4JService {
                 WHERE matchCount > 0
                 ORDER BY matchCount DESC
                 RETURN candidate AS similarSong, relationshipTypes, matchCount
+                LIMIT 25
         `);
     
         if (!results.records || results.records.length === 0) {
