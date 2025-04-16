@@ -20,11 +20,13 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     constructor(private playlistService: PlaylistService, private route: ActivatedRoute, private router: Router, private location: Location, private loginService: LoginService) {}
 
     ngOnInit(): void {
+        
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
             }
         });
+        
         this.route.paramMap.subscribe((params) => {
             this.id = params.get('id');
             if (this.id) {
@@ -32,12 +34,15 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
                     if (playlist) {
                         this.playlist = playlist;
                         this.songs = playlist.songs;
+                        console.log(this.user?._id)
+                        console.log(this.playlist.creator)
                     } else {
                         console.error('Playlist not found');
                     }
                 });
             }
         });
+
     }
 
     ngOnDestroy(): void {
