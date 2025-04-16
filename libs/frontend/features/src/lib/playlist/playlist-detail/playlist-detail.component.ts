@@ -50,7 +50,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     }
 
     deletePlaylist(playlist: IPlaylist): void {
-        if(playlist.creator == this.user) {
+        if(playlist.creator.toString() == this.user?._id.toString()) {
             this.playlistService.delete(playlist).subscribe({
                 next: () => {
                     this.router.navigate(['playlist-list']);
@@ -62,7 +62,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     }
     
     updatePlaylist(): void {
-        if(this.playlist && this.playlist.creator == this.user) {
+        if(this.playlist && this.playlist.creator.toString() == this.user?._id.toString()) {
             if (this.playlist) {
             this.playlistService.update(this.playlist).subscribe((updatedPlaylist) => {
                 this.playlist = updatedPlaylist;

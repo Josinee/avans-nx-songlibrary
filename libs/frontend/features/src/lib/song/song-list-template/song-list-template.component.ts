@@ -28,7 +28,7 @@ export class SongListTemplateComponent {
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private songService: SongService) {}
 
     addToPlaylist(playlist: IPlaylist, song: ISong): void {
-        if(playlist.creator == this.user) {
+        if(playlist.creator.toString() == this.user?._id.toString()) {
             this.songService.read(song._id).subscribe((result)=>{
             this.addedSong = result as ISong;
             if(this.addedSong && this.user){
@@ -55,7 +55,7 @@ export class SongListTemplateComponent {
     }
 
     removeFromPlaylist(playlist: IPlaylist, song: ISong): void {
-        if(playlist.creator == this.user) {
+        if(playlist.creator.toString() == this.user?._id.toString()) {
             if (!playlist) {
             console.error('Playlist not found');
             return;
