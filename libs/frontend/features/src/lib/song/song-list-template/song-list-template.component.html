@@ -1,3 +1,4 @@
+<div *ngIf="user">
 <div class="table-container mx-5">
     <div class="table-responsive">
         <table class="table table-hover">
@@ -54,7 +55,7 @@
                                         </div>
                                     </ul>
                                 </li>
-                                <div *ngIf="context === 'playlist' && playlist && playlist.creator == this.user">
+                                <div *ngIf="context === 'playlist' && playlist && playlist.creator.toString() == this.user._id.toString()">
                                     <li class="dropdown-item">
                                         <button class="btn" (click)="removeFromPlaylist(playlist, song)">Remove from playlist</button>
                                     </li>
@@ -85,4 +86,5 @@
             <button type="button" class="btn-close" (click)="closeToast()"></button>
         </div>
     </div>
+</div>
 </div>
