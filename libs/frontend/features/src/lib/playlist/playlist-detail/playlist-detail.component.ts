@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
     templateUrl: './playlist-detail.component.html'
 })
 export class PlaylistDetailComponent implements OnInit, OnDestroy {
-    playlist!: IPlaylist;
+    playlist: IPlaylist | undefined;
     songs: ISong[] = [];
 
     id: string | null = null;

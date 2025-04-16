@@ -1,53 +1,62 @@
 <form #songCreate="ngForm" (ngSubmit)="onSubmit()" class="container row m-3 py-3">
     <div class="row">
-
-        <div class="mb-3 col-12 col-md-6">
-            <label for="title" class="form-label">Song Title</label>
-            <input type="text" class="form-control" [(ngModel)]="song.title" name="songTitle" #songTitle="ngModel" id="title" required placeholder="Enter song title" />
-            <div *ngIf="songTitle.invalid && songTitle.touched" class="text-danger">Song title is required.</div>
-        </div>
-
-        <div class="mb-3 col-12 col-md-6">
-            <label for="songText" class="form-label">Song Text</label>
-            <textarea
-                class="form-control"
-                [(ngModel)]="song.songText"
-                name="songText"
-                #songText="ngModel"
-                id="songText"
-                placeholder="Enter song text"
-            ></textarea>
-        </div>
+  
+      <div class="mb-3 col-12 col-md-6">
+        <label for="title" class="form-label">Song Title</label>
+        <input type="text" class="form-control" [(ngModel)]="song.title" name="songTitle" #songTitle="ngModel" id="title" required placeholder="Enter song title" />
+        <div *ngIf="songTitle.invalid && songTitle.touched" class="text-danger">Song title is required.</div>
+      </div>
+  
+      <div class="mb-3 col-12 col-md-6">
+        <label for="songText" class="form-label">Song Text</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="song.songText"
+          name="songText"
+          #songText="ngModel"
+          id="songText"
+          required
+          placeholder="Enter song text"
+        ></textarea>
+        <div *ngIf="songText.invalid && songText.touched" class="text-danger">Song text is required.</div>
+      </div>
     </div>
-
+  
     <div class="row">
-        <div class="mb-3 col-12 col-md-6">
-            <label for="artist" class="form-label">Artist</label>
-            <select [(ngModel)]="song.artist" name="artist" class="form-control" (change)="onArtistChange()">
-                <option *ngFor="let artist of artists" [ngValue]="artist">{{ artist.name }}</option>
-            </select>
-        </div>
-
-        <div class="mb-3 col-12 col-md-6">
-            <label for="genre" class="form-label">Genre</label>
-            <select [(ngModel)]="song.genre" name="genre" class="form-control">
-                <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
-            </select>
-        </div>
-
-        <div class="mb-3 col-12 col-md-6">
-            <label for="duration" class="form-label">Duration</label>
-            <input type="time" class="form-control" [(ngModel)]="song.duration" name="songDuration" #songDuration="ngModel" id="Duration" required placeholder="Enter song duration" />
-            <div *ngIf="songDuration.invalid && songDuration.touched" class="text-danger">Song duration is required.</div>
-        </div>
-
-        <div class="mb-3 col-12 col-md-6">
-            <label for="album" class="form-label">Album</label>
-            <select [(ngModel)]="song.album" name="album" class="form-control">
-                <option *ngFor="let album of albums;" [value]="album._id">{{ album.title }}</option>
-            </select>
-        </div>
+      <div class="mb-3 col-12 col-md-6">
+        <label for="artist" class="form-label">Artist</label>
+        <select [(ngModel)]="song.artist" name="artist" #artist="ngModel" class="form-control" required (change)="onArtistChange()">
+          <option [ngValue]="null" disabled selected>Select artist</option>
+          <option *ngFor="let artist of artists" [ngValue]="artist">{{ artist.name }}</option>
+        </select>
+        <div *ngIf="artist.invalid && artist.touched" class="text-danger">Artist is required.</div>
+      </div>
+  
+      <div class="mb-3 col-12 col-md-6">
+        <label for="genre" class="form-label">Genre</label>
+        <select [(ngModel)]="song.genre" name="genre" #genre="ngModel" class="form-control" required>
+          <option [value]="null" disabled selected>Select genre</option>
+          <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+        </select>
+        <div *ngIf="genre.invalid && genre.touched" class="text-danger">Genre is required.</div>
+      </div>
+  
+      <div class="mb-3 col-12 col-md-6">
+        <label for="duration" class="form-label">Duration</label>
+        <input type="time" class="form-control" [(ngModel)]="song.duration" name="songDuration" #songDuration="ngModel" id="Duration" required placeholder="Enter song duration" />
+        <div *ngIf="songDuration.invalid && songDuration.touched" class="text-danger">Song duration is required.</div>
+      </div>
+  
+      <div class="mb-3 col-12 col-md-6">
+        <label for="album" class="form-label">Album</label>
+        <select [(ngModel)]="song.album" name="album" #album="ngModel" class="form-control" required>
+          <option [value]="null" disabled selected>Select album</option>
+          <option *ngFor="let album of albums" [value]="album._id">{{ album.title }}</option>
+        </select>
+        <div *ngIf="album.invalid && album.touched" class="text-danger">Album is required.</div>
+      </div>
     </div>
-
-    <button type="submit" class="btn btn-outline-primary w-100 mt-3">Submit</button>
-</form>
+  
+    <button type="submit" class="btn btn-outline-primary w-100 mt-3" [disabled]="songCreate.invalid">Submit</button>
+  </form>
+  

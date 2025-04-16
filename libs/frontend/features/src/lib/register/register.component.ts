@@ -15,7 +15,7 @@ export class RegisterComponent {
         password: '',
         name: ''
     };
-    registerForm!: NgForm;
+    registerForm: NgForm | undefined;
 
     constructor(private registerService: RegisterService, private router: Router) {}
 

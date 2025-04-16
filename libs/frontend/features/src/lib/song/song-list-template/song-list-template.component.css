@@ -30,3 +30,19 @@
 .toast.show {
     opacity: 1;
 }
+
+.relationship-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0.5rem;
+}
+  
+.relationship-badge {
+    padding: 0px 6px;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ccc;
+}

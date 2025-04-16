@@ -22,7 +22,7 @@ export class SongListTemplateComponent {
     toastMessage: string = '';
 
     playlists: IPlaylist[] = [];
-    user!: IUser;
+    user: IUser | undefined;
     addedSong: ISong | null = null;
 
     constructor(private playlistService: PlaylistService, private loginService: LoginService, private songService: SongService) {}
@@ -30,7 +30,7 @@ export class SongListTemplateComponent {
     addToPlaylist(playlist: IPlaylist, song: ISong): void {
         this.songService.read(song._id).subscribe((result)=>{
             this.addedSong = result as ISong;
-            if(this.addedSong){
+            if(this.addedSong && this.user){
                 this.songService.putLikedSong(this.user, this.addedSong).subscribe();
         
                 if (!playlist) {
@@ -56,27 +56,31 @@ export class SongListTemplateComponent {
             console.error('Playlist not found');
             return;
         }
-        this.songService.removeLikedSong(this.user, song).subscribe();
+        if(this.user) {
+            this.songService.removeLikedSong(this.user, song).subscribe();
         this.playlistService.removeFromPlaylist(playlist, song).subscribe((results) => {
             this.songs = results.songs
             this.showToast(`Succesfully removed ${song.title} from ${playlist.name}`);
         });
+        }
+        
     }
 
     ngOnInit(): void {
         
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
-                this.user = user;
-            }
-        });
-        this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
+                this.user = user;        
+                this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
             if (results) {
                 this.playlists = results;
             } else {
                 console.error('Playlists not found');
             }
         });
+            }
+        });
+
     }
 
     ngOnDestroy(): void {

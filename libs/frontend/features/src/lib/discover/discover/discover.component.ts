@@ -12,7 +12,7 @@ import { interval, Subscription } from 'rxjs';
 })
 export class DiscoverComponent implements OnInit {//TODO tekst pagina aanpassen
     songs: ISong[] = [];
-    user!: IUser;
+    user: IUser | undefined;
     subscription: Subscription = new Subscription;
     playlists: IPlaylist[] = [];
     constructor(private discoverService: DiscoverService, private loginService: LoginService, private albumService: AlbumService) {}
@@ -32,13 +32,16 @@ export class DiscoverComponent implements OnInit {//TODO tekst pagina aanpassen
 
     loadSongs(): void {
         this.discoverService.matchSimilar();
-        this.discoverService.getRecommendationsForUser(this.user._id).subscribe((recommendations) => {
+        if(this.user){
+          this.discoverService.getRecommendationsForUser(this.user._id).subscribe((recommendations) => {
           this.songs = recommendations.map((rec) => ({
             ...rec.song,
             relationshipTypes: rec.relationshipTypes,
             matchCount: rec.matchCount
           }));
         });
+        }
+        
       }
 
     ngOnDestroy(): void {

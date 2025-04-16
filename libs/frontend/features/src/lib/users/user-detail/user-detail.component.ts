@@ -8,7 +8,7 @@ import { IUser, UserGender } from '@avans-nx-songlibrary/api';
     templateUrl: './user-detail.component.html',
 })
 export class UserDetailComponent implements OnInit {
-    user!: IUser;
+    user: IUser | undefined;
 
     UserGender = UserGender;
 
@@ -27,8 +27,11 @@ export class UserDetailComponent implements OnInit {
     }
 
     onSubmit() {
-        this.userService.update(this.user).subscribe((user) => {
+        if(this.user) {
+            this.userService.update(this.user).subscribe((user) => {
             this.user = user;
         });
+        }
+        
     }
 }

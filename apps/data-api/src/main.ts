@@ -5,9 +5,8 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 import { ApiResponseInterceptor } from '@avans-nx-songlibrary/backend/dto'
 
 import * as dotenv from 'dotenv';
-dotenv.config();
+dotenv.config(); 
 async function bootstrap() {
-
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
