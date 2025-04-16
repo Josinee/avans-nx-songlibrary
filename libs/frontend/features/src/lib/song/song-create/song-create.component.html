@@ -48,11 +48,10 @@
   
       <div class="mb-3 col-12 col-md-6">
         <label for="album" class="form-label">Album</label>
-        <select [(ngModel)]="song.album" name="album" #album="ngModel" class="form-control" required>
+        <select [(ngModel)]="song.album" name="album" #album="ngModel" class="form-control">
           <option [value]="null" disabled selected>Select album</option>
           <option *ngFor="let album of albums" [value]="album._id">{{ album.title }}</option>
         </select>
-        <div *ngIf="album.invalid && album.touched" class="text-danger">Album is required.</div>
       </div>
     </div>
   
