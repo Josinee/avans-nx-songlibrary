@@ -1,4 +1,4 @@
-<div *ngIf="playlist">
+<div *ngIf="playlist && user">
 <button class="btn" (click)="goBack()"><i class="bi bi-arrow-up-left-square"></i></button>
 
 <div class="modal" tabindex="-1" id="exampleModal">
@@ -66,7 +66,7 @@
             <p class="d-inline">{{ playlist.public ? 'Public' : 'Private' }}</p>
             <div class="mt-3">
                 <p class="d-inline"><strong>Created:</strong> {{ playlist.creationDate | date }}</p>
-                <button *ngIf="playlist.creator === this.user" type="button" class="btn float-end d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-gear"></i></button>
+                <button *ngIf="playlist.creator.toString() == this.user._id.toString()" type="button" class="btn float-end d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-gear"></i></button>
             </div>
         </div>
         <div class="col-3">

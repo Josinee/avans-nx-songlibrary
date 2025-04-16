@@ -8,13 +8,14 @@
 
         <div class="mb-3 col-12 col-md-6">
             <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" [(ngModel)]="artist.description" name="artistDescription" #artistDescription="ngModel" id="Description" required placeholder="Enter artist description" />
+            <input type="text" class="form-control" [(ngModel)]="artist.description" name="artistDescription" #artistDescription="ngModel" id="Description" required placeholder="Enter artist description"/>
             <div *ngIf="artistDescription.invalid && artistDescription.touched" class="text-danger">Artist description is required.</div>
         </div>
 
         <div class="mb-3 col-12 col-md-6">
             <label for="recordLabel" class="form-label">Record Label</label>
-            <input type="text" class="form-control" [(ngModel)]="artist.recordLabel" name="artistRecordLabel" #artistRecordLabel="ngModel" id="recordLabel" required placeholder="Enter artist record label" />
+            <input
+                type="text" class="form-control" [(ngModel)]="artist.recordLabel" name="artistRecordLabel" #artistRecordLabel="ngModel" id="recordLabel" required placeholder="Enter artist record label"/>
             <div *ngIf="artistRecordLabel.invalid && artistRecordLabel.touched" class="text-danger">Artist record label is required.</div>
         </div>
     </div>
@@ -34,11 +35,11 @@
         
         <div class="mb-3 col-12 col-md-6">
             <label for="genre" class="form-label">Genre</label>
-            <select [(ngModel)]="artist.genres" name="genres" class="form-control" multiple>
+            <select [(ngModel)]="artist.genres" name="genres" class="form-control" multiple required>
                 <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
             </select>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-outline-primary w-100 mt-3">Submit</button>
+    <button type="submit" class="btn btn-outline-primary w-100 mt-3" [disabled]="artistCreate.invalid">Submit</button>
 </form>
