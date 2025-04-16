@@ -7,7 +7,7 @@ export const environment: IEnvironment = {
     dataApiUrl: 'https://avans-nx-songlibrary.onrender.com/api',
     rcmndApiUrl: 'https://rcmnd-api.onrender.com/api',
 
-    // MONGO_DB_CONNECTION_STRING: '...',
+    MONGO_DB_CONNECTION_STRING: '...',
     // NEO4J_DB_CONNECTION_STRING: '...',
     // NEO4J_DB_DATABASE_NAME: 'neo4j',
     // NEO4J_DB_USERNAME: 'neo4j',

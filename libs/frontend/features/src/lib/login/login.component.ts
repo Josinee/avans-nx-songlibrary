@@ -14,7 +14,7 @@ export class LoginComponent {
         emailAddress: '',
         password: ''
     };
-    loginForm!: NgForm;
+    loginForm: NgForm | undefined;
     error: string = '';
 
     constructor(private loginService: LoginService, private router: Router) {}

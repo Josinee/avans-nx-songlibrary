@@ -53,7 +53,10 @@ export class AlbumUpdateComponent {//TODO update mooim maken, terug knoppen maar
                         } else {
                             this.songs = [updatedSong];
                         }
-                        this.allSongs = this.allSongs!.filter(song => song._id !== updatedSong._id);
+                        if(this.allSongs) {
+                            this.allSongs = this.allSongs.filter(song => song._id !== updatedSong._id);
+                        }
+                        
                     },
                     error: (err) => {
                         console.error('Error with adding song to album:', err);

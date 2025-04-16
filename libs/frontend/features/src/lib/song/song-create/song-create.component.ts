@@ -29,7 +29,7 @@ export class SongCreateComponent {
         songText: '',
         album: undefined
     };
-    albums!: IAlbum[] | null;
+    albums: IAlbum[] | null | undefined;
 
     constructor (private songService: SongService, private artistService: ArtistService, private albumService: AlbumService, private route: ActivatedRoute, private router: Router) {}
     ngOnInit(): void {

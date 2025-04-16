@@ -12,9 +12,9 @@ import { LoginService } from '../../login/login.service';
 
 })
 export class PlaylistListComponent implements OnInit, OnDestroy {
-    playlists: IPlaylist[] | null = null;
-    privatePlaylists: IPlaylist[] | null = null;
-    user!: IUser;
+    playlists: IPlaylist[] | undefined
+    privatePlaylists: IPlaylist[] | undefined
+    user: IUser | undefined;
 
     subscription: Subscription | undefined = undefined;
 
@@ -22,16 +22,20 @@ export class PlaylistListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.playlistService.list().subscribe((results) => {
-            this.playlists = results;
+            if(results) {
+                this.playlists = results;
+            }
+            
         });
         this.loginService.currentUser.subscribe((user) => {
             if (user) {
                 this.user = user;
+                this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
+                    this.privatePlaylists = results;
+                });
             }
         });
-        this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
-            this.privatePlaylists = results;
-        });
+
     }
 
     ngOnDestroy(): void {

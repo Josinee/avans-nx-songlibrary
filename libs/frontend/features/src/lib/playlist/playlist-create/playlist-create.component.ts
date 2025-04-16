@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IUser } from '@avans-nx-songlibrary/api';
+import { IUser, UserGender, UserRole } from '@avans-nx-songlibrary/api';
 import { PlaylistService } from '../playlist.service';
 import { ICreatePlaylist } from '@avans-nx-songlibrary/api';
 import { LoginService } from '../../login/login.service';
@@ -10,7 +10,17 @@ import { LoginService } from '../../login/login.service';
     templateUrl: './playlist-create.component.html'
 })
 export class PlaylistCreateComponent {
-    user!: IUser;
+    user: IUser = {
+        playlists: [],
+        _id: '',
+        profileImgUrl: '',
+        role: UserRole.Guest,
+        gender: UserGender.Male,
+        isActive: false,
+        name: '',
+        emailAddress: '',
+        password: ''
+    }
     playlist: ICreatePlaylist = {
         name: '',
         numberOfSongs: 0,

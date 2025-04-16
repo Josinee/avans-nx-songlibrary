@@ -12,7 +12,7 @@ export class HomepageComponent {
     playlists: IPlaylist[] = [];
     personalPlaylists: IPlaylist[] = [];
     albums: IAlbum[] | null = null;
-    user!: IUser;
+    user: IUser | undefined;
 
     constructor(private albumService: AlbumService, private loginService: LoginService, private playlistService: PlaylistService) {}
     ngOnInit(): void {
@@ -32,15 +32,23 @@ export class HomepageComponent {
         };
 
         this.albumService.list(options).subscribe((albums) => {
-            this.albums = albums!.slice(0, 4);
+            if(albums){
+                this.albums = albums.slice(0, 4);
+            }
+            
         });
 
         this.playlistService.list().subscribe((results) => {
-            this.playlists = results!.slice(0, 4);
+            if(results) {
+                this.playlists = results.slice(0, 4);
+            }
+            
         });
-
-        this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
+        if(this.user){
+            this.playlistService.getPlaylistFromCreator(this.user._id).subscribe((results) => {
             this.personalPlaylists = results.slice(0, 4);
         });
+        }
+        
     }
 }

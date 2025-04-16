@@ -39,7 +39,7 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
                     if (artist) {
                         this.artist = artist;
                         const options = {
-                            artist: this.artist!._id
+                            artist: this.artist._id
                         };
                         this.subscription = this.songService.list(options).subscribe((results) => {
                    

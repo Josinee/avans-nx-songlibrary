@@ -1,8 +1,10 @@
+<div *ngIf="playlists && privatePlaylists">  
 <div class="container p-4">
     <h4 class="display-4">Public Playlists</h4>
-    <playlist-list-template [playlists]="playlists!"></playlist-list-template>
+    <playlist-list-template [playlists]="playlists"></playlist-list-template>
 
     <h4 class="display-4">Your Playlists</h4>
 
-    <playlist-list-template [playlists]="privatePlaylists!"></playlist-list-template>
+    <playlist-list-template [playlists]="privatePlaylists"></playlist-list-template>
+</div>
 </div>

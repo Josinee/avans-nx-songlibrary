@@ -22,15 +22,20 @@ export class SidebarComponent {
     ngOnInit(): void {
         this.loginService.currentUser.subscribe((user) => {
             this.user = user;
+            if(this.user){
+
+            
+            this.subscription = this.playlistService.getPlaylistFromCreator(this.user._id).subscribe(
+                (playlists: IPlaylist[]) => {
+                    this.personalPlaylists = playlists;
+                },
+                (error) => {
+                    console.error('Error fetching playlists:', error);
+                }
+            );
+        }
         });
-        this.subscription = this.playlistService.getPlaylistFromCreator(this.user!._id).subscribe(
-            (playlists: IPlaylist[]) => {
-                this.personalPlaylists = playlists;
-            },
-            (error) => {
-                console.error('Error fetching playlists:', error);
-            }
-        );
+        
 
         this.subscription = this.playlistService.playlists$.subscribe((playlists: IPlaylist[]) => {
             this.personalPlaylists = playlists;
